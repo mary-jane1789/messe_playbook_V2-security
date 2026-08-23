@@ -56,6 +56,7 @@ bleibt stehen.
 | F-17 | Jeder Blattordner ist repositoryweit eindeutig und nennt seinen Typ: `security-module-detailkonzept/`, `security-module-instanzen/`. Die Bausteinebene (`module/`) darf sich wiederholen. | Ein Pfadsegment wie `security/`, das an zwei Stellen vorkommt, sagt allein nicht, wo man ist — nicht in der Suche, nicht im Editor-Tab, nicht im Verweis. Ergänzt F-01. |
 | F-18 | Abläufe liegen in Ebene 2, nicht in Ebene 3. **Revidiert F-10 und die Ortsangabe in E-28.** Damit ist die Grenze zwischen den Ebenen geschärft: Ebene 2 sind Konzepte, Ebene 3 sind ausgefüllte Schemata. | Ein Krisenablauf ist ein Konzepttext, kein gefülltes Formular. Die vorherige Zuordnung hätte Ebene 3 zu zwei verschiedenen Dingen gemacht. Folge: Ebene 2 ist nicht mehr nur bereichsspezifisch. |
 | F-19 | Ebene 2 und Ebene 3 sind gleich gegliedert: Ebene, dann Baustein, dann die konkrete Sache. **Revidiert F-09.** | Symmetrie zwischen den Ebenen orientiert beim Navigieren. Der Preis ist, dass `module/` zweimal vorkommt; der nummerierte Elternordner macht den Pfad trotzdem eindeutig. |
+| F-20 | Dieses Repository ist die Backstage des Playbooks: Es hält die Ergebnisse und zusätzlich die Architektur, Struktur und Methodik, aus denen sie entstanden sind. Das Playbook zeigt nur die Ergebnisse. | Ein Ergebnis ohne seine Herleitung lässt sich nur ersetzen, nicht fortschreiben. Die Weiterentwickelbarkeit des Playbooks hängt daran, dass Schnitt, Feldlogik, Auslassungen und offene Fragen an einem Ort nachlesbar bleiben. |
 
 ---
 
@@ -80,3 +81,10 @@ bleibt stehen.
 | E-26 | SLAs werden nicht übernommen. Dienstleistersteuerung liegt in der Linie, nicht im Modul. | 1789 |
 | E-27 | Risikomanagement wird kein Grundkonzept. Die Risikostufe wird ein Feld im Modul (`niedrig / mittel / hoch`), „hoch" löst eine Pre-mortem-Pflicht aus. | 1789 |
 | E-28 | Konfiguration, Krisenablauf und Lernschleife werden Abläufe in Ebene 3. Alle drei sind Entwürfe. Damit sind Krise und Triage, Retrospektiven und das Pre-mortem eingeordnet. | 1789 |
+
+### 2026-08-19 · Migration `veranstaltung.md`
+
+| ID | Entscheidung | durch |
+|---|---|---|
+| E-29 | `veranstaltung.md` ist übertragen (V1.0 Kap. 1 und 4): die drei Achsen Art, Veranstalter, Größe; Veranstalter gegen Betreiber; die drei Veranstalter-Modelle; die vier Regeln aus Kap. 4; der Add-on-Grundsatz. Nicht übernommen: Ticketpreise, Beispielveranstaltungen, Segmentcharakterisierung, Grafik 3 und 4, die Add-on-Beispiele. Konkretisiert E-15. | 1789 |
+| E-30 | Die Werte der Größenklassen sind Richtwerte, keine Schwellen. Die Einstufung nimmt die für die Veranstaltung verantwortliche Rolle vor. | 1789 |

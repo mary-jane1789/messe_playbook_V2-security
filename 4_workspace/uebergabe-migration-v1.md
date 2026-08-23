@@ -175,9 +175,12 @@ ist der Gegentest. Nimm es weg — lässt sich ein Modul dann noch schreiben?
 
 ## Reihenfolge
 
-1. **`veranstaltung.md` und `phasen.md`.** Belastbar beschrieben, keine offenen
-   Punkte, und alles Weitere verweist darauf. Guter Einstieg, weil man am
-   Ergebnis sieht, ob Verdichtungsmaßstab und Frontmatter tragen.
+1. ~~**`veranstaltung.md`**~~ — erledigt am 19.08.2026, liegt in
+   `1_grundkonzepte/veranstaltung.md` (E-29, E-30). Offene Punkte daraus stehen
+   in `0_meta/offene-punkte.md`, die Wording-Frage in
+   `4_workspace/fragen-an-ma.md`.
+   **`phasen.md`** steht als nächstes an — V1.0 Kap. 2, P0 bis P7 mit
+   Zeitfenster und Primär-Träger, dazu die acht Gates. Befund 1 beachten.
 2. **`modul.md`.** Der Hauptbrocken und der Engpass für alles in Ebene 2 und 3.
    Das Aufteilen des Frameworks ist gleichzeitig sein Test: Felder, die sich
    nicht attributieren lassen, sind unklar formuliert.

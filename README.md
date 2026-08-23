@@ -3,9 +3,9 @@
 Repository für die bereichsspezifischen Module des Operations Playbooks.
 Pilotbereich ist Security.
 
-**Stand:** Skelett angelegt, inhaltlich leer. Was aus dem Playbook V1.0 und dem
-Modul-Framework übernommen wird, ist teilweise entschieden und in
-`0_meta/offene-punkte.md` festgehalten.
+**Stand:** Skelett angelegt, Migration der Inhalte aus Playbook V1.0 läuft.
+Übertragen ist `1_grundkonzepte/veranstaltung.md`. Was übernommen wird, steht in
+`0_meta/entscheidungen.md`, was noch zu klären ist in `0_meta/offene-punkte.md`.
 
 ## Aufbau
 
