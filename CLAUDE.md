@@ -6,7 +6,15 @@ Dieses Repository enthält die bereichsspezifischen Module des Operations
 Playbooks der Messe. Pilotbereich ist Security. Das Playbook V1.0 ist
 verabschiedet und gilt; dieses Repository baut die Module darauf auf.
 
-Stand: Skelett. Inhaltlich noch leer.
+Stand: Migration der V1.0-Inhalte läuft. Übertragen sind
+`1_grundkonzepte/veranstaltung.md` und `1_grundkonzepte/phasen.md`.
+
+**Referenzrahmen ist die Eigenveranstaltung.** V1.0 legt sie im Abschnitt
+Versionierung als Referenzrahmen fest. Struktur, Bemessung und Rollenbesetzung
+sind hier für die Eigenveranstaltung geschrieben. Einzelne Stellen verweisen auf
+Gastveranstaltungen — das ist die Ausnahme und wird am Ort vermerkt. Beim
+Schreiben gilt: Eine Aussage, die nur für Gast oder Partner gilt, sagt das
+ausdrücklich; ohne Vermerk gilt sie für Eigen.
 
 ## Aufbau und Zuordnung
 

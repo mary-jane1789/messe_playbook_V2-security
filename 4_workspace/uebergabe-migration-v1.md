@@ -1,6 +1,6 @@
 ---
 status: laufend
-stand: 2026-08-19
+stand: 2026-08-23
 zweck: Einstieg für die nächste Sitzung — Inhalte aus Playbook V1.0 ins Repository übertragen
 ---
 
@@ -96,16 +96,43 @@ Risikokategorien werden **nicht** übernommen.
 
 ## Befunde aus V1.0, die beim Übertragen greifen
 
-**1 · Phasenzählung ist dreifach inkonsistent.** Dominant und tragend ist
-**P0–P7** (Übersichtstabelle Kap. 2, Grafik 5, Grafik 8, Gate-Tabelle, und
-Kap. 4: „Die Phasenstruktur P0 bis P7 gilt für alle Veranstalter-Modelle").
-Abweichend: „durchgehender Neu-Nummerierung P0 bis P6" im Abschnitt
-Versionierung, „acht Phasen, benannt P0 bis P6" im Einleitungssatz von Kap. 2,
-und „nach P8" in Grafik 11. Das Modul-Framework rechnet durchgehend mit P0–P8.
-→ **P0–P7 setzen.** Zwei Folgen im Framework: Das Phasenprofil-Beispiel in
-Block 2 ist ab P4 um eins verschoben, und „Hard Cut vor P4 (SR-02)" in Kap. 4.1
-bezeichnet die falsche Phase — V1.0 hat den Punkt als
-„Vollständigkeitscheck vor P3, Gate P2 → P3" entschieden.
+**1 · Phasenzählung — an der Quelle nachgeprüft, erledigt am 23.08.2026.**
+P0–P7 steht an 13 Stellen, davon vier tragend: Grafik 5 (S. 10, acht Kästen),
+Übersichtstabelle (S. 10–11), Gate-Tabelle (S. 11, acht Übergänge), acht
+Phasensektionen (S. 12–22). Dazu Kap. 4 (S. 24), Kap. 5 (S. 25), Grafik 8
+(S. 30), Kap. 7 (S. 28), Kap. 13 (S. 38), Kap. 15 (S. 43–44), Überschrift und
+Inhaltsverzeichnis.
+
+Abweichend nur drei Stellen, und es sind keine konkurrierenden Systeme:
+
+- S. 9 „acht Phasen, benannt **P0 bis P6**" — in sich widersprüchlich, P0 bis P6
+  sind sieben. Zahlendreher im Satz, der die Zusammenlegung beschreibt.
+- S. 4 „durchgehender Neu-Nummerierung **P0 bis P6**" — derselbe Dreher an
+  derselben Aussage. Beide Vorkommen hängen an der Zusammenlegung, nirgends sonst.
+- S. 46 Grafik 11, „nach **P8**" — Vor-Merge-Label. Vor der Zusammenlegung gab es
+  neun Phasen P0–P8, Nachbereitung war P8. Gemeint ist P7.
+
+→ **P0–P7 ist gesetzt, V1.0 ist Source of Truth.** Das Modul-Framework v0.2
+rechnet mit der Vor-Merge-Zählung P0–P8 und wird umgerechnet.
+
+**Umrechnungsregel: P0, P1, P2 bleiben. P3 bis P8 minus eins.** Alte P2
+(Verkaufszeitraum Services) und alte P3 (Feinplanung) gehen in die neue P2 auf;
+3−1 = 2 trifft das, deshalb genügt eine Regel. Frühere Fassung dieses Befunds
+sagte „ab P4 um eins verschoben" — es ist ab P3.
+
+Neun Stellen im Framework sind betroffen:
+
+| Zeile | jetzt | wird |
+|---|---|---|
+| 16, 103, 205, 211 | `P0–P8` | `P0–P7` |
+| 35 | „Übergabe SOD → Expo Realisation … Status-quo P3" | `P2` — deckt sich mit CP-2d in P2 |
+| 154 | „den bislang fehlenden Hard Cut vor P4 (SR-02)" | `vor P3`, **und** inhaltlich: V1.0 hat SR-02 als Vollständigkeitscheck ohne harten Cut-off entschieden, Gate P2 → P3 |
+| 257 | „P0 · P3 Konzept und Postenplan · P5–P7 Kontrollbetrieb · P8 Auswertung" | `P0 · P2 · P4–P6 · P7` |
+| 281 | „P3: 4 PT Planung; P5–P7: durchgehende Präsenz" | `P2` … `P4–P6` |
+| 283 | „Peak in P4/P5" | `P3/P4` |
+
+Die Quelldatei in `0_meta/quellen/` bleibt als Beleg unangetastet; die Korrektur
+greift beim Schreiben von `modul.md`.
 
 **2 · „Modul" ist in V1.0 dreifach belegt.** Als Playbook-Kapitel (die drei
 Welle-2-Module Kommunikation und Kollaboration, KPI, Tailoring und Skalierung),
@@ -123,17 +150,22 @@ springt: 1–13, 18–21, 22–26, 27–29, 30–31, 33–35. Die Positionen 14�
 fehlen, die Überschriften-Zählungen stimmen jeweils. Beim Übertragen offener
 Punkte den Wortlaut mitnehmen, nicht die Nummer.
 
-**5 · „Freigabe" bedeutet im Steckbrief drei verschiedene Dinge.**
-Framework Kap. 4 „Freigabeinstanz" (wer verantwortet inhaltlich), Block 3
-„Freigabe / Quality Gate" (darf der Einsatz starten), Block 5 „freigegeben durch"
-(Dokumentfreigabe). Beim Bau des Feldkatalogs entzerren — Vorschlag: Block 3
-heißt `start-gate-und-abbruchkriterien`.
+**5 · „Freigabe" bedeutete im Steckbrief drei verschiedene Dinge — gelöst am
+23.08.2026.** Framework Kap. 4 „Freigabeinstanz" (wer verantwortet inhaltlich),
+Block 3 „Freigabe / Quality Gate" (darf der Einsatz starten), Block 5
+„freigegeben durch" (Dokumentfreigabe). In `modul.md` heißen die drei jetzt
+**Zustimmung**, **Startbedingung** und **Abbruchkriterien**, und
+**Dokumentfreigabe**. Das Wort „Freigabe" kommt genau einmal vor.
 
-**6 · Ein Feld fehlt: `reversibilität`.** V1.0 Kap. 9 setzt für
-sicherheitskritische Entscheidungen zwei Dinge, die im Steckbrief keinen Platz
-haben: Freigabe durch BL SOD **plus** die relevante fachliche Einheit, und
-„grundsätzlich nicht reversibel". Ohne das Feld beschreibt der Steckbrief eine
-Entscheidung als rücknehmbar, die es laut Playbook nicht ist.
+**6 · Reversibilität — anders gelöst als vorgeschlagen, 23.08.2026.** V1.0
+Kap. 9 setzt für sicherheitskritische Entscheidungen zwei Dinge: Freigabe durch
+BL SOD **plus** die relevante fachliche Einheit, und „grundsätzlich nicht
+reversibel". Ein Feld `reversibilität` ist **nicht** entstanden. Stattdessen:
+die **Entscheidungsfrist** im Wahlpflicht-Grundmodul trägt die praktische Folge
+(bis wann muss entschieden sein, und diese Frist ist verbindlich gemeint), das
+Feld **Zustimmung** trägt die Doppelfreigabe, weil es mehr als eine Stelle
+nennen darf. Die V1.0-Aussage zur Nichtumkehrbarkeit steht als bewusste
+Verkürzung in `0_meta/offene-punkte.md`.
 
 **7 · Security ist in V1.0 keine eigene Einheit.** Durchgängig „Logistics &
 Security" unter einem AL, zuständig für Ladehof, Slot-Management, Anfahrt und
@@ -179,11 +211,23 @@ ist der Gegentest. Nimm es weg — lässt sich ein Modul dann noch schreiben?
    `1_grundkonzepte/veranstaltung.md` (E-29, E-30). Offene Punkte daraus stehen
    in `0_meta/offene-punkte.md`, die Wording-Frage in
    `4_workspace/fragen-an-ma.md`.
-   **`phasen.md`** steht als nächstes an — V1.0 Kap. 2, P0 bis P7 mit
-   Zeitfenster und Primär-Träger, dazu die acht Gates. Befund 1 beachten.
-2. **`modul.md`.** Der Hauptbrocken und der Engpass für alles in Ebene 2 und 3.
-   Das Aufteilen des Frameworks ist gleichzeitig sein Test: Felder, die sich
-   nicht attributieren lassen, sind unklar formuliert.
+   ~~**`phasen.md`**~~ — erledigt am 23.08.2026, liegt in
+   `1_grundkonzepte/phasen.md`. P0–P7 mit Zeitfenster und Primär-Träger, die acht
+   Gates, dazu der Abschnitt „Wozu das Phasenmodell". Befund 1 ist an der Quelle
+   nachgeprüft und oben ersetzt. Vier Abweichungen von V1.0 sind entschieden und
+   in der Datei vermerkt: Bezugspunkt P6, Endpunkt P5, Beginn P3 bei T0 −2
+   Monate, Gate P1 → P2 als prüfbarer Zustand. Primär-Träger sind als weiche
+   Deskriptoren ohne RACI-Wirkung festgelegt.
+2. ~~**`modul.md`**~~ — erledigt am 23.08.2026, liegt in
+   `1_grundkonzepte/modul.md`. Feldkatalog in fünf Blöcken mit den fünf Spalten,
+   Definition, fünf Bedingungen, zwei Einordnungen, Außensicht, Lebenszyklus.
+   Sechs Abweichungen vom Framework sind entschieden und in der Datei als
+   Setzung erkennbar: das Ergebniskriterium neu formuliert; Owner aufgeteilt in
+   Durchführung (Rolle) und Fortschreibung (Name); „Freigabe" entzerrt in
+   Zustimmung, Startbedingung und Dokumentfreigabe; Bindung mit vier Werten und
+   Grundmodul-Regel statt separater Wahlpflicht-Gruppe; Entscheidungsfrist statt
+   Reversibilität; Ressourcenbedarf aufgenommen. Keine Beispiele übernommen.
+   Risikoregister-Struktur und Berichtsformat fallen weg.
 3. **`dienstleister.md`**, mit der Vollständigkeitsfrage an die Messe.
 4. **`rolle.md`, `gremium.md`, `lead-modell.md`.** Schemata, kurz, mit offenen
    Punkten statt geglätteter Entwürfe.

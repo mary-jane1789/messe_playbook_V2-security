@@ -4,8 +4,21 @@ Repository für die bereichsspezifischen Module des Operations Playbooks.
 Pilotbereich ist Security.
 
 **Stand:** Skelett angelegt, Migration der Inhalte aus Playbook V1.0 läuft.
-Übertragen ist `1_grundkonzepte/veranstaltung.md`. Was übernommen wird, steht in
+Übertragen sind `1_grundkonzepte/veranstaltung.md` und
+`1_grundkonzepte/phasen.md`. Was übernommen wird, steht in
 `0_meta/entscheidungen.md`, was noch zu klären ist in `0_meta/offene-punkte.md`.
+
+## Referenzrahmen: Eigenveranstaltung
+
+Das Modell ist an der **Eigenveranstaltung** ausgerichtet. Playbook V1.0 legt sie
+im Abschnitt Versionierung als Referenzrahmen fest; Details zu Gast-, Partner-
+und B2C-Veranstaltungen folgen in späteren Ausbaustufen.
+
+Für dieses Repository heißt das: Struktur, Bemessung und Rollenbesetzung sind für
+die Eigenveranstaltung geschrieben. An einzelnen Stellen verweist das Modell auf
+Gastveranstaltungen — etwa beim Gate P6 → P7 oder bei der Gewerke-Einordnung —
+aber das ist die Ausnahme und jeweils am Ort vermerkt, nicht der Regelfall.
+Wo eine Aussage nur für Gast oder Partner gilt, muss sie das sagen.
 
 ## Aufbau
 

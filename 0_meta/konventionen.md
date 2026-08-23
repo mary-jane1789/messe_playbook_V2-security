@@ -1,6 +1,6 @@
 ---
 status: entwurf
-stand: 2026-08-19
+stand: 2026-08-23
 ---
 
 # Konventionen
@@ -85,7 +85,11 @@ Feldkatalog in `1_grundkonzepte/modul.md` fest — nicht diese Datei. Drei Zonen
 kurze und aufzählbare Felder ins Frontmatter, wiederholte Datensätze in Tabellen
 mit festen Spalten, Prosa unter feste Überschriften. Der Katalog sagt je Feld,
 welche Zone gilt, weil daraus der leere Steckbrief und später die Darstellung
-erzeugt werden.
+erzeugt werden. Er führt fünf Spalten: Feld, gilt-wenn, Zone, Pflicht oder
+optional, Wertebereich.
+
+Modul-IDs folgen dem Muster `MOD-<BEREICH>-<NR>`. Das Präfix `M-` ist für
+Schemata reserviert und wird für Module nicht verwendet.
 
 ## Verweise
 
@@ -108,7 +112,7 @@ Deutsch, auch in Ordner- und Dateinamen.
 
 ## Noch offen
 
-- Zulässige Werte für `status`
+- Zulässige Werte für `status` bei Konzeptdateien. Für Module ist die
+  Statuskette in `1_grundkonzepte/modul.md` festgelegt.
 - Ausgabeformat der Steckbrief-Vorlage
-- Schema für `id` bei Modulen
 - Umgang mit Versionsständen: nur in Git oder zusätzlich im Frontmatter

@@ -51,13 +51,14 @@ es benutzt.
 | `rolle.md` | was eine Rolle ausmacht: strukturell, mit Mandat und Reporting-Linie | keine bisher | V1.0 Kap. 6 | muss ausgestaltet werden |
 | `gremium.md` | was ein Gremium ausmacht: Zweck, Mitglieder, Mandat, Entscheidungsfähigkeit, Rhythmus | keine bisher | V1.0 Kap. 7 | Schema festlegbar, Gremien sind Entwürfe |
 | `dienstleister.md` | Kategorien und die Einordnung Pflicht / Wahl-Pflicht / Wahl | inline | V1.0 Kap. 10 | Vollständigkeit zu prüfen |
-| `modul.md` | was ein Modul ist und wie es beschrieben wird | `3_instanzen/module/` | Modul-Framework | — |
+| `modul.md` | was ein Modul ist und wie es beschrieben wird | `3_instanzen/module/` | Modul-Framework | Feldkatalog steht, an keinem echten Modul erprobt |
 | `ablauf.md` | was ein Ablauf ausmacht: Auslöser, Schritte, beteiligte Rollen, Ergebnis | `2_detailkonzepte/ablauf/` | neu | zu schreiben |
 
-Noch keine Datei angelegt. Was tatsächlich übernommen wird und in welcher
-Verdichtung, wird vor der Migration besprochen. Die Spalte „Zustand" bezieht sich
-auf V1.0, nicht auf diese Ablage — offene Punkte stehen in
-`0_meta/offene-punkte.md`.
+Angelegt sind `veranstaltung.md` (19.08.2026) sowie `phasen.md` und `modul.md`
+(23.08.2026). Was
+tatsächlich übernommen wird und in welcher Verdichtung, wird vor der Migration
+besprochen. Die Spalte „Zustand" bezieht sich auf V1.0, nicht auf diese Ablage —
+offene Punkte stehen in `0_meta/offene-punkte.md`.
 
 Acht Dateien, flach. Unterordner erst, wenn es deutlich mehr werden.
 
