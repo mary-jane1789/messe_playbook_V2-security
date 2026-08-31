@@ -1,6 +1,6 @@
 ---
 status: laufend
-stand: 2026-08-23
+stand: 2026-08-31
 ---
 
 # Offene Punkte
@@ -38,9 +38,11 @@ Hausverwaltung und Inventar-Übergabe im Clean-Cut.
 **Primär-Träger in P0.** Die Übersichtstabelle nennt für P0 nur Brand &
 Marketing, der Kapiteltext lässt Logistics & Security das Sicherheits-
 Grundkonzept zuliefern, und das Gate P0 → P1 verlangt einen Security-/Logistik-
-Check. Ein Security-Modul mit Auslöser-Phase P0 hat damit in seiner Auslöser-
+Check. Ein Security-Modul, dessen erste Deadline in P0 liegt, hat damit in dieser
 Phase keinen Träger. Mit der Festlegung, dass Primär-Träger weiche Deskriptoren
 ohne RACI-Wirkung sind, entschärft — für die Modulbemessung aber zu bestätigen.
+(Das Feld „Auslöser-Phase" gibt es seit E-65 nicht mehr; die Phasen eines Moduls
+stehen in den Deadlines.)
 
 **Braucht die Modulart eine dritte Kategorie?** Ein Modul ist entweder eine
 Pflicht aus dem Recht oder eine Leistung, die an Aussteller oder einen internen
@@ -53,10 +55,34 @@ Pflicht. Wenn nein, genügen zwei Arten und das Modell wird einfacher. Die
 Modulart steuert, welche Felder Pflicht sind — die Frage ist also nicht
 folgenlos.
 
+Die Recherche zum Security-Detailkonzept spricht gegen eine dritte Art: Die
+Kandidaten sind rechtlich verlangt und damit Compliance. Die Unterweisung folgt
+aus § 42 Abs. 2 VStättVO (bei Beginn des Arbeitsverhältnisses und danach
+mindestens jährlich, der Bauaufsichtsbehörde auf Verlangen nachzuweisen), aus
+§ 12 ArbSchG und aus § 4 DGUV Vorschrift 1. Das ist Evidenz, keine Entscheidung —
+die Frage an die Messe bleibt.
+
 **Übungs- und Trainingsformate — Modul oder Linie?** Jährliche Unterweisung und
 auflagenbasierte Räumungsübung sind Pflicht und damit Modulkandidaten.
 Freiwillige Trainingsformate könnten Personalentwicklung sein und in die Linie
 gehören. Hängt mit der Frage nach der dritten Modulart zusammen.
+
+**Wo die vier Dauerbestandteile geführt werden — teilweise beantwortet am
+24.08.2026.** Es **gibt** ein Rahmensicherheitskonzept. Es ist stark
+safety-getrieben, hatte primär die Geländesicherheit im Fokus, wurde
+seinerzeit von Abteilung 420 verantwortet, und aus ihm wird das
+veranstaltungsbezogene Sicherheitskonzept abgeleitet. Der **Gefahrenabwehrplan**
+ist darin enthalten; für ihn ist die Frage beantwortet. Offen bleibt, wo
+**Funkregeln**, **sicherheitstechnische Anlagen** und **Glossar** geführt werden.
+Sind sie vorhanden, sind sie die Quelle, auf die Module verweisen; werden sie je
+Veranstaltung neu geschrieben, ist das Doppelarbeit, die die Module beheben
+würden.
+
+**Geltungsbereich des Rechtsrahmens — geklärt am 26.08.2026.** Ein Standort,
+Geltung Deutschland. Bezugsfassung im Rechtsrahmen ist damit die
+Muster-Versammlungsstättenverordnung; der Fassungsstand bleibt je Fundstelle
+anzugeben, weil Novellen die Inhalte verschieben. Die Frage nach einer
+abweichenden Landesfassung entfällt.
 
 **Richtwerte der Größenklassen.** Die Werte gelten als Richtwerte, die
 Einstufung nimmt die verantwortliche Rolle vor (E-30). In V1.0 sind die
@@ -99,10 +125,11 @@ etabliert, die Moderation ist nicht geklärt.
 `modul.md` verweist es auf `2_detailkonzepte/ablauf/`. Der Krisenablauf dort ist
 noch nicht geschrieben; der Verweis zeigt bis dahin auf den Ordner.
 
-**CP-2d darf nicht verlorengehen.** Die Check-Points sind nicht übernommen.
-CP-2d ist die einzige in V1.0 belegte Security-Übergabe:
-Security-Umsetzungsvorschlag (Postenplan, Schichten) von Logistics & Security an
-Expo Realisation. Gehört in `2_detailkonzepte/module/security-module-detailkonzept/uebergabekarte.md`.
+**Bestellweg — erledigt am 24.08.2026, siehe E-66.** Der Widerspruch in V1.0
+(Expo Realisation löst aus / Customer Success handhabt) ist fachlich
+beantwortet: 410 · TVK bestellt, Security 214 bereitet fachlich vor. Die
+Übergabe steht als Feld im Modul, nicht in einer eigenen Übergabekarte — die ist
+mit F-26 gestrichen.
 
 **Umrechnung des Modul-Frameworks auf P0–P7.** Das Framework v0.2 rechnet
 durchgehend mit der Vor-Merge-Zählung P0–P8. V1.0 ist Source of Truth, die
@@ -143,9 +170,46 @@ für das Format. Sie sind nicht in `modul.md` übernommen und bleiben in der
 Quelldatei `quellen/modul-framework-v0.2.md`, die diese Funktion hat.
 
 **Modul-Framework Kap. 2.2** — VStättVO, vfdb 13/01, verkaufbare Leistungen.
-Vorschlag: nach `2_detailkonzepte/module/security-module-detailkonzept/`, weil beim nächsten Bereich nichts davon gilt.
+Erledigt: aufgenommen in
+`../2_detailkonzepte/module/security-module-detailkonzept/`, verteilt auf
+`security-modul.md` (Benennungsregel nach vfdb, Außensicht) und
+`rechtsrahmen.md` (Normen, Schwellen, Fristen). Die Normzeilen selbst sind noch
+nicht eingetragen, siehe Landesfassung oben.
 
-**Ausgabeformat der Steckbrief-Vorlage.** Der Weg ist entschieden (R-23), das
+### Rückmeldungen an `1_grundkonzepte/modul.md`
+
+Aus der Arbeit am Security-Detailkonzept. Ebene 2 darf Ebene 1 nicht ändern,
+deshalb stehen sie hier und nicht dort.
+
+**Rollen sind strukturell, Personen situativ — bei Security trägt das nicht
+durch.** § 38 Abs. 2 VStättVO verlangt eine namentlich benannte, während des
+Betriebes ständig anwesende Person. Bestellungen von Funktionsträgern sind
+gegenzuzeichnende Rechtsakte mit Widerruf. Die Bußgeldbewehrung trifft die
+Personen einzeln. Das Detailkonzept entschärft das nur teilweise, über das
+bedingte Feld „Rechtlich verantwortliche Stelle" und die Prüfliste.
+
+**Das Feld „Abhängigkeiten" kennt keinen Vorrang.** Es führt `setzt voraus:` und
+`nicht gemeinsam mit:`. § 38 Abs. 4 VStättVO verpflichtet zur Einstellung des
+Betriebes, wenn sicherheitsrelevante Einrichtungen nicht betriebsfähig sind; ein
+Security-Modul kann damit andere stillstellen. Nicht im Detailkonzept gelöst,
+weil die Veranstaltungstechnik dasselbe kann — es ist eine Frage an Ebene 1.
+
+**Eskalationsstufen sind nirgends gesetzt.** Das Security-Detailkonzept führt
+das Feld „Verhalten je Eskalationsstufe", weil die Verantwortungszuordnung bei
+Security von der Lage abhängt und nicht nur von der Phase. Die Stufen selbst
+gehören in `2_detailkonzepte/ablauf/krisenablauf.md`, der noch nicht geschrieben
+ist. Bis dahin trägt jedes Modul die Stufen, die es tatsächlich unterscheidet.
+Beim Schreiben des Krisenablaufs abzugleichen.
+
+**Betriebszustände — Achse benannt, Ort offen.** Das Haus unterscheidet
+Nullbetrieb, technischen Aufbau, vorgezogenen Aufbau, regulären Aufbau,
+Laufzeit, Abendveranstaltung und Abbau. Das ist eine Zeitachse, feiner als die
+Phasen und mit ihnen überlappend — drei der Zustände liegen innerhalb von P4,
+der vorgezogene Aufbau beginnt davor. In `phasen.md` steht davon nichts. Drei
+Optionen mit Empfehlung stehen in `../4_workspace/betriebszustaende-entwurf.md`;
+zu entscheiden mit der Projektleitung.
+
+**Ausgabeformat der Steckbrief-Vorlage.** Der Weg ist entschieden (F-15), das
 Format nicht. Dazu kommt: Weil keine Beispiele ins Repository übernommen sind,
 muss die Vorlage die Ausfüllhinweise allein tragen. Sie wird damit wichtiger als
 bisher geplant.
@@ -154,6 +218,37 @@ bisher geplant.
 Entwurf notiert in `../4_workspace/workflow-dokumente-inputs-kundeninteraktionen.md`.
 Offen ist zuerst der Ort — Konvention in `0_meta/` oder Ablauf in
 `2_detailkonzepte/ablauf/`.
+
+### Neu aus den Sparrings vom 24.08.2026
+
+**Bestellfrist des Sicherheitsdienstleisters.** Im Termin wurden 14 Tage und
+vier Wochen vor der Veranstaltung genannt. Welche gilt und in welcher Phase sie
+liegt, ist mit dem Fachbereich zu klären. Eine Nachbestellung am ersten
+Laufzeittag kommt vor.
+
+**Wie die Sicherheitsdokumentation heute geführt wird.** Nach Auskunft der
+Leitung Security in E-Mails und im Security-Postfach; eine strukturierte Ablage
+gibt es nicht, sie wäre aber erwünscht. Das ist der Ist-Befund, der den
+Reifegrad 1 der meisten Module begründet, und zugleich das Nutzenargument
+gegenüber dem Fachbereich.
+
+**Doppelbesetzung an Toren.** An Zufahrtstoren stehen im Aufbau ein
+Logistik-Servicepartner und eine Sicherheitskraft nebeneinander, mit getrennten
+Aufträgen aus getrennten Verträgen. Die Leitung Security würde das gern
+auflösen, kann es vertraglich nicht. Für den Modulschnitt bedeutet es: Der
+Security-Anteil an einem Tor ist beschreibbar, ohne den Logistikanteil
+mitzuregeln.
+
+**Governance über Phasen und Module hinweg — zurückgestellt.** Die Frage, ob
+Module zu Gruppen zusammengefasst auf übergeordnete Security-Quality-Gates je
+Phase einzahlen, ist nicht Teil dieser Projektphase. Was sichergestellt sein
+muss: dass je Phase klar ist, was entschieden sein muss. Das trägt die
+Deadlines-Tabelle im Modul.
+
+**Modulindex.** Die Definition of Done verlangt die Registrierung im Modulindex.
+Mit der Modullandkarte in Ebene 3 gibt es jetzt ein Register; ob es der
+Modulindex im Sinne der DoD ist oder ein zweites Ding gebraucht wird, ist zu
+entscheiden.
 
 ### Aus Veranstaltung (V1.0 Kap. 1 und 4), dort selbst als offen markiert
 

@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Was ein Security-Modul braucht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root{
+  --paper:#F5F6F8; --surface:#FFFFFF; --surface-2:#EDEFF3;
+  --ink:#12181F; --ink-2:#4E5A66; --ink-3:#77828E;
+  --rule:#CFD5DC; --rule-soft:#E2E6EB;
+  --compliance:#A6362C; --leistung:#1D6273; --flag:#8E6410;
+  --display:"Archivo",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0E1319; --surface:#151C24; --surface-2:#1B242E;
+  --ink:#E6EAEF; --ink-2:#9CA8B4; --ink-3:#7C8894;
+  --rule:#2A333D; --rule-soft:#212932;
+  --compliance:#E28C81; --leistung:#74BECE; --flag:#D9AE5C;
+}}
+:root[data-theme="dark"]{
+  --paper:#0E1319; --surface:#151C24; --surface-2:#1B242E;
+  --ink:#E6EAEF; --ink-2:#9CA8B4; --ink-3:#7C8894;
+  --rule:#2A333D; --rule-soft:#212932;
+  --compliance:#E28C81; --leistung:#74BECE; --flag:#D9AE5C;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:18px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 120px}
+header > *{max-width:70ch}
+.sec-head{max-width:70ch}
+section > p,section > h3,section > h4,section > ul,section > ol,
+section > .panel,section > .quote{max-width:70ch}
+section > .fields{max-width:940px}
+figure,.scroll{max-width:100%}
+
+header{border-bottom:2px solid var(--ink);padding:56px 0 26px;margin-bottom:44px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 18px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.8vw,58px);
+  line-height:1.03;letter-spacing:-.022em;margin:0 0 18px;text-wrap:balance}
+.standfirst{font-size:21px;line-height:1.5;color:var(--ink-2);max-width:62ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;
+  font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.meta b{font-weight:500;color:var(--ink-2)}
+
+section{margin:0 0 68px}
+.sec-head{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--ink);
+  padding-top:14px;margin:0 0 26px}
+.sec-no{font-family:var(--mono);font-size:12px;color:var(--ink-3);
+  letter-spacing:.08em;flex:none;padding-top:6px}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(25px,3.4vw,34px);
+  line-height:1.14;letter-spacing:-.016em;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.25;
+  margin:38px 0 10px;letter-spacing:-.008em;text-wrap:balance}
+p{margin:0 0 16px}
+.lede{font-size:20px;color:var(--ink-2);line-height:1.5}
+strong{font-weight:600}
+
+code,.tok{font-family:var(--mono);font-size:.85em;background:var(--surface-2);
+  padding:.1em .38em;border-radius:2px}
+.term{font-family:var(--mono);font-size:.86em;font-weight:500}
+
+/* Ebenen-Marker */
+.lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;padding:2px 7px;border:1px solid;white-space:nowrap;
+  display:inline-block;vertical-align:2px}
+.l1{color:var(--ink-3);border-color:var(--rule)}
+.l2{color:var(--compliance);border-color:var(--compliance)}
+
+.panel{background:var(--surface);border:1px solid var(--rule-soft);
+  border-top:2px solid var(--ink);padding:22px 24px;margin:26px 0}
+.panel.c{border-top-color:var(--compliance)}
+.panel.l{border-top-color:var(--leistung)}
+.panel.f{border-top-color:var(--flag)}
+.panel > :last-child{margin-bottom:0}
+.plabel{font-family:var(--mono);font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+
+.fields{border-top:1px solid var(--rule);margin:20px 0 0}
+.field{border-bottom:1px solid var(--rule-soft);padding:16px 0;
+  display:grid;grid-template-columns:minmax(200px,250px) 1fr;gap:8px 30px}
+.field-n{font-family:var(--mono);font-size:14px;font-weight:500;line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);
+  padding:1px 6px;white-space:nowrap}
+.chip.req{color:var(--compliance);border-color:var(--compliance)}
+.field-b{font-size:16.5px;line-height:1.55}
+.field-b p{margin:0 0 8px}.field-b p:last-child{margin:0}
+.why{color:var(--ink-2);font-size:15.5px}
+.why::before{content:"Warum ";font-family:var(--display);font-weight:600;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+@media(max-width:760px){.field{grid-template-columns:1fr;gap:6px}}
+
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;vertical-align:top;padding:11px 16px 11px 0;
+  border-bottom:1px solid var(--rule-soft)}
+th{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule)}
+td.n{font-family:var(--mono);font-size:14px;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+
+ul,ol{margin:0 0 16px;padding-left:1.15em}
+li{margin:0 0 8px}
+.check{list-style:none;padding:0}
+.check li{padding-left:26px;position:relative}
+.check li::before{content:"";position:absolute;left:2px;top:.62em;width:11px;
+  height:2px;background:var(--ink-3)}
+
+figure{margin:30px 0;padding:0}
+figure svg{display:block;width:100%;max-width:100%;height:auto;
+  background:var(--surface);border:1px solid var(--rule-soft)}
+figcaption{font-size:14.5px;color:var(--ink-2);margin-top:10px;line-height:1.5;
+  font-family:var(--display)}
+:focus-visible{outline:2px solid var(--leistung);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{body{background:#fff}.panel,figure,.field{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">Operations Playbook · Ebene 1 + 2 · Bereich Security</p>
+  <h1>Was ein Security-Modul braucht</h1>
+  <p class="standfirst">Alles, was für jedes Modul gilt, plus das, was bei Security dazukommt — in einem Dokument. Die Herkunft jeder Angabe ist markiert.</p>
+  <div class="meta">
+    <span><b>Stand</b> 31.08.2026</span>
+    <span><b>Status</b> Entwurf</span>
+    <span><b>Dateien</b> 1_grundkonzepte/modul.md · security-modul.md</span>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="sec-no">00</span><h2>Wie dieses Dokument zu lesen ist</h2></div>
+  <p>Das Playbook trennt zwei Ebenen, und diese Trennung ist mehr als Ablage-Ordnung — sie entscheidet, ob sich Module über Bereiche hinweg vergleichen lassen.</p>
+  <div class="panel">
+    <p><span class="lvl l1">Ebene 1</span> &nbsp;Das Grundkonzept. Gilt für <strong>alle</strong> Bereiche — Security, Logistik, alles, was später dazukommt.</p>
+    <p style="margin-bottom:0"><span class="lvl l2">Ebene 2 · Security</span> &nbsp;Das Detailkonzept. Gilt <strong>nur</strong> für Security und ergänzt Ebene 1.</p>
+  </div>
+  <p><strong>Die harte Regel:</strong> Ebene 2 darf Felder <em>ergänzen</em>. Sie darf kein Feld aus Ebene 1 umbenennen, weglassen oder anders bedeuten lassen. Welche Felder ein Modul hat, steuert die Modulart — nicht der Bereich.</p>
+  <p>Der Maßstab für jeden Satz auf Ebene 2 lautet: <em>Stimmt er beim nächsten Bereich auch?</em> Wenn ja, gehört er nach Ebene 1.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">01</span><h2>Warum Security überhaupt mehr braucht</h2></div>
+  <p class="lede">Drei Eigenschaften, aus denen sich alles Weitere ableitet. Sie sind der Grund, warum es ein Detailkonzept gibt und nicht nur eine längere Feldliste.</p>
+
+  <h3>Fremde Autorität</h3>
+  <p>Norm, Behörde und Genehmigungsbescheid bestimmen Existenz, Mindestinhalt, Frist und Freigabe eines Moduls. Der Bescheid kann über die Verordnung hinausgehen und ihre Schwelle auch unterlaufen.</p>
+  <p><strong>Folge:</strong> Ein Security-Modul ist nach oben offen. Seine Sollbeschreibung ist nie abschließend aus der Norm ableitbar — deshalb braucht jede Anforderung die Angabe, <em>ob</em> sie Rechtspflicht, Behördenauflage, Branchenstandard oder Hausentscheidung ist.</p>
+
+  <h3>Wirkung auf und Bindung an Personen</h3>
+  <p>Die Leistung schränkt Menschen ein und hängt an namentlich benannten, anwesenden, behördlich geprüften Personen. Die Bußgeldbewehrung trifft diese Personen einzeln, nicht die Organisation.</p>
+  <p><strong>Folge:</strong> Der Grundsatz „Rollen sind strukturell, Personen situativ“ trägt hier nur teilweise. Kein anderer Bereich schränkt Menschen ein — deshalb kennt Ebene 1 keine Befugnisgrundlage.</p>
+
+  <h3>Umschaltung zur Laufzeit</h3>
+  <p>Lage, Betriebszustand und Eskalationsstufe ändern sich <em>innerhalb</em> einer Veranstaltung, nicht nur zwischen Phasen. Wer ein Modul führt, kann davon abhängen.</p>
+  <p><strong>Folge:</strong> Das Phasenmodell allein reicht nicht. Es braucht eine zweite und dritte Zeitrechnung — siehe nächster Abschnitt.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">02</span><h2>Drei Achsen, drei Wörter</h2></div>
+  <p>Der häufigste Begriffsfehler in den bisherigen Gesprächen. Drei verschiedene Dinge wurden mit demselben Wort benannt — „Betriebszustand“ meinte einmal die Zeit und einmal die Lage. Seit dem 29.08. sind sie getrennt.</p>
+</section>
+
+<figure>
+<svg viewBox="0 0 1000 400" role="img" aria-label="Drei parallele Achsen: die Phase als grobe Zeitachse P0 bis P7, der Betriebszustand als feine Zeitachse von Nullbetrieb bis Abbau, und die Eskalationsstufe als Lageachse vom Regelbetrieb bis zur Gefahrenabwehrbehörde">
+  <defs>
+    <marker id="e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+
+  <!-- Achse 1 -->
+  <text x="30" y="34" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4" fill="currentColor" opacity=".55">ACHSE 1 · ZEIT, GROB</text>
+  <text x="30" y="58" font-family="Archivo, sans-serif" font-size="16" font-weight="600" fill="currentColor">Phase</text>
+  <text x="130" y="58" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor" opacity=".65">gesetzt in phasen.md · im Modul über die Deadlines</text>
+  <line x1="30" y1="72" x2="960" y2="72" stroke="currentColor" opacity=".3"/>
+  <g font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle" opacity=".9">
+    <text x="88" y="94">P0</text><text x="204" y="94">P1</text><text x="320" y="94">P2</text><text x="436" y="94">P3</text>
+    <text x="552" y="94">P4</text><text x="668" y="94">P5</text><text x="784" y="94">P6</text><text x="900" y="94">P7</text>
+  </g>
+  <g stroke="currentColor" opacity=".18">
+    <line x1="146" y1="80" x2="146" y2="104"/><line x1="262" y1="80" x2="262" y2="104"/>
+    <line x1="378" y1="80" x2="378" y2="104"/><line x1="494" y1="80" x2="494" y2="104"/>
+    <line x1="610" y1="80" x2="610" y2="104"/><line x1="726" y1="80" x2="726" y2="104"/>
+    <line x1="842" y1="80" x2="842" y2="104"/>
+  </g>
+
+  <!-- Achse 2 -->
+  <text x="30" y="148" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4" fill="currentColor" opacity=".55">ACHSE 2 · ZEIT, FEIN</text>
+  <text x="30" y="172" font-family="Archivo, sans-serif" font-size="16" font-weight="600" fill="currentColor">Betriebszustand</text>
+  <text x="205" y="172" font-family="Archivo, sans-serif" font-size="12.5" fill="#8E6410">noch nirgends gesetzt</text>
+  <line x1="30" y1="186" x2="960" y2="186" stroke="currentColor" opacity=".3"/>
+  <g>
+    <rect x="30" y="198" width="150" height="26" fill="currentColor" opacity=".10"/>
+    <rect x="184" y="198" width="120" height="26" fill="currentColor" opacity=".14"/>
+    <rect x="308" y="198" width="120" height="26" fill="currentColor" opacity=".18"/>
+    <rect x="432" y="198" width="120" height="26" fill="currentColor" opacity=".22"/>
+    <rect x="556" y="198" width="180" height="26" fill="currentColor" opacity=".28"/>
+    <rect x="740" y="198" width="100" height="26" fill="currentColor" opacity=".18"/>
+    <rect x="844" y="198" width="114" height="26" fill="currentColor" opacity=".22"/>
+  </g>
+  <g font-family="Archivo, sans-serif" font-size="11" fill="currentColor" text-anchor="middle" opacity=".9">
+    <text x="105" y="215">Nullbetrieb</text>
+    <text x="244" y="215">techn. Aufbau</text>
+    <text x="368" y="215">vorgez. Aufbau</text>
+    <text x="492" y="215">reg. Aufbau</text>
+    <text x="646" y="215">Laufzeit</text>
+    <text x="790" y="215">Abendver.</text>
+    <text x="901" y="215">Abbau</text>
+  </g>
+  <path d="M184 232 L184 246 L552 246 L552 232" fill="none" stroke="currentColor" stroke-width="1" opacity=".45"/>
+  <text x="368" y="264" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" text-anchor="middle" opacity=".7">die drei Aufbau-Zustände fallen in P4 — der vorgezogene beginnt davor</text>
+
+  <!-- Achse 3 -->
+  <text x="30" y="300" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.4" fill="currentColor" opacity=".55">ACHSE 3 · LAGE</text>
+  <text x="30" y="324" font-family="Archivo, sans-serif" font-size="16" font-weight="600" fill="#A6362C">Eskalationsstufe</text>
+  <text x="205" y="324" font-family="Archivo, sans-serif" font-size="12.5" fill="#8E6410">gehört in den Krisenablauf · noch nicht gesetzt</text>
+  <line x1="30" y1="338" x2="960" y2="338" stroke="currentColor" opacity=".3"/>
+  <g>
+    <rect x="30" y="350" width="230" height="30" fill="#A6362C" opacity=".10"/>
+    <rect x="284" y="350" width="270" height="30" fill="#A6362C" opacity=".22"/>
+    <rect x="578" y="350" width="290" height="30" fill="#A6362C" opacity=".38"/>
+  </g>
+  <g font-family="Archivo, sans-serif" font-size="12" fill="currentColor" text-anchor="middle">
+    <text x="145" y="370">Regelbetrieb</text>
+    <text x="419" y="370">Abstimmung im Koordinierungskreis</text>
+    <text x="723" y="370">Gefahrenabwehrbehörde führt</text>
+  </g>
+  <line x1="264" y1="365" x2="280" y2="365" stroke="currentColor" opacity=".5" marker-end="url(#e1)"/>
+  <line x1="558" y1="365" x2="574" y2="365" stroke="currentColor" opacity=".5" marker-end="url(#e1)"/>
+  <text x="880" y="370" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".55" text-anchor="start">…</text>
+</svg>
+<figcaption>Die drei Achsen laufen unabhängig voneinander. Ein Modul kann in P4 sein, im vorgezogenen Aufbau, und trotzdem im Regelbetrieb — oder in derselben Minute auf Eskalationsstufe 3. Das Feld <span class="term">Verhalten je Eskalationsstufe</span> fragt nur nach der dritten Achse. Die abgebildeten Stufen sind Beispiele; gesetzt werden sie im Krisenablauf.</figcaption>
+</figure>
+
+<section>
+  <div class="sec-head"><span class="sec-no">03</span><h2>Die vier Zusatzangaben</h2></div>
+  <p class="lede">Genau vier Felder kommen bei Security zu Ebene 1 dazu. Nicht mehr — jede weitere Angabe wäre entweder allgemein (dann gehört sie nach Ebene 1) oder Inhalt eines einzelnen Moduls.</p>
+
+  <h3><span class="lvl l2">Ebene 2</span> Befugnisgrundlage <span style="font-weight:400;color:var(--ink-3);font-size:15px">— und ihre Grenze</span></h3>
+  <p>Worauf sich die Maßnahme gegenüber Dritten stützt, und wo sie endet. Zwei Angaben: die <strong>Grundlage</strong> — Hausrecht, vertragliche Einwilligung, Jedermannsrecht, behördliche Anordnung — und die <strong>Grenze</strong>, also was das Modul ausdrücklich <em>nicht</em> darf.</p>
+  <div class="panel c">
+    <p class="plabel">Der rechtliche Kern in einem Absatz</p>
+    <p style="margin-bottom:0">Ein Ordnungsdienst hat keine hoheitlichen Befugnisse. § 34a Abs. 5 GewO lässt Wachpersonen ausdrücklich nur die Jedermannsrechte — Notwehr, Notstand, Selbsthilfe. Alles darüber hinaus, Zutrittsverweigerung und Taschenkontrolle eingeschlossen, läuft über das <strong>Hausrecht</strong> und die <strong>Einwilligung</strong>, die mit dem Betreten erklärt wird.</p>
+  </div>
+  <p><strong>Ohne dieses Feld</strong> beschreibt das Modul eine Handlung, ohne zu sagen, warum sie zulässig ist. Das ist genau die Frage, die im Ernstfall gestellt wird.</p>
+
+  <h3><span class="lvl l2">Ebene 2</span> Verhalten je Eskalationsstufe</h3>
+  <p>Je Stufe eine Zeile: Welche Stufe, was mit dem Modul geschieht — <span class="tok">läuft weiter</span>, <span class="tok">ändert die Ausprägung</span>, <span class="tok">ruht</span> — und wer es auf dieser Stufe führt.</p>
+  <p>Der Grund: Die Verantwortung für ein Security-Modul ist keine Konstante. Im Regelbetrieb verantwortet der Veranstalter; im Schadensfall greift die Gefahrenabwehrbehörde ein und behandelt die Lage als Krisenfall.</p>
+  <div class="panel">
+    <p class="plabel">Abzugrenzen von drei Feldern aus Ebene 1</p>
+    <p><span class="term">Abbruchkriterien</span> sagen, <em>wann der Einsatz endet</em>.</p>
+    <p><span class="term">Meldeweg und Eskalation</span> sagt, <em>wer informiert wird</em> — das ist der <strong>Pfad</strong>, nicht die <strong>Stufe</strong>.</p>
+    <p style="margin-bottom:0">Dieses Feld sagt, <em>wer führt</em>, wenn die Lage umschaltet.</p>
+  </div>
+  <p><strong>Beim Befüllen:</strong> Die Stufen sind noch nicht gesetzt. Trage die ein, die dein Modul tatsächlich unterscheidet, und notiere den Abgleich mit dem Krisenablauf als offenen Punkt. Keine eigene Stufenlogik erfinden — sie würde später kollidieren.</p>
+
+  <h3><span class="lvl l2">Ebene 2</span> Handlungsvollmacht ohne Rückfrage</h3>
+  <p>Je Maßnahme eine Zeile mit vier Angaben: <strong>auslösende Rolle</strong>, <strong>Voraussetzung</strong>, <strong>wer sie beendet</strong>, <strong>wer unverzüglich informiert wird</strong>. Wer auslöst, beendet nicht notwendig.</p>
+  <p>Der Impuls kommt aus einem <em>Ereignis</em>, nicht aus einer Rolle. Niemand entscheidet planvoll, jetzt eine Zusatzkontrolle anzusetzen; etwas passiert, und daraus folgt eine Maßnahme in Minuten. Deshalb genügen die vorhandenen Felder nicht — die Entscheidungsfrist der Wahlpflicht ist relativ zu T0 bemessen und damit ein Planungskonstrukt.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Fall aus dem Haus</th><th>Vollmacht</th><th>Warum</th></tr></thead>
+    <tbody>
+      <tr><td>Ein Aggregat auf dem Ladehof verliert Öl</td><td><strong>ohne Rückfrage</strong> — abbinden, abstreuen, Feuerwehr und Polizei alarmieren</td><td>Unmittelbare Gefahr für Personen trägt die Maßnahme</td></tr>
+      <tr><td>Eine angemeldete Demonstration eskaliert</td><td><strong>keine</strong> eigenständige Maßnahme — nur in Rücksprache mit der Polizei</td><td>Die Zuständigkeit liegt dort, nicht beim Haus</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>Beim Befüllen:</strong> Gibt es keine Vollmacht, wird ausdrücklich <span class="tok">keine</span> eingetragen — nicht leer gelassen. Ein leeres Feld ist nicht unterscheidbar von einem vergessenen.</p>
+
+  <h3><span class="lvl l2">Ebene 2</span> Rechtlich verantwortliche Stelle <span style="font-weight:400;color:var(--ink-3);font-size:15px">— bedingt</span></h3>
+  <p>Gilt nur, wenn das Modul <strong>auch bei Gastveranstaltungen</strong> eingesetzt wird. Bei Eigenveranstaltungen sind Veranstalter und Betreiber dieselbe Organisation — dann wird das Feld ausgeblendet.</p>
+  <div class="panel c">
+    <p style="margin-bottom:0">§ 43 Abs. 2 VStättVO legt das Sicherheitskonzept dem <strong>Betreiber</strong> auf, nicht dem Veranstalter. Nach § 38 Abs. 5 ist eine Übertragung auf den Veranstalter nur schriftlich möglich — und die Verantwortung des Betreibers bleibt davon <strong>unberührt</strong>.</p>
+  </div>
+  <p><strong>Ohne das Feld</strong> behauptet der Steckbrief bei einer Gastveranstaltung eine Verantwortungsverlagerung, die es rechtlich nicht gibt. Das ist zugleich der Grund, warum das Veranstalter-Modell weder Variante noch Parameter ist: Es ändert nicht, <em>wie</em> gearbeitet wird, sondern <em>wer haftet</em>.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">04</span><h2>Zwölf Felder aus Ebene 1, die bei Security anders befüllt werden</h2></div>
+  <p>Kein neues Feld — die Security-Antwort auf ein Feld, das Ebene 1 nur benennt. Das ist der Teil, der beim Ausfüllen am meisten Zeit spart.</p>
+
+  <div class="fields">
+    <div class="field">
+      <div><span class="field-n">Modulname</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Wo eine behördlich etablierte Benennung existiert, wird sie übernommen — Ordnungsdienstkonzept, Sanitätsdienstkonzept, Räumungskonzept, Verkehrskonzept nach vfdb 13-01.</p>
+        <p class="why">Eine eigene Nomenklatur erzeugt Reibung im Genehmigungsverfahren. Die eingeführte <strong>Hausbezeichnung</strong> geht dabei nicht verloren: Pünktchenplan, Hallenstreife, Spotter, SCU, ODL und SDP stehen als Synonym in der Außensicht und mit Definition im Glossar. Ein Modulname, den im Haus niemand benutzt, wird im Workshop nicht wiedererkannt.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Rechtsgrundlage</span><div class="chips"><span class="chip req">nur Compliance</span></div></div>
+      <div class="field-b">
+        <p>Norm <strong>und Fassungsstand und Normqualität</strong>. Die Normqualität unterscheidet Rechtsverordnung, Verwaltungsvorschrift, Gesetz, Behördenauflage, Branchenstandard und Hausentscheidung.</p>
+        <p class="why">Ohne die Unterscheidung wird Freiwilliges als Pflicht geführt — und Pflichtiges beim Tailoring gestrichen. Beispiel: Die Veranstaltungsleitung hat in der Verordnung <em>keine</em> Qualifikationsanforderung; die verbreiteten Anforderungen sind Branchenstandard.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Auslöseschwelle</span><div class="chips"><span class="chip req">nur Compliance</span></div></div>
+      <div class="field-b">
+        <p>Mehrere Auslöser einzeln nennen, je mit Art: <span class="tok">Zahl</span>, <span class="tok">Bewertung</span> oder <span class="tok">Bescheid</span>. Es gilt der zuerst greifende.</p>
+        <p class="why">§ 43 VStättVO trägt zwei Arten nebeneinander — eine Zahl in Abs. 2 und einen unbestimmten Rechtsbegriff in Abs. 1. Für Ausstellungsräume rechnet § 1 Abs. 2 mit einem Besucher je Quadratmeter Grundfläche; die Pflicht greift damit bei einer Messe im Regelfall, nicht als Ausnahme.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Fristen</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Bei Security meist eine <strong>Kette</strong>, kein Datum: mit Zwischenständen und einer Rückmeldezeit, die nicht in der Hand des Hauses liegt.</p>
+        <p class="why">vfdb 13-01 empfiehlt sechs Wochen für den Entwurf und vier für die Endfassung; andernorts sind es acht Wochen plus vierzehn Tage Behördenrückmeldung plus zwei Wochen Endfassung plus fünf Werktage Unterschriften. Wer das als ein Datum notiert, plant an der Realität vorbei.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Zustimmung</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Bei einer Stelle außerhalb des Hauses zusätzlich: Form des Nachweises, Frist relativ T0, und <strong>was gilt, wenn die Zustimmung ausbleibt</strong>.</p>
+        <p class="why">Das Einvernehmen nach § 43 Abs. 2 ist ein eigener Verfahrensschritt, kein Konzeptinhalt. Es kann scheitern — und die Fertigstellung des Moduls liegt insoweit nicht in der Hand des Hauses.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Qualifikationsnachweis vor Einsatz</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Nicht nur ob und welcher, sondern: <strong>Stufe</strong>, <strong>zulässige Belegarten</strong>, <strong>Gültigkeitsdauer</strong>, <strong>Prüfweg</strong>.</p>
+        <p class="why">Die Stufe hängt an der Tätigkeit, nicht an der Person — § 34a Abs. 1a GewO zählt die sachkundepflichtigen Tätigkeiten abschließend auf; für einfache Zugangskontrolle genügt die Unterrichtung. Die Zuverlässigkeit wird spätestens nach fünf Jahren neu geprüft, der Nachweis hat also ein Ablaufdatum. Und: Der Auftraggeber kann das Bewacherregister nicht selbst abfragen — der Prüfweg ist Zusicherung des Erbringers plus Sichtprüfung des Ausweises.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Nachweise und Dokumentation</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Die Aufbewahrungsdauer ist zu <strong>setzen und zu begründen</strong>, nicht zu übernehmen. Dazu die Angabe, <strong>wo der Beleg liegt</strong>.</p>
+        <p class="why">Für Kontrollprotokolle und Vorfallmeldungen existiert keine normierte Frist. § 21 BewachV bindet mit drei Jahren den Bewachungsunternehmer, nicht den Auftraggeber; Ansprüche wegen Personenschäden verjähren nach § 199 Abs. 2 BGB erst nach dreißig Jahren. Bei Fremdvergabe liegt der Beleg beim Dienstleister und ist ohne vertraglichen Zugriff nicht verfügbar.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Lieferobjekte</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Wo ein Lieferobjekt <strong>Rechtswirkung</strong> hat, reicht der Ablageort nicht. Zusätzlich: Adressat, Form, Übergabezeitpunkt und wer gegenzeichnet.</p>
+        <p class="why">Betroffen sind unter anderem das Bestellungsschreiben eines Funktionsträgers, die Dienstanweisung nach § 17 BewachV, die Einvernehmenserklärung und das Sicherheitskonzept selbst, sobald es Bestandteil des Bescheids wird. Wo ein Dokument verteilt wird, gehören Verteiler und Sicherung der aktuellen Fassung dazu.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Bemessungsregel</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Das <strong>Verfahren</strong> ist selbst anzugeben, nicht nur das Ergebnis: mit Quelle, Verbindlichkeitsstufe, Eingangsgrößen und der Angabe, ob das Ergebnis ein <strong>Mindest-</strong> oder ein <strong>Richtwert</strong> ist und wer es abnimmt.</p>
+        <p class="why">Die Bemessungsgröße ist Posten mal Zeit, nicht Stückzahl. vfdb 13-01 hält ausdrücklich fest, dass eine Berechnung allein nach Besucherzahl nicht zielführend ist; die verbreitete Formel „ein Ordner je hundert Besucher“ ist fachlich verworfen und steht in keiner Verordnung. Im Haus ist das Verfahren der <strong>Pünktchenplan</strong> — positionsbasiert, Ergebnisart Richtwert. Für die Brandsicherheitswache kommt das Mengengerüst dagegen von der Feuerwehr, als Mindestwert ohne zulässige Abweichung.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Startbedingung</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Vorbedingungen, die den Einsatz <em>sperren</em>, bis sie erfüllt sind.</p>
+        <p class="why">Zulassung des Erbringers; bei Verarbeitung personenbezogener Daten die Rechtsgrundlage der Verarbeitung, die Beschilderung und — wo einschlägig — die Datenschutz-Folgenabschätzung, die Art. 35 DSGVO ausdrücklich „vorab“ verlangt; bei Fremdvergabe der Auftragsverarbeitungsvertrag.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Risikostufe</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Nicht pauschal je Veranstaltung. Eingetragen wird die <strong>höchste</strong> Stufe im Zeitverlauf, und die Zeitabschnitte, in denen sie erreicht wird.</p>
+        <p class="why">Eine über die Laufzeit gemittelte Risikostufe beschreibt keinen Moment, den es gibt.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Ressourcenbedarf</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Je Phase ist zu grob. Bei Security zusätzlich als Grundlage des Postenplans: <strong>Posten und Zeitfenster</strong>.</p>
+        <p class="why">Derselbe Sanitätsdienst steht im Aufbau mit zwei Kräften und in der Laufzeit mit sieben einschließlich Arzt und Rettungswagen. Eine Phasenzahl bildet das nicht ab.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Nachbereitung und Rückkopplung</span><div class="chips"><span class="chip">Ebene 1</span></div></div>
+      <div class="field-b">
+        <p>Bemessungsergebnis und tatsächlicher Bedarf werden <strong>getrennt geführt</strong> und gegeneinander ausgewertet.</p>
+        <p class="why">Der einzige veröffentlichte Vergleich der beiden gängigen Sanitätsdienst-Verfahren zeigt beide als deutlich überdimensionierend. Ohne Rückkopplung bleibt das unbemerkt und wird zur Gewohnheit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">05</span><h2>Vier Schnittregeln für Security</h2></div>
+  <p>Ebene 1 sagt, <em>was</em> ein Modul ist. Diese vier Regeln sagen, wie man in der Praxis entscheidet, <em>wo eines aufhört</em>. Sie ergänzen den Werkstatt-Test.</p>
+
+  <h3>1 · Compliance und Leistung werden nicht in einem Modul vermischt</h3>
+  <p>Auch dann nicht, wenn derselbe Kräftepool beides erbringt — der Ordnungsdienst ist Pflicht, die Standwache ist eine an Aussteller verkaufte Leistung. Adressat, Nachweis und Abrechnung sind verschieden. Die Konkurrenz um dieselben Kräfte wird als <strong>Abhängigkeit</strong> geführt, nicht durch Zusammenlegen aufgelöst.</p>
+
+  <h3>2 · Das Veranstalter-Modell ist weder Variante noch Parameter</h3>
+  <p>Es ändert nicht, <em>wie</em> gearbeitet wird, sondern <em>wer rechtlich haftet</em>. Nach dem Werkstatt-Test bleibt es damit ein Modul — mit dem bedingten Feld „Rechtlich verantwortliche Stelle“, nicht mit einer zweiten Anleitung.</p>
+
+  <h3>3 · Ein Szenario ist kein Modul</h3>
+  <p>Bombendrohung, Räumung, Überfüllung, Unwetter sind Krisenfälle und gehören in den Krisenablauf. Was im Modul steht, ist das <em>Verhalten je Eskalationsstufe</em> — nicht der Ablauf des Ereignisses.</p>
+  <p>Dazu die Abgrenzung, die am häufigsten verwechselt wird: <strong>Ein Teilkonzept ist ein Lieferobjekt, kein Modul.</strong> Das Ordnungsdienstkonzept ist das, was das Modul Ordnungsdienst hervorbringt. Der Name ist derselbe, die Sache nicht.</p>
+
+  <h3>4 · Ein Ablaufschritt wird nicht dadurch zum Modul, dass er einen Namen hat</h3>
+  <p>Dieselbe Tätigkeit kommt in mehreren Modulen als Abschnitt vor — eine Personenkontrolle findet am Einlass statt und noch einmal durch die Hallenstreife in der Veranstaltung. Das sind nicht zwei Module gleichen Namens und auch kein drittes, das beide bedient.</p>
+  <div class="panel l">
+    <p style="margin-bottom:0">Unterschieden wird über den <strong>Geltungsbereich</strong>: Das Modul am Einlass gilt räumlich <em>vor</em> der Ticketkontrolle, die Hallenstreife <em>in</em> der Veranstaltung. Das ist der Grund, warum der Geltungsbereich seit dem 29.08. ein Pflichtfeld ist.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">06</span><h2>Eine vierte Art von Beteiligten</h2></div>
+  <p>Ebene 1 kennt drei Arten: eigene Rollen, Dienstleister, die die Linie beschafft, und Nachbarn, an die übergeben wird. Bei Security kommt eine vierte hinzu, für die keine dieser drei passt.</p>
+</section>
+
+<figure>
+<svg viewBox="0 0 1000 300" role="img" aria-label="Vier Arten von Beteiligten: eigene Rollen sind weisungsgebunden, Dienstleister werden beschafft, Nachbarn erhalten Übergaben, und Behörden sind weder weisungsgebunden noch beschaffbar und können in den Betrieb hineinweisen">
+  <defs>
+    <marker id="s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+    <marker id="s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A6362C"/>
+    </marker>
+  </defs>
+  <rect x="368" y="112" width="264" height="76" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  <text x="500" y="146" font-family="Archivo, sans-serif" font-size="16" font-weight="600" fill="currentColor" text-anchor="middle">Das Modul</text>
+  <text x="500" y="168" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" text-anchor="middle" opacity=".65">eine Durchführungsverantwortung</text>
+
+  <!-- 1 eigene Rollen -->
+  <rect x="40" y="34" width="220" height="56" fill="none" stroke="currentColor" opacity=".55"/>
+  <text x="58" y="58" font-family="Archivo, sans-serif" font-size="13.5" font-weight="600" fill="currentColor">Eigene Rollen</text>
+  <text x="58" y="77" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".65">weisungsgebunden</text>
+  <line x1="264" y1="72" x2="364" y2="122" stroke="currentColor" opacity=".5" marker-end="url(#s1)"/>
+
+  <!-- 2 Dienstleister -->
+  <rect x="40" y="118" width="220" height="56" fill="none" stroke="currentColor" opacity=".55"/>
+  <text x="58" y="142" font-family="Archivo, sans-serif" font-size="13.5" font-weight="600" fill="currentColor">Dienstleister</text>
+  <text x="58" y="161" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".65">Linie beschafft, Modul bestellt</text>
+  <line x1="264" y1="146" x2="364" y2="148" stroke="currentColor" opacity=".5" marker-end="url(#s1)"/>
+
+  <!-- 3 Nachbarn -->
+  <rect x="740" y="118" width="220" height="56" fill="none" stroke="currentColor" opacity=".55"/>
+  <text x="758" y="142" font-family="Archivo, sans-serif" font-size="13.5" font-weight="600" fill="currentColor">Nachbarmodule</text>
+  <text x="758" y="161" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".65">definierte Übergaben</text>
+  <line x1="636" y1="148" x2="736" y2="146" stroke="currentColor" opacity=".5" marker-end="url(#s1)"/>
+
+  <!-- 4 Behörden -->
+  <rect x="330" y="228" width="340" height="60" fill="#A6362C" opacity=".10"/>
+  <rect x="330" y="228" width="340" height="60" fill="none" stroke="#A6362C" stroke-width="1.6"/>
+  <text x="500" y="252" font-family="Archivo, sans-serif" font-size="13.5" font-weight="600" fill="#A6362C" text-anchor="middle">Stellen ohne Weisungsverhältnis</text>
+  <text x="500" y="272" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" text-anchor="middle" opacity=".75">Polizei · Feuerwehr · Ordnungsamt · Zoll · Rettungsdienst · Brandsicherheitswache</text>
+  <line x1="500" y1="224" x2="500" y2="192" stroke="#A6362C" stroke-width="1.8" marker-end="url(#s2)"/>
+  <text x="516" y="212" font-family="Archivo, sans-serif" font-size="12" font-weight="600" fill="#A6362C">weisen in den laufenden Betrieb hinein</text>
+
+  <text x="40" y="212" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".6">nicht weisungsgebunden ·</text>
+  <text x="40" y="230" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".6">nicht beschaffbar</text>
+</svg>
+<figcaption>Die vierte Art lässt sich nicht steuern und nicht bestellen — sie kann anweisen. Bei der Brandsicherheitswache steht das ausdrücklich in § 41 Abs. 2 VStättVO: Ihren Anweisungen ist Folge zu leisten.</figcaption>
+</figure>
+
+<section>
+  <div class="sec-head"><span class="sec-no">07</span><h2>Wo diese Stellen geführt werden</h2></div>
+  <p>Wo ein Modul an eine solche Stelle grenzt, wird die Übergabe wie jede andere beschrieben — Objekt, Medium, Auslöser, Rollen — und <strong>zusätzlich</strong> im Rechtsrahmen des Detailkonzepts geführt: mit ihrer Befugnis gegenüber dem Haus, ihrer Erreichbarkeit und dem nötigen Vorlauf.</p>
+  <div class="panel f">
+    <p class="plabel">Der Punkt, der in der Praxis reißt</p>
+    <p style="margin-bottom:0">Der <strong>Vorlauf</strong>. Das Behördenmeeting liegt weit vor der Veranstaltung. Wer die Frist erst bemerkt, wenn das Konzept fertig ist, hat sie schon verpasst.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">08</span><h2>Prüfliste</h2></div>
+  <p>Zusätzlich zur Definition of Done aus Ebene 1. Das ist die Liste, mit der ein fertiges Security-Modul abgenommen wird.</p>
+  <ul class="check">
+    <li>Steht bei <em>jeder</em> Anforderung, ob sie Rechtspflicht, Behördenauflage, Branchenstandard oder Hausentscheidung ist? Ohne das wird Freiwilliges als Pflicht geführt — und Pflichtiges beim Tailoring gestrichen.</li>
+    <li>Sind alle Auslöser genannt, nicht nur der bekannteste?</li>
+    <li>Ist die Frist eine Kette oder ein Datum? Externe Fristen haben Zwischenstände und eine Rückmeldezeit, die nicht in der Hand des Hauses liegt.</li>
+    <li>Ist gesagt, was gilt, wenn eine externe Zustimmung ausbleibt?</li>
+    <li>Steht die Befugnisgrundlage <strong>und</strong> ihre Grenze?</li>
+    <li>Ist das Modul lückenlos besetzt, und ist die Übergabe beschrieben? Für den Schichtwechsel existiert keine Norm — das Modul muss sie selbst definieren.</li>
+    <li>Hat jeder personengebundene Nachweis ein Ablaufdatum und einen Prüfweg?</li>
+    <li>Ist die Aufbewahrungsdauer gegen den Haftungshorizont begründet, und ist gesagt, wo der Beleg liegt?</li>
+    <li>Ist die Bemessung als Posten mal Zeit ausgedrückt, nicht als Stückzahl?</li>
+    <li>Steht bei jedem Lieferobjekt mit Rechtswirkung, wer es gegenzeichnet?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">09</span><h2>Was noch offen ist</h2></div>
+  <p>Vier Punkte, die im Workshop auftauchen werden. Sie stehen hier, damit sie nicht als Überraschung kommen.</p>
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Offener Punkt</th><th>Stand</th><th>Wer entscheidet</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="n">Eskalationsstufen</td>
+        <td>Das Feld verlangt sie, gesetzt sind sie nirgends. Sie gehören in den Krisenablauf, der noch nicht geschrieben ist. Bis dahin trägt jedes Modul die Stufen, die es tatsächlich unterscheidet.</td>
+        <td>1789, beim Schreiben des Krisenablaufs</td>
+      </tr>
+      <tr>
+        <td class="n">Betriebszustände</td>
+        <td>Die Achse ist benannt, der Ort offen. Drei der sieben Zustände liegen innerhalb von P4, der vorgezogene Aufbau beginnt davor. In der Phasenbeschreibung steht davon nichts. Drei Optionen mit Empfehlung liegen als Entwurf vor.</td>
+        <td>Projektleitung mit Bereichsleitung</td>
+      </tr>
+      <tr>
+        <td class="n">Auftragsverantwortung im Detail</td>
+        <td>Das Feld ist seit dem 31.08. da (R · A · F). Offen ist, ob die Rolle bei Security immer 214 ist oder je Modul wechselt — und wie sie sich zur bestellenden Stelle 410 verhält, wenn beide in derselben Übergabe vorkommen.</td>
+        <td>Messe, an den ersten befüllten Modulen</td>
+      </tr>
+      <tr>
+        <td class="n">Vorrang zwischen Modulen</td>
+        <td>§ 38 Abs. 4 VStättVO verpflichtet zur Einstellung des Betriebes, wenn sicherheitsrelevante Einrichtungen nicht betriebsfähig sind — ein Security-Modul kann damit andere stillstellen. Das Feld „Abhängigkeiten“ kennt dafür keine Form. Nicht in Ebene 2 gelöst, weil die Veranstaltungstechnik dasselbe kann.</td>
+        <td>Frage an Ebene 1</td>
+      </tr>
+      <tr>
+        <td class="n">Dritte Modulart</td>
+        <td>Für Befähigungsleistungen. Kandidat aus dem Haus ist die veranstaltungsspezifische Dienstleistereinweisung. Die Recherche spricht dagegen: Unterweisungen folgen aus § 42 Abs. 2 VStättVO, § 12 ArbSchG und § 4 DGUV Vorschrift 1 — und wären damit ohnehin Compliance.</td>
+        <td>Messe</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">10</span><h2>Belege</h2></div>
+  <p>Die Wortlaute stammen aus Webabrufen und sind vor der Aufnahme in den Rechtsrahmen am amtlichen Text der maßgeblichen Landesfassung zu prüfen. Bezugsfassung ist die Muster-Versammlungsstättenverordnung; ein Standort, Geltung Deutschland.</p>
+  <ul>
+    <li>§ 38, § 41, § 42, § 43 VStättVO — Veranstaltungsleitung, Brandsicherheitswache, Unterweisung, Sicherheitskonzept</li>
+    <li>§ 34a GewO und BewachV §§ 8, 12, 16, 17, 18, 21 — Bewachungsgewerbe, Sachkunde, Dienstanweisung, Aufbewahrung</li>
+    <li>vfdb-Merkblatt 13-01 — Sicherheitskonzept für Großveranstaltungen</li>
+    <li>BaSiGo — Betriebsarten</li>
+    <li>§ 199 BGB — Verjährung; Art. 35 DSGVO — Datenschutz-Folgenabschätzung</li>
+    <li>DSK, Orientierungshilfe Videoüberwachung durch nicht-öffentliche Stellen</li>
+  </ul>
+  <p style="color:var(--ink-2);font-size:16px">Dazu als Realprobe ein anonymisiertes veranstaltungsbezogenes Sicherheitskonzept, das im Repository liegt.</p>
+</section>
+
+</div>
+</body>
+</html>

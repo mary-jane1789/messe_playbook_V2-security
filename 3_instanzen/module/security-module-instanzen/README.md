@@ -1,10 +1,12 @@
 # security-module-instanzen
 
-Die ausgefüllten Security-Module. Je Modul eine Datei, benannt nach dem Modul:
-`einlasskontrolle.md`, `ordnungsdienst.md`.
+Die ausgefüllten Security-Module. Je Modul eine Datei, benannt nach dem Modul.
 
-Welche Module es gibt, steht in
-`2_detailkonzepte/module/security-module-detailkonzept/modullandkarte.md`.
-Welche Felder ein Modul hat, in `1_grundkonzepte/modul.md`.
+| Datei | Inhalt |
+|---|---|
+| `modullandkarte.md` | das Register: welche Module es gibt, wie sie eingeordnet sind, und was ausdrücklich kein Modul ist |
+| `personenkontrolle-stichprobe-spotter.md` | MOD-SEC-01 · Testmodul aus dem Sparring vom 24.08.2026, inhaltlich nicht abgenommen |
 
-Noch keine Datei angelegt.
+Welche Felder ein Modul hat, steht in `../../../1_grundkonzepte/modul.md`; was
+bei Security dazukommt, in
+`../../../2_detailkonzepte/module/security-module-detailkonzept/`.

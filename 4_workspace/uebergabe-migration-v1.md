@@ -1,15 +1,39 @@
 ---
 status: laufend
-stand: 2026-08-23
+stand: 2026-08-31
 zweck: Einstieg für die nächste Sitzung — Inhalte aus Playbook V1.0 ins Repository übertragen
 ---
 
 # Übergabe: Migration der V1.0-Inhalte
 
+> **Achtung, Teilstand.** Dieses Dokument beschreibt die Migration mit Stand
+> 26.08.2026. Seither hat der erste echte Durchgang durch die Steckbrief-Vorlage
+> den Feldkatalog verändert — Feld `Ergebnis` und Feld `Auslöser` sind
+> gestrichen, `Geltungsbereich` und `Fristen` sind neu, `Phasenprofil` heißt
+> `Deadlines`, `Bindung` heißt `Pflichtstufe`, das Feld
+> „Verhalten im eskalierten Betriebszustand" heißt „Verhalten je
+> Eskalationsstufe", und es gibt drei Verantwortungen statt zwei (R · A · F).
+> **Maßgeblich sind `1_grundkonzepte/modul.md` und
+> `0_meta/entscheidungen.md` ab E-63.** Wo dieses Dokument alte Feldnamen
+> benutzt, gelten die neuen.
+>
+> Neu entstanden sind außerdem die Modullandkarte und das erste befüllte Modul
+> in `3_instanzen/module/security-module-instanzen/`. Der Rücklauf, der zu den
+> Änderungen geführt hat, steht in `rueckfluss-sparrings-2026-08-24.md`.
+
+> **Teilweise überholt seit dem 29.08.2026.** Die Sparrings vom 24.08.2026 haben
+> Befund 8 (Bestellweg) beantwortet und die Annahme in E-55 widerlegt; dazu sind
+> Felder des Katalogs gestrichen, umbenannt und ergänzt worden. Was gilt, steht
+> in `0_meta/entscheidungen.md` ab E-63 und in
+> `4_workspace/rueckfluss-sparrings-2026-08-24.md`. Dieses Dokument bleibt für
+> die noch offenen Migrationsschritte gültig — `dienstleister.md`, `rolle.md`,
+> `gremium.md`, `lead-modell.md`, `ablauf.md` und die drei Abläufe.
+
 ## Wo du bist
 
-Das Repository-Skelett steht und ist committet (`5879335`, noch nicht gepusht).
-Inhaltlich ist es leer. Was aus dem Playbook V1.0 und dem Modul-Framework
+Das Repository-Skelett steht und ist committet. Übertragen sind
+`veranstaltung.md`, `phasen.md` und `modul.md`; dazu ist das Security-Detail-
+konzept vorgezogen entstanden (siehe unten). Was aus dem Playbook V1.0 und dem Modul-Framework
 übernommen wird, ist je Kapitel entschieden und in `0_meta/entscheidungen.md`
 unter E-14 bis E-28 festgehalten.
 
@@ -74,11 +98,15 @@ Zustimmungsfloskeln.
 
 ### 2_detailkonzepte/module/security-module-detailkonzept/
 
-Erst nach `modul.md`. Quelle ist **Modul-Framework Kap. 2.2**, das hierher
-wandert und nicht ins Grundkonzept gehört: VStättVO §§ 38, 41, 42, 43 mit
-Auslöseschwellen, § 34a GewO, vfdb-Merkblatt 13/01 mit Fristenlogik (Entwurf
-T-6 Wochen, Endfassung T-4) und dessen Konzeptstruktur, verkaufbare Leistungen.
-Dazu Modullandkarte, Wahlpflichtgruppen, Übergabekarte, Bemessungsregeln.
+~~Erst nach `modul.md`.~~ **Vorgezogen und am 26.08.2026 angelegt** — siehe
+„Abweichung von der Reihenfolge" unten. Es besteht aus drei Dateien statt der
+fünf des Platzhalters (F-26): `security-modul.md` mit den vier Zusatzangaben,
+den Ausfüllhinweisen und den Schnittregeln, dazu `rechtsrahmen.md` und
+`bemessungsverfahren.md` mit Struktur, aber ohne Zeilen (E-60).
+
+Modul-Framework Kap. 2.2 ist damit verteilt: die Benennungsregel nach vfdb und
+die Außensicht stehen in `security-modul.md`, Normen, Schwellen und Fristen in
+`rechtsrahmen.md`. Die Normzeilen selbst sind noch nicht eingetragen.
 
 ### 0_meta/
 
@@ -231,9 +259,30 @@ ist der Gegentest. Nimm es weg — lässt sich ein Modul dann noch schreiben?
 3. **`dienstleister.md`**, mit der Vollständigkeitsfrage an die Messe.
 4. **`rolle.md`, `gremium.md`, `lead-modell.md`.** Schemata, kurz, mit offenen
    Punkten statt geglätteter Entwürfe.
-5. **`ablauf.md`**, dann die drei Abläufe.
+5. **`ablauf.md`**, dann die drei Abläufe. Der **Krisenablauf** ist inzwischen
+   vorrangig: Das Security-Detailkonzept braucht die Betriebszustände (E-52).
 6. **`glossar.md`, `projektkontext.md`** laufend mitziehen.
-7. Erst danach das Security-Detailkonzept.
+7. ~~Erst danach das Security-Detailkonzept.~~ — **vorgezogen, erledigt am
+   26.08.2026** (E-50 bis E-62).
+
+## Abweichung von der Reihenfolge
+
+Das Security-Detailkonzept ist vor den Punkten 3 bis 6 entstanden, weil ein
+Termin mit Bereichsleitung und Leitung Security anstand und dafür ein
+befüllbares Format gebraucht wurde.
+
+Was das kostet, offen benannt: Das Detailkonzept verweist an drei Stellen ins
+Leere.
+
+- Das Feld **Verhalten im eskalierten Betriebszustand** braucht Betriebszustände,
+  die im Krisenablauf zu setzen sind. Der ist nicht geschrieben.
+- **Rollenbezeichnungen** in Übergaben und Zuständigkeiten sind provisorisch,
+  solange `rolle.md` fehlt.
+- Der Hinweis, dass das Modul nur die Anforderung liefert und die Linie
+  beschafft, hängt an `dienstleister.md`.
+
+Diese Verweise sind als hängend gekennzeichnet und nicht plausibel gefüllt. Beim
+Schreiben der fehlenden Dateien ist gegen das Detailkonzept abzugleichen.
 
 ## Was am Ende des Tages passiert
 
