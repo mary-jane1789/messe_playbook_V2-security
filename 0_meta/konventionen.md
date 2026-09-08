@@ -1,6 +1,6 @@
 ---
 status: entwurf
-stand: 2026-08-23
+stand: 2026-09-08
 ---
 
 # Konventionen
@@ -109,6 +109,29 @@ verlinkt.
 ## Sprache
 
 Deutsch, auch in Ordner- und Dateinamen.
+
+## Farben und Typografie in Ausgabedateien
+
+Für alles, was als Ausgabe entsteht — HTML-Onepager, Landkarten, Workshop-
+Material —, gilt das Brand System der Messe, „Hello Opportunities". Quelle ist
+`brand-system.md` im Repository `messe-playbook_v1`, Ordner `00_Meta`.
+
+| Farbe | Hex | Rolle |
+|---|---|---|
+| Empowering Orange | `#F94F14` | Akzent, Interaktion, Hervorhebung |
+| Embracing Red | `#E00229` | Titel und Überschriften |
+| Inspirational Pink | `#F31194` | Akzent für Struktur und Gliederung |
+| Navigation Red | `#DB2F00` | nur Navigations- und Fußleisten |
+
+Neutrals: `#FFFFFF` Flächen, `#F8F8F8` Tönung, `#E5E7EB` Linien, `#6B7280`
+Sekundärtext, `#000000` Text. Schrift Google Sans, Fallback Product Sans und
+Figtree.
+
+Jede Farbe trägt in einer Datei genau eine Bedeutung. Ohne diese Regel wird aus
+drei Markenfarben eine bunte Fläche, in der keine Auszeichnung mehr trägt.
+
+Die Farben sind Ausgabe, nicht Datenstand: Markdown-Dateien im Repository
+bleiben ungestaltet.
 
 ## Noch offen
 
