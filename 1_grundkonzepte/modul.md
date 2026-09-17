@@ -1,7 +1,7 @@
 ---
 status: entwurf
-stand: 2026-08-31
-quelle: Modul-Framework V0.2 (nicht freigegeben); Phasen nach Playbook V1.0, Kap. 2; Risikostufe und Zustimmung nach Playbook V1.0, Kap. 9, 13, 15; Änderungen aus der ersten Befüllung am 24.08.2026 (E-63 bis E-72)
+stand: 2026-09-17
+quelle: Modul-Framework V0.2 (nicht freigegeben); Phasen nach Playbook V1.0, Kap. 2; Risikostufe und Zustimmung nach Playbook V1.0, Kap. 9, 13, 15; Änderungen aus der ersten Befüllung am 24.08.2026 (E-63 bis E-72); Ordnung Modulgruppe → Modul → Variante nach Modullandkarte Security — konsolidiert, 08.09.2026 (E-88)
 instanzen: 3_instanzen/module/
 ---
 
@@ -35,9 +35,9 @@ Dauerleistungen, und für die Bearbeitung durch das Fach die eindeutigere Frage.
 Module werden nach Ergebnis und Verantwortung geschnitten — nicht nach Phasen
 und nicht nach Aufbauorganisation.
 
-Ein Modul liegt quer zu den Phasen. Ein Sicherheitsmodul beginnt in der
-strategischen Konzeption, wird in der Feinplanung bestellt, in der Laufzeit
-erbracht und in der Nachbereitung ausgewertet. Das ist der Normalfall, nicht die
+Ein Modul liegt quer zu den Phasen. Es beginnt in der strategischen Konzeption,
+wird in der Feinplanung bestellt, in der Laufzeit erbracht und in der
+Nachbereitung ausgewertet. Das ist der Normalfall, nicht die
 Ausnahme. Ein Schnitt entlang der Phasen erzeugt Bausteine, die nur in Reihe
 funktionieren; ein Schnitt entlang der Bereiche erzeugt Bausteine, die niemand
 allein verantworten kann.
@@ -63,6 +63,7 @@ entstehen Splitter, die einzeln nichts leisten.
 | Kein Modul | Warum | Wohin |
 |---|---|---|
 | Phase (P0 bis P7) | Zeitabschnitt, nicht Leistung. Module wirken in Phasen und laufen quer dazu | `phasen.md` |
+| Modulgruppe | Ordnungsebene über dem Modul; kein Träger, kein Ergebnis, keine Verantwortung | Register des Bereichs |
 | Rolle | Träger, nicht Leistung | `rolle.md`, `lead-modell.md` |
 | Einzelner Prozessschritt | zu fein; erzwingt synchrone Änderung anderswo | Ablaufabschnitt innerhalb eines Moduls |
 | Dokument oder Vorlage | Lieferobjekt, nicht Leistungseinheit | Feld „Lieferobjekte" des Moduls |
@@ -73,7 +74,7 @@ entstehen Splitter, die einzeln nichts leisten.
 | Querschnittsmechanik (Terminologie, Eskalationslogik) | hängt mit fast allen Modulen zusammen | Ebene 1 oder `2_detailkonzepte/ablauf/` |
 | Parameterwert | ändert nur einen Wert | Feld „Parameter" des Moduls |
 
-## Drei Abgrenzungen
+## Zwei Abgrenzungen
 
 **Ein Modul ist kein Prozess.** Ein Prozess folgt dem Fluss, über
 Bereichsgrenzen hinweg. Ein Modul folgt der Verantwortung und endet dort, wo
@@ -83,7 +84,7 @@ kreuzt viele Module, ein Modul kommt in vielen Prozessen vor.
 Praktische Folge für das Befüllen: Was andere Verantwortliche tun, steht nicht
 als Ablaufschritt, sondern als Übergabe. Im Ablauf gibt es keine parallel
 weiterlaufenden Zweige — Unterschiede sind Variante oder Parameter. Und es gilt
-Steuerungstiefe statt Ausführungstiefe: als Richtwert vier bis acht Abschnitte.
+Steuerungstiefe statt Ausführungstiefe: ein Abschnitt je Phase.
 
 **Ein Modul ist keine Dienstleistersteuerung — aber die Beauftragung gehört
 hinein.** Die Grenze verläuft zwischen Linie und Veranstaltung, nicht zwischen
@@ -98,20 +99,56 @@ Haus und Dienstleister:
 Was je Veranstaltung mit dem Dienstleister passiert — beauftragen, übergeben,
 abnehmen — ist Teil des Moduls und kein eigenes Modul.
 
-**Ein Modul ist kein Controlling-Objekt.** Kennzahlen im Modul dienen der
-Selbstprüfung des ausführenden Teams. Sie sind kein Instrument der
-Leistungsbewertung durch die Führung.
+## Die Ordnung des Katalogs
 
-Eine Grenze der dritten Abgrenzung: Bei Compliance-Modulen ist die Abweichung
-von einer Frist oder einer Behördenauflage nichts, was das Team mit sich selbst
-klärt. Sie ist meldepflichtig an eine benannte Rolle. Das ist kein Controlling,
-sondern Weitergabe von Haftung.
+Drei Ebenen, von oben nach unten: **Modulgruppe → Modul → Variante.** Darunter
+liegt der Parameter als Wertebene.
 
-## Zwei Einordnungen
+| Ebene | was sie ist | was sie steuert |
+|---|---|---|
+| **Modulgruppe** | fachlich verwandte Module unter einem Namen | nichts. Sie ordnet und macht den Katalog lesbar |
+| **Modul** | die Leistungseinheit: einzeln bestellbar, bemessbar und prüfbar, mit einem Ergebnis | alles, was ein Steckbrief trägt |
+| **Variante** | Ausprägung desselben Moduls — anderer Mitteleinsatz, gleiches Ergebnis | nichts Eigenes; sie steht in der Varianten-Tabelle ihres Moduls |
+| **Parameter** | ein Wert innerhalb der Ausprägung | nur diesen Wert |
 
-Ein Modul wird auf zwei unabhängigen Achsen eingeordnet. Die Trennung ist
-nötig, weil sonst vermischt wird, *was* ein Modul ist, und *ob* es für eine
-Veranstaltung gilt.
+**Die Modulgruppe ordnet und steuert nichts.** Sie ist kein Träger, keine
+Organisationseinheit und keine Verantwortung; sie hat keinen Steckbrief, keine
+Rolle und keine Pflichtstufe. Ein Modul gehört zu genau einer Gruppe. Wechselt
+es die Gruppe, ändert sich am Modul selbst nichts.
+
+**Welche Gruppen es gibt, steht nicht hier.** Der Zuschnitt ist Sache des
+Bereichs und steht in seinem Register — für Security in
+`../3_instanzen/module/security-module-instanzen/`. Ebene 1 sagt nur, dass es
+die Ebene gibt und was sie nicht darf.
+
+### Was am Modul hängt, ordnet den Katalog nicht
+
+Drei Angaben stehen am einzelnen Modul. Sie sind Merkmale, keine
+Gliederungsachsen: Der Katalog wird nicht nach ihnen geschnitten, und zwei
+Module derselben Gruppe dürfen sich in allen dreien unterscheiden.
+
+| Angabe | Werte | sagt |
+|---|---|---|
+| **Modulart** | `Compliance` \| `Leistung` | *was* das Modul ist — und damit, welche Felder Pflicht sind |
+| **Pflichtstufe** | `Muss` \| `Wählen` \| `Kann` | *ob* es für eine Veranstaltung gilt |
+| **Grundmodul** oder **Alternative zu** | — \| Modul-ID | ob es mit anderen Modulen eine Wahl bildet |
+
+Compliance ist damit ein Merkmal eines Moduls und keine Ordnungsebene. Ein
+Compliance-Modul und ein Leistungs-Modul stehen ohne Weiteres nebeneinander in
+derselben Gruppe — bei den Ordnungs- und Wachdiensten ist genau das der Fall.
+
+### Vier Achsen, die quer liegen
+
+Phase, Akteur, Betriebszustand und Eskalationsstufe beschreiben ein Modul
+ebenfalls, stehen aber nicht in der Hierarchie: Ein Modul liegt quer zu allen
+vieren. Sie werden auf den Katalog **gemappt**, nicht in ihn eingebaut.
+
+| Achse | Werte | steht im Modul als |
+|---|---|---|
+| Phase | P0 bis P7, siehe [phasen.md](phasen.md) | Deadlines und Schwerpunkt-Phase |
+| Akteur | Veranstalter · Dienstleister · Genehmigungsbehörde · Gefahrenabwehr | Durchführung, Auftragsverantwortung, beteiligte Rollen, Übergaben |
+| Betriebszustand | noch nicht gesetzt | Geltungsbereich, zeitlicher Teil |
+| Eskalationsstufe | noch nicht gesetzt | Zusatzfeld des Security-Detailkonzepts |
 
 ### Modulart — bestimmt, welche Felder Pflicht sind
 
@@ -122,23 +159,31 @@ Veranstaltung gilt.
 | Außensicht | Nachweissicht | Katalogsicht |
 | Zusätzliche Pflichtfelder | Rechtsgrundlage, Auslöseschwelle, Nachweisart, Fristen, Zustimmung | Preis und Verrechnungseinheit, Bestellweg, Vorlauf- und Stornofrist, Mitwirkung, Servicezeiten |
 
-Ob eine dritte Modulart für Befähigungsleistungen gebraucht wird, ist offen und
-mit der Messe zu klären.
+Eine dritte Modulart für Befähigungsleistungen gibt es nicht. Die geprüften
+Kandidaten — Unterweisung, Räumungsübung — sind rechtlich verlangt und damit
+Compliance. Sollte in dieser Projektphase ein Baustein auftauchen, der weder
+Rechtspflicht noch verkaufte Leistung ist, wird die dritte Art nachgezogen
+(E-87).
+
+Im Register darf `offen` stehen, solange die Art nicht gesetzt ist. Das ist ein
+Bearbeitungsstand und keine dritte Art: Solange sie offen ist, steht nicht fest,
+welche Felder Pflicht sind, und der Steckbrief wird nicht freigegeben.
 
 ### Pflichtstufe — bestimmt, ob es für eine Veranstaltung gilt
 
-Drei Werte, in der Sprache, die im Haus benutzt wird:
+Drei Werte, in der Sprache, in der im Haus über eine Veranstaltung entschieden
+wird:
 
 | Wert | bedeutet |
 |---|---|
-| `Pflicht` | gibt es bei jeder Veranstaltung |
-| `Wahlpflicht` | gibt es bei jeder Veranstaltung, aber in unterschiedlichen Ausprägungen — eine davon muss gewählt werden |
-| `Optional` | gibt es bei manchen Veranstaltungen, nicht bei allen |
+| `Muss` | gibt es bei jeder Veranstaltung |
+| `Wählen` | gibt es bei jeder Veranstaltung, aber in unterschiedlichen Ausprägungen — eine davon muss gewählt werden |
+| `Kann` | gibt es bei manchen Veranstaltungen, nicht bei allen |
 
 **Woraus eine Pflicht entsteht.** Nur aus Recht — Gesetz, Verordnung oder
 Behördenauflage — oder aus einer Setzung der Messe. Ein Wunsch des Veranstalters,
 des Ausstellers oder eines internen Auftraggebers erzeugt keine Pflicht, auch
-wenn er im Einzelfall unabweisbar wirkt. Er wird als `Optional` geführt und im
+wenn er im Einzelfall unabweisbar wirkt. Er wird als `Kann` geführt und im
 Modul bestellt.
 
 **Schwellen erzeugen kein Hochstufen, sondern ein anderes Modul.** Wo eine
@@ -147,35 +192,35 @@ Risikoeinstufung, ab einer Auflage im Bescheid —, ist das ein eigenes Modul mi
 der Schwelle im Namen, nicht dasselbe Modul mit gewechselter Pflichtstufe. Sonst
 trägt ein Steckbrief zwei verschiedene Sollzustände und ist nicht mehr prüfbar.
 
-### Gruppenrolle — wo mehrere Module sich gegenseitig ausschließen
+### Grundmodul und Alternativen — wo mehrere Module sich gegenseitig ausschließen
 
-Die Gruppenrolle ist **unabhängig von der Pflichtstufe**. Sie greift überall, wo
-mehrere Module Ausprägungen derselben Sache sind und immer nur eine davon gilt.
+Wo mehrere Module Ausprägungen derselben Sache sind und immer nur eine davon
+gilt, ist eines das **Grundmodul** und die übrigen sind **Alternativen**. Das
+gilt **unabhängig von der Pflichtstufe**.
 
-Von mehreren Ausprägungen ist eine das **Grundmodul**, die übrigen sind
-**Alternativen**. Das Grundmodul trägt die Entscheidung: wer entscheidet, bis
-wann, und welche Alternativen es gibt. Die Alternativen tragen nur den
-Rückverweis. Damit stehen Entscheider und Frist genau einmal und können nicht
-auseinanderlaufen.
+Das Grundmodul trägt die Entscheidung: wer entscheidet, bis wann, und welche
+Alternativen es gibt. Die Alternativen tragen nur den Rückverweis
+`Alternative zu <Modul-ID>`. Damit stehen Entscheider und Frist genau einmal und
+können nicht auseinanderlaufen.
 
 **Jede Alternative ist ein eigenes Modul** mit eigener ID und eigenem
-Steckbrief — das Feld `Alternativen` führt Modul-IDs. Eine Gruppe besteht also
-aus mindestens zwei Modulen, und alle erscheinen einzeln im Modulindex. Ein
-einzelnes Modul, dessen Ausprägungen mit derselben Anleitung laufen, ist keine
-Gruppe, sondern ein Modul mit einer Varianten-Tabelle. Welcher Fall vorliegt,
+Steckbrief — das Feld `Alternativen` führt Modul-IDs. Eine Wahl besteht also aus
+mindestens zwei Modulen, und alle erscheinen einzeln im Register. Ein einzelnes
+Modul, dessen Ausprägungen mit derselben Anleitung laufen, ist keine Wahl,
+sondern ein Modul mit einer Varianten-Tabelle. Welcher Fall vorliegt,
 entscheidet der Werkstatt-Test.
 
 **Was gilt, wenn nicht entschieden wird, hängt an der Pflichtstufe** — und das
 ist der Grund, warum die beiden Angaben getrennt bleiben:
 
-| Pflichtstufe der Gruppe | Wird nichts entschieden, dann … |
+| Pflichtstufe | Wird nichts entschieden, dann … |
 |---|---|
-| `Wahlpflicht` | gilt das **Grundmodul**. Eine der Ausprägungen muss laufen, also greift die Vorbelegung |
-| `Optional` | gilt **keine** der Ausprägungen. Das Grundmodul ist hier keine Vorbelegung, sondern die einfachste Ausprägung, falls die Gruppe gebucht wird |
+| `Wählen` | gilt das **Grundmodul**. Eine der Ausprägungen muss laufen, also greift die Vorbelegung |
+| `Kann` | gilt **keine** der Ausprägungen. Das Grundmodul ist hier keine Vorbelegung, sondern die einfachste Ausprägung, falls gebucht wird |
 
-Eine Gruppe innerhalb von `Optional` ist damit ausdrücklich möglich und braucht
-keine eigene Form: Zwei optionale Module, von denen eines Grundmodul ist, sagen
-genau „wenn überhaupt, dann eines von beiden".
+Eine Wahl innerhalb von `Kann` ist damit ausdrücklich möglich und braucht keine
+eigene Form: Zwei Kann-Module, von denen eines Grundmodul ist, sagen genau
+„wenn überhaupt, dann eines von beiden".
 
 **Welches Modul das Grundmodul ist:** die einfachste Ausprägung, die mit dem
 geringsten Ressourceneinsatz auskommt.
@@ -187,16 +232,12 @@ gefährlichere Fall.
 
 **Die Entscheidungsfrist ist verbindlich gemeint.** Sie sagt, bis wann
 entschieden sein muss, damit das Modul in der laufenden Planung noch greifen
-kann.
+kann. Sie ist damit ein Steuerungstermin und steht im Feldkatalog neben den
+Deadlines, nicht bei den Feldern, die beschreiben, wie ein Modul variiert.
 
-## Modul, Variante, Parameter
+## Modul, Variante oder Parameter
 
-Drei Ebenen:
-
-1. **Modulkatalog** — welche Bausteine existieren. Bereichsweit, stabil.
-2. **Modulauswahl je Veranstaltung** — welche gelten. Das regelt die Pflichtstufe.
-3. **Parametrisierung** — mit welchen Werten der gewählte Baustein läuft.
-
+Die häufigste Frage beim Befüllen: ein neues Modul oder nur eine Abwandlung?
 Wo die Grenze liegt, entscheidet ein Test:
 
 > Können dieselben Menschen mit **derselben Anleitung** beide Ausprägungen
@@ -208,8 +249,10 @@ Der Test ist an die Vertretungsfähigkeit gekoppelt und damit an dasselbe
 Kriterium wie die Definition of Done. Modulgrenzen werden dadurch aus der Praxis
 entschieden, nicht am Reißbrett.
 
-Tailoring-Regeln werden als Bedingung formuliert, nicht als Ablauftext. So sind
-sie prüfbar.
+Der Katalog selbst ist bereichsweit und stabil. Welche seiner Module für eine
+einzelne Veranstaltung gelten, regelt die Pflichtstufe; mit welchen Werten sie
+laufen, regeln die Parameter. Tailoring-Regeln werden als Bedingung formuliert,
+nicht als Ablauftext. So sind sie prüfbar.
 
 ## Verantwortung: drei Rollen, R · A · F
 
@@ -288,6 +331,7 @@ einer festen Überschrift.
 | Feld | gilt-wenn | Zone | Pflicht | Wertebereich |
 |---|---|---|---|---|
 | Modul-ID | immer | Frontmatter | Pflicht | `MOD-<BEREICH>-<NR>` |
+| Modulgruppe | immer | Frontmatter | Pflicht | genau eine Gruppe aus dem Register des Bereichs |
 | Modulname | immer | Frontmatter | Pflicht | substantivisch, ergebnisorientiert; nie Verb, Tool- oder Abteilungsname |
 | Modulart | immer | Frontmatter | Pflicht | `Compliance` \| `Leistung` |
 | Zweck und Schutzziel | immer | Prosa | Pflicht | wovor schützt es wen, als angestrebter Zustand. Trägt zugleich, was am Ende vorliegt |
@@ -296,7 +340,7 @@ einer festen Überschrift.
 | Vertretung | immer | Frontmatter | Pflicht | eine Rolle, die im Ausfall der Durchführung einspringt — nicht eine, die zusätzlich eingreifen darf |
 | Auftragsverantwortung | immer | Frontmatter | Pflicht | eine Rolle im Haus; beauftragt, überwacht, nimmt ab (A) |
 | Fortschreibung | immer | Frontmatter | Pflicht | ein Name; pflegt das Modul über die Zeit (F) |
-| Ablauf in Abschnitten | immer | Tabelle | Pflicht | Richtwert vier bis acht Abschnitte; je Abschnitt Auslöser, Tätigkeit, Ergebnis, Rolle |
+| Ablauf in Abschnitten | immer | Tabelle | Pflicht | je Phase ein Abschnitt, mit Auslöser, Tätigkeit, Ergebnis, Rolle |
 | Lieferobjekte | immer | Tabelle | Pflicht | je Objekt ein Ablageort |
 
 ### Block 2 · Zusammenspiel — damit es an die Nachbarn anschließt
@@ -304,10 +348,16 @@ einer festen Überschrift.
 | Feld | gilt-wenn | Zone | Pflicht | Wertebereich |
 |---|---|---|---|---|
 | Deadlines | immer | Tabelle | Pflicht | je Zeile: Phase, bis wann, was bis dahin entschieden oder erledigt sein muss, Ergebnis, führende Rolle |
+| Entscheidungsfrist | Modul ist Grundmodul | Frontmatter | Pflicht | Zeitpunkt relativ T0, mit der Phase, in die er fällt |
 | Schwerpunkt-Phase | immer | Frontmatter | Pflicht | eine oder mehrere Phasen aus P0 bis P7 |
 | Übergaben rein und raus | immer | Tabelle | Pflicht | je Grenze: Richtung, Objekt, Medium, Auslöser, gebende und nehmende Rolle |
 | Beteiligte Rollen | immer | Tabelle | Pflicht | je Rolle die Abschnitte, in denen sie mitwirkt |
 | Abhängigkeiten | wenn vorhanden | Frontmatter | optional | `setzt voraus:` \| `nicht gemeinsam mit:` |
+
+Die Entscheidungsfrist steht hier und nicht in Block 4: Sie ist ein Termin, bis
+zu dem etwas entschieden sein muss, und beantwortet damit dieselbe Frage wie
+eine Deadline-Zeile. Welche Alternativen zur Wahl stehen und wer entscheidet,
+bleibt in Block 4.
 
 Die Deadlines-Tabelle ersetzt das frühere Phasenprofil und beantwortet die Frage,
 die das Lead Committee je Phase stellt: Was muss bis zum nächsten Gate
@@ -336,11 +386,11 @@ Abhängigkeiten.
 
 | Feld | gilt-wenn | Zone | Pflicht | Wertebereich |
 |---|---|---|---|---|
-| Pflichtstufe | immer | Frontmatter | Pflicht | `Pflicht` \| `Wahlpflicht` \| `Optional` |
-| Gruppenrolle | Modul gehört zu einer Gruppe sich ausschließender Ausprägungen | Frontmatter | Pflicht | `Grundmodul` \| `Alternative zu <Modul-ID>`. Unabhängig von der Pflichtstufe |
-| Entscheider | Gruppenrolle ist Grundmodul | Frontmatter | Pflicht | eine Rolle, gegebenenfalls im Einvernehmen mit einer zweiten |
-| Entscheidungsfrist | Gruppenrolle ist Grundmodul | Frontmatter | Pflicht | Zeitpunkt relativ T0 |
-| Alternativen | Gruppenrolle ist Grundmodul | Frontmatter | Pflicht | Modul-IDs der Alternativen |
+| Pflichtstufe | immer | Frontmatter | Pflicht | `Muss` \| `Wählen` \| `Kann` |
+| Grundmodul | Modul ist die einfachste von mehreren Ausprägungen, von denen nur eine gilt | Frontmatter | Pflicht in diesem Fall | `ja`. Unabhängig von der Pflichtstufe |
+| Alternative zu | Modul ist eine Ausprägung neben einem Grundmodul | Frontmatter | Pflicht in diesem Fall | Modul-ID des Grundmoduls |
+| Entscheider | Modul ist Grundmodul | Frontmatter | Pflicht | eine Rolle, gegebenenfalls im Einvernehmen mit einer zweiten |
+| Alternativen | Modul ist Grundmodul | Frontmatter | Pflicht | Modul-IDs der Alternativen |
 | Varianten | wenn vorhanden | Tabelle | optional | Ausprägungen, die mit derselben Anleitung laufen |
 | Parameter | wenn vorhanden | Tabelle | optional | je Parameter ein Wertebereich |
 | Bemessungsregel | immer | Prosa | Pflicht | Schlüsselzahl oder Rechenweg, mit Quelle |
@@ -376,7 +426,7 @@ entfallen, an ihre Stelle treten Auflagen-, Mitwirkungs- und Erfüllungsnachweis
 | Nicht enthalten — Abgrenzung | Geltungsbereich, Ablauf und Übergaben. Pflichtfeld, häufigste Reklamationsursache |
 | Was wir vom Adressaten brauchen | Übergaben und Ablauf |
 | Servicezeiten und Einsatzfenster | Geltungsbereich und Deadlines |
-| Ausprägungen zur Wahl | Pflichtstufe und Varianten |
+| Ausprägungen zur Wahl | Varianten sowie Grundmodul und Alternativen |
 | Bestellweg, Vorlauffrist, Storno | nur Leistungs-Module |
 | Preis und Verrechnungseinheit | nur Leistungs-Module; ohne definierte Einheit kein Preis |
 | Ansprechpunkt bei Reklamation | Meldeweg |
@@ -421,7 +471,8 @@ auf Basis eines gelaufenen Einsatzes.
   Rückfrage ausführen
 - Übergaben beidseitig bestätigt — die empfangende Rolle hat gegengezeichnet
 - Mindestens eine Selbstprüfungskennzahl benannt
-- Pflichtstufe formuliert, auch wenn sie `Pflicht` lautet
+- Pflichtstufe formuliert, auch wenn sie `Muss` lautet
+- Genau einer Modulgruppe zugeordnet, und die Modulart ist gesetzt — nicht `offen`
 - Durchführung, Auftragsverantwortung und Fortschreibung benannt — R, A und F
 - Im Modulindex registriert, Ablageort und Version gesetzt
 - Bei Compliance-Modulen: Rechtsgrundlage, Nachweisart und Zustimmung belegt
@@ -451,6 +502,11 @@ Ein Detailkonzept darf **Felder ergänzen**. Es darf Felder aus diesem Katalog
 nicht umbenennen, nicht weglassen und nicht anders bedeuten lassen. Welche
 Felder ein Modul hat, steuert die Modulart — nicht der Bereich.
 
+Der **Zuschnitt der Modulgruppen** ist dagegen ausdrücklich Sache des Bereichs.
+Er steht nicht im Detailkonzept, sondern im Register neben den Instanzen: Die
+Gruppe ordnet Module, sie ändert keine Definition. Was sie nicht darf, steht
+oben — ein Träger werden, eine Verantwortung tragen, Felder steuern.
+
 Was hier als Feld steht, wird dort mit Inhalt gefüllt: Das Feld
 „Rechtsgrundlage" gehört hierher, welche Normen und Auslöseschwellen bei einem
 Bereich gelten, gehört ins Detailkonzept. Ebenso beim
@@ -460,7 +516,20 @@ Qualifikationsnachweis — das Feld hier, der konkrete Nachweis dort.
 
 Mit Stand der Klärung in `../0_meta/offene-punkte.md`.
 
-- **Dritte Modulart** für Befähigungsleistungen — mit der Messe zu klären.
+- **Muster der Modul-ID.** Hier gilt `MOD-<BEREICH>-<NR>` (F-24). Das Register
+  Security arbeitet mit sprechenden Arbeitsnummern `<BEREICH>-<GRUPPE>-<NR>`,
+  weil ein Verweis damit die Gruppe mitnennt. Beides nebeneinander ist ein
+  Übergangszustand: Das Muster wird gesetzt, sobald der Gruppenzuschnitt steht —
+  als F-Entscheidung mit Begründung und mit einer Regel für die dann abgelösten
+  IDs.
+- **Der Gruppenzuschnitt ist vorläufig.** Ebene 1 sagt, dass es die Modulgruppe
+  gibt; welche Gruppen ein Bereich führt und wie viele Module in eine gehören,
+  entscheidet der Bereich mit dem Fachbereich. Solange das nicht bestätigt ist,
+  ist die Zuordnung eines Moduls zu einer Gruppe änderbar.
+- **Das Mapping auf die Querachsen steht aus.** Phase und Akteur sind als Achsen
+  benannt und im Modul als Felder verankert; ein Register, das den Katalog je
+  Phase oder je Akteur zeigt, gibt es noch nicht. Betriebszustand und
+  Eskalationsstufe sind nicht gesetzt.
 - **Vorrang zwischen Modulen.** Das Feld „Abhängigkeiten" kennt nur
   `setzt voraus` und `nicht gemeinsam mit`. Ein Modul, das andere stillstellen
   kann, hat dafür keine Form.

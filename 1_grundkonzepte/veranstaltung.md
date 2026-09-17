@@ -29,7 +29,7 @@ Publikumsmesse sind synonym. Der Begriff „Private Events" wird nicht verwendet
 
 Die Benennung der Arten ist noch nicht abschließend geklärt — offen ist, warum
 die Messe auf dieser Achse nach B2B und B2C getrennt wird und ob die Messe die
-Begriffe so verwendet. Siehe `../4_workspace/fragen-an-ma.md`.
+Begriffe so verwendet. Die Frage steht in `../0_meta/offene-punkte.md`.
 
 ## Veranstalter
 

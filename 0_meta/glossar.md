@@ -1,6 +1,6 @@
 ---
 status: entwurf
-stand: 2026-08-31
+stand: 2026-09-17
 ---
 
 # Glossar
@@ -18,11 +18,26 @@ Check-Points sind nicht ins Repository übernommen (E-18).
 **Modul** — Die kleinste eigenständig verantwortbare Leistungseinheit eines
 Bereichs. Langfassung in `../1_grundkonzepte/modul.md`.
 
-**Modulart** — Sagt, *was* ein Modul ist: `Compliance` oder `Leistung`. Sie
-steuert, welche Felder Pflicht sind.
+**Modulgruppe** — Die Ordnungsebene über dem Modul: fachlich verwandte Module
+unter einem Namen. Sie ordnet und steuert nichts — kein Träger, keine
+Verantwortung, kein Steckbrief. Ein Modul gehört zu genau einer Gruppe. Welche
+Gruppen es gibt, steht im Register des Bereichs. Die Ordnung lautet
+**Modulgruppe → Modul → Variante**.
 
-**Pflichtstufe** — Sagt, *ob* ein Modul für eine Veranstaltung gilt: `Pflicht`,
-`Wahlpflicht`, `Optional`. Sie ist eine Eigenschaft des Moduls im Katalog.
+**Variante** — Ausprägung desselben Moduls: anderer Mitteleinsatz, gleiches
+Ergebnis, dieselbe Anleitung. *Abzugrenzen gegen zwei Module:* Bräuchte eine
+Vertretung zwei verschiedene Anleitungen, sind es zwei Module. Ändert sich nur
+ein Wert, ist es ein Parameter.
+
+**Modulart** — Sagt, *was* ein Modul ist: `Compliance` oder `Leistung`. Sie
+steuert, welche Felder Pflicht sind. Sie ist ein Merkmal des einzelnen Moduls
+und **keine Ordnungsebene**: Compliance- und Leistungs-Module stehen
+nebeneinander in derselben Modulgruppe.
+
+**Pflichtstufe** — Sagt, *ob* ein Modul für eine Veranstaltung gilt: `Muss`
+(bei jeder), `Wählen` (bei jeder, aber in Ausprägungen — eine davon muss gewählt
+werden), `Kann` (bei manchen). Sie ist eine Eigenschaft des Moduls im Katalog
+und hängt wie die Modulart am einzelnen Modul; sie ordnet den Katalog nicht.
 *Abzugrenzen gegen die Verbindlichkeitsstufe:* Die Pflichtstufe sagt, ob das
 Modul gilt; die Verbindlichkeitsstufe sagt, wie bindend eine einzelne
 Anforderung innerhalb des Moduls ist.
@@ -54,13 +69,14 @@ Lage.
 **Geltungsbereich** — Zeitliche und räumliche Grenze eines Moduls. Beide
 Angaben sind Pflicht; sie unterscheiden Module mit ähnlicher Tätigkeit.
 
-**Gruppenrolle** — `Grundmodul` oder `Alternative zu <Modul-ID>`. Sie sagt, dass
-mehrere Module Ausprägungen derselben Sache sind und immer nur eine gilt. Das
-Grundmodul trägt Entscheider, Frist und die Liste der Alternativen; die
-Alternativen tragen nur den Rückverweis. **Unabhängig von der Pflichtstufe** —
-auch innerhalb von `Optional` möglich. Was bei Nichtentscheidung gilt, hängt
-dagegen an der Pflichtstufe: bei `Wahlpflicht` das Grundmodul, bei `Optional`
-keine der Ausprägungen.
+**Grundmodul und Alternative** — Wo mehrere Module Ausprägungen derselben Sache
+sind und immer nur eine gilt, ist eines das **Grundmodul** und die übrigen sind
+**Alternativen**. Das Grundmodul trägt Entscheider, Frist und die Liste der
+Alternativen; eine Alternative trägt nur den Rückverweis
+`Alternative zu <Modul-ID>`. **Unabhängig von der Pflichtstufe** — auch
+innerhalb von `Kann` möglich. Was bei Nichtentscheidung gilt, hängt dagegen an
+der Pflichtstufe: bei `Wählen` das Grundmodul, bei `Kann` keine der
+Ausprägungen. Jede Alternative ist ein eigenes Modul mit eigenem Steckbrief.
 
 **Durchführung · Auftragsverantwortung · Fortschreibung** — die drei
 Verantwortungen eines Moduls, kurz **R · A · F**. *Durchführung* (R) erbringt die

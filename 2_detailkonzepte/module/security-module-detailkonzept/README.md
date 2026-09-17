@@ -23,7 +23,7 @@ Instanzen und gehört neben die Instanzen. Sie liegt in
 nicht der Bereich. Dieses Detailkonzept ergänzt Felder; es benennt keines um,
 lässt keines weg und lässt keines anders bedeuten.
 
-**Keine Wahlpflichtgruppen als eigene Datei.** `modul.md` legt Entscheider,
+**Keine eigene Datei für Wahlen zwischen Ausprägungen.** `modul.md` legt Entscheider,
 Frist und Alternativen in die Felder des Grundmoduls, damit sie genau einmal
 stehen. Eine eigene Datei wäre die zweite Stelle.
 

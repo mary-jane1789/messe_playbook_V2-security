@@ -4,39 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Was ein Modul ist</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+/* Brand System Hello Opportunities — siehe 0_meta/konventionen.md.
+   Rot: Überschriften und Compliance · Pink: Gliederung und Leistung
+   Orange: Akzent, Hervorhebung, Interaktion */
 :root{
-  --paper:#F5F6F8; --surface:#FFFFFF; --surface-2:#EDEFF3;
-  --ink:#12181F; --ink-2:#4E5A66; --ink-3:#77828E;
-  --rule:#CFD5DC; --rule-soft:#E2E6EB;
-  --compliance:#A6362C; --leistung:#1D6273; --flag:#8E6410;
-  --compliance-bg:#F6E9E7; --leistung-bg:#E4F0F3; --flag-bg:#F7EEDC;
-  --display:"Archivo",system-ui,sans-serif;
-  --body:"Source Serif 4",Georgia,serif;
-  --mono:"IBM Plex Mono",ui-monospace,monospace;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#0E1319; --surface:#151C24; --surface-2:#1B242E;
-    --ink:#E6EAEF; --ink-2:#9CA8B4; --ink-3:#7C8894;
-    --rule:#2A333D; --rule-soft:#212932;
-    --compliance:#E28C81; --leistung:#74BECE; --flag:#D9AE5C;
-    --compliance-bg:#2A1B19; --leistung-bg:#132A30; --flag-bg:#2A2115;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0E1319; --surface:#151C24; --surface-2:#1B242E;
-  --ink:#E6EAEF; --ink-2:#9CA8B4; --ink-3:#7C8894;
-  --rule:#2A333D; --rule-soft:#212932;
-  --compliance:#E28C81; --leistung:#74BECE; --flag:#D9AE5C;
-  --compliance-bg:#2A1B19; --leistung-bg:#132A30; --flag-bg:#2A2115;
+  --paper:#F8F8F8; --surface:#FFFFFF; --surface-2:#F8F8F8;
+  --ink:#000000; --ink-2:#6B7280; --ink-3:#6B7280;
+  --rule:#E5E7EB; --rule-soft:#E5E7EB;
+  --compliance:#E00229; --leistung:#F31194; --flag:#F94F14;
+  --compliance-bg:rgba(224,2,41,.06); --leistung-bg:rgba(243,17,148,.06);
+  --flag-bg:rgba(249,79,20,.055);
+  --display:"Google Sans","Product Sans","Figtree",system-ui,-apple-system,sans-serif;
+  --body:"Google Sans","Product Sans","Figtree",system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);
-  font-size:18px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
+  font-size:16.5px;line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1120px;margin:0 auto;padding:0 28px 120px}
 header > *{max-width:68ch}
 .sec-head{max-width:68ch}
@@ -46,10 +33,10 @@ section > .fields{max-width:920px}
 figure,.scroll{max-width:100%}
 
 /* --- Kopf --- */
-header{border-bottom:2px solid var(--ink);padding:56px 0 26px;margin-bottom:44px}
+header{border-bottom:2px solid var(--flag);padding:56px 0 26px;margin-bottom:44px}
 .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-3);margin:0 0 18px}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(38px,6.2vw,62px);
+h1{color:var(--compliance);font-family:var(--display);font-weight:700;font-size:clamp(38px,6.2vw,62px);
   line-height:1.02;letter-spacing:-.022em;margin:0 0 18px;text-wrap:balance}
 .standfirst{font-size:21px;line-height:1.5;color:var(--ink-2);max-width:60ch;margin:0}
 .meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;
@@ -58,11 +45,11 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(38px,6.2vw,62px);
 
 /* --- Abschnitte --- */
 section{margin:0 0 68px}
-.sec-head{display:flex;align-items:baseline;gap:16px;border-top:1px solid var(--ink);
+.sec-head{display:flex;align-items:baseline;gap:16px;border-top:2px solid var(--flag);
   padding-top:14px;margin:0 0 26px}
-.sec-no{font-family:var(--mono);font-size:12px;color:var(--ink-3);
+.sec-no{font-family:var(--mono);font-size:12px;color:var(--flag);font-weight:700;
   letter-spacing:.08em;flex:none;padding-top:6px}
-h2{font-family:var(--display);font-weight:600;font-size:clamp(25px,3.4vw,34px);
+h2{color:var(--compliance);font-family:var(--display);font-weight:700;font-size:clamp(25px,3.4vw,34px);
   line-height:1.14;letter-spacing:-.016em;margin:0;text-wrap:balance}
 h3{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.25;
   margin:38px 0 10px;letter-spacing:-.008em;text-wrap:balance}
@@ -79,7 +66,7 @@ code,.tok{font-family:var(--mono);font-size:.85em;background:var(--surface-2);
 
 /* --- Panels --- */
 .panel{background:var(--surface);border:1px solid var(--rule-soft);
-  border-top:2px solid var(--ink);padding:22px 24px;margin:26px 0}
+  border-top:3px solid var(--flag);padding:22px 24px;margin:26px 0}
 .panel.c{border-top-color:var(--compliance)}
 .panel.l{border-top-color:var(--leistung)}
 .panel.f{border-top-color:var(--flag)}
@@ -156,9 +143,9 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <h1>Was ein Modul ist</h1>
   <p class="standfirst">Der Baustein, aus dem das Playbook zusammengesetzt wird — seine Definition, seine Grenzen, seine Felder. Gilt für alle Bereiche, nicht nur für Security.</p>
   <div class="meta">
-    <span><b>Stand</b> 31.08.2026</span>
+    <span><b>Stand</b> 17.09.2026</span>
     <span><b>Status</b> Entwurf</span>
-    <span><b>Quelle</b> Modul-Framework V0.2, Playbook V1.0</span>
+    <span><b>Quelle</b> Modul-Framework V0.2, Playbook V1.0, Modullandkarte Security</span>
     <span><b>Datei</b> 1_grundkonzepte/modul.md</span>
   </div>
 </header>
@@ -190,7 +177,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
 
   <p>Module werden nach <strong>Ergebnis und Verantwortung</strong> geschnitten — nicht nach Phasen und nicht nach Aufbauorganisation.</p>
 
-  <p>Ein Modul liegt quer zu den Phasen. Ein Sicherheitsmodul beginnt in der strategischen Konzeption, wird in der Feinplanung bestellt, in der Laufzeit erbracht und in der Nachbereitung ausgewertet. Das ist der Normalfall, nicht die Ausnahme.</p>
+  <p>Ein Modul liegt quer zu den Phasen. Es beginnt in der strategischen Konzeption, wird in der Feinplanung bestellt, in der Laufzeit erbracht und in der Nachbereitung ausgewertet. Das ist der Normalfall, nicht die Ausnahme.</p>
 
 <figure>
 <svg viewBox="0 0 1000 260" role="img" aria-label="Ein Modul erstreckt sich über alle acht Phasen P0 bis P7 mit unterschiedlicher Intensität, während ein phasenweise geschnittener Baustein nur in einer Phase existiert">
@@ -199,11 +186,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
       <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
     </marker>
   </defs>
-  <g font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor">
+  <g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="currentColor">
     <text x="30" y="34" font-size="11" letter-spacing="1.4" opacity=".6">ZEITACHSE DER VERANSTALTUNG</text>
   </g>
   <line x1="30" y1="52" x2="960" y2="52" stroke="currentColor" stroke-width="1" opacity=".35"/>
-  <g font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle">
+  <g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="currentColor" text-anchor="middle">
     <text x="82" y="72">P0</text><text x="198" y="72">P1</text><text x="314" y="72">P2</text>
     <text x="430" y="72">P3</text><text x="546" y="72">P4</text><text x="662" y="72">P5</text>
     <text x="778" y="72">P6</text><text x="894" y="72">P7</text>
@@ -216,14 +203,14 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   </g>
   <!-- Modul quer -->
   <g>
-    <rect x="30" y="96" width="928" height="30" fill="#1D6273" opacity=".12"/>
-    <rect x="30" y="96" width="116" height="30" fill="#1D6273" opacity=".30"/>
-    <rect x="256" y="96" width="232" height="30" fill="#1D6273" opacity=".62"/>
-    <rect x="604" y="96" width="116" height="30" fill="#1D6273" opacity=".92"/>
-    <rect x="836" y="96" width="122" height="30" fill="#1D6273" opacity=".45"/>
-    <text x="40" y="116" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="currentColor">Ein Modul</text>
+    <rect x="30" y="96" width="928" height="30" fill="#F31194" opacity=".12"/>
+    <rect x="30" y="96" width="116" height="30" fill="#F31194" opacity=".30"/>
+    <rect x="256" y="96" width="232" height="30" fill="#F31194" opacity=".62"/>
+    <rect x="604" y="96" width="116" height="30" fill="#F31194" opacity=".92"/>
+    <rect x="836" y="96" width="122" height="30" fill="#F31194" opacity=".45"/>
+    <text x="40" y="116" font-family="Google Sans, Figtree, sans-serif" font-size="13" font-weight="600" fill="currentColor">Ein Modul</text>
   </g>
-  <g font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".8" text-anchor="middle">
+  <g font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="currentColor" opacity=".8" text-anchor="middle">
     <text x="88" y="146">Konzeption</text>
     <text x="372" y="146">Planung, Bestellung</text>
     <text x="662" y="146">Erbringung</text>
@@ -232,11 +219,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <!-- Kontrast -->
   <g>
     <rect x="256" y="176" width="232" height="24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3" opacity=".55"/>
-    <text x="266" y="193" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".75">Phasenweise geschnitten</text>
+    <text x="266" y="193" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".75">Phasenweise geschnitten</text>
   </g>
   <line x1="500" y1="188" x2="600" y2="188" stroke="currentColor" stroke-width="1" opacity=".5" marker-end="url(#ar1)"/>
-  <text x="610" y="192" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".7">funktioniert nur in Reihe</text>
-  <g font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".65">
+  <text x="610" y="192" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".7">funktioniert nur in Reihe</text>
+  <g font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".65">
     <text x="30" y="235">Intensität variiert über die Phasen — deshalb sagt ein Modul nicht „wann“, sondern „bis wann was entschieden sein muss“.</text>
   </g>
 </svg>
@@ -300,6 +287,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <thead><tr><th>Kein Modul</th><th>Warum nicht</th><th>Wohin es stattdessen gehört</th></tr></thead>
   <tbody>
     <tr><td class="n">Phase (P0–P7)</td><td>Zeitabschnitt, nicht Leistung. Module wirken in Phasen und laufen quer dazu</td><td>phasen.md</td></tr>
+    <tr><td class="n">Modulgruppe</td><td>Ordnungsebene über dem Modul; kein Träger, kein Ergebnis, keine Verantwortung</td><td>Register des Bereichs</td></tr>
     <tr><td class="n">Rolle</td><td>Träger, nicht Leistung</td><td>rolle.md, lead-modell.md</td></tr>
     <tr><td class="n">Einzelner Prozessschritt</td><td>Zu fein; erzwingt synchrone Änderung anderswo</td><td>Ablaufabschnitt innerhalb eines Moduls</td></tr>
     <tr><td class="n">Dokument oder Vorlage</td><td>Lieferobjekt, nicht Leistungseinheit</td><td>Feld „Lieferobjekte“</td></tr>
@@ -316,11 +304,11 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">05</span><h2>Drei Abgrenzungen</h2></div>
+  <div class="sec-head"><span class="sec-no">05</span><h2>Zwei Abgrenzungen</h2></div>
 
   <h3>Ein Modul ist kein Prozess</h3>
   <p>Ein Prozess folgt dem Fluss, über Bereichsgrenzen hinweg. Ein Modul folgt der Verantwortung und endet dort, wo eine andere beginnt; der Prozess läuft weiter. Beides ist orthogonal: Ein Prozess kreuzt viele Module, ein Modul kommt in vielen Prozessen vor.</p>
-  <p><strong>Praktische Folge für das Befüllen:</strong> Was andere Verantwortliche tun, steht nicht als Ablaufschritt, sondern als Übergabe. Im Ablauf gibt es keine parallel weiterlaufenden Zweige. Und es gilt Steuerungstiefe statt Ausführungstiefe — als Richtwert vier bis acht Abschnitte.</p>
+  <p><strong>Praktische Folge für das Befüllen:</strong> Was andere Verantwortliche tun, steht nicht als Ablaufschritt, sondern als Übergabe. Im Ablauf gibt es keine parallel weiterlaufenden Zweige. Und es gilt Steuerungstiefe statt Ausführungstiefe — ein Abschnitt je Phase.</p>
 
   <h3>Ein Modul ist keine Dienstleistersteuerung — aber die Beauftragung gehört hinein</h3>
   <p>Die Grenze verläuft zwischen <strong>Linie</strong> und <strong>Veranstaltung</strong>, nicht zwischen Haus und Dienstleister. Das ist die Unterscheidung, die im ersten Durchgang am häufigsten schiefging.</p>
@@ -338,59 +326,103 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
 
   <p>Was je Veranstaltung mit dem Dienstleister passiert — beauftragen, übergeben, abnehmen — ist Teil des Moduls und <strong>kein eigenes Modul</strong>. Eine Abnahme von der Leistung zu trennen, die bestellt hat, trennt auch die Verantwortung davon.</p>
 
-  <h3>Ein Modul ist kein Controlling-Objekt</h3>
-  <p>Kennzahlen im Modul dienen der Selbstprüfung des ausführenden Teams. Sie sind kein Instrument der Leistungsbewertung durch die Führung.</p>
-  <div class="panel c">
-    <p class="plabel">Die Grenze dieser Abgrenzung</p>
-    <p>Bei Compliance-Modulen ist die Abweichung von einer Frist oder einer Behördenauflage nichts, was das Team mit sich selbst klärt. Sie ist meldepflichtig an eine benannte Rolle. Das ist kein Controlling, sondern Weitergabe von Haftung.</p>
-  </div>
-
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">06</span><h2>Zwei Einordnungen</h2></div>
-  <p>Jedes Modul wird auf zwei unabhängigen Achsen eingeordnet. Die Trennung ist nötig, weil sonst vermischt wird, <em>was</em> ein Modul ist, und <em>ob</em> es für eine bestimmte Veranstaltung gilt.</p>
+  <div class="sec-head"><span class="sec-no">06</span><h2>Die Ordnung: Modulgruppe → Modul → Variante</h2></div>
+  <p class="lede">Der Katalog hat drei Ebenen. Die <span class="term">Modulgruppe</span> ordnet, das <span class="term">Modul</span> ist die Leistungseinheit, die <span class="term">Variante</span> ist eine Ausprägung desselben Moduls. Darunter liegt der Parameter als Wertebene.</p>
+  <p>Diese Ordnung folgt der konsolidierten Modullandkarte Security, die als Register die Source of Truth ist. Sie löst die frühere Sortierung ab, in der Compliance und Leistung die oberste Achse waren.</p>
 
 <figure>
-<svg viewBox="0 0 1000 330" role="img" aria-label="Matrix aus Modulart Compliance und Leistung gegen Pflichtstufe Pflicht, Wahlpflicht und Optional">
-  <g font-family="Archivo, sans-serif" font-size="12.5" font-weight="600" fill="currentColor" text-anchor="middle">
-    <text x="380" y="42">PFLICHT</text><text x="600" y="42">WAHLPFLICHT</text><text x="820" y="42">OPTIONAL</text>
-  </g>
-  <g font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".65" text-anchor="middle">
-    <text x="380" y="60">bei jeder</text><text x="600" y="60">bei jeder, in Varianten</text><text x="820" y="60">bei manchen</text>
-  </g>
-  <line x1="270" y1="74" x2="930" y2="74" stroke="currentColor" opacity=".35"/>
-  <!-- Zeilen -->
-  <g>
-    <rect x="270" y="88" width="660" height="94" fill="#A6362C" opacity=".07"/>
-    <text x="70" y="128" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="#A6362C">COMPLIANCE</text>
-    <text x="70" y="148" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">Rechtspflicht erfüllen,</text>
-    <text x="70" y="164" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">Nachweis erbringen</text>
-    <text x="380" y="142" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" text-anchor="middle" opacity=".85">Ordnungsdienst</text>
-    <text x="600" y="142" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" text-anchor="middle" opacity=".85">Personenkontrolle</text>
-    <text x="820" y="142" font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle" opacity=".4">selten besetzt</text>
-  </g>
-  <g>
-    <rect x="270" y="196" width="660" height="94" fill="#1D6273" opacity=".08"/>
-    <text x="70" y="236" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="#1D6273">LEISTUNG</text>
-    <text x="70" y="256" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">Leistung für Kunden oder</text>
-    <text x="70" y="272" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">internen Auftraggeber</text>
-    <text x="380" y="250" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" text-anchor="middle" opacity=".85">Ticketkontrolle</text>
-    <text x="600" y="250" font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor" text-anchor="middle" opacity=".4">noch leer</text>
-    <text x="820" y="250" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" text-anchor="middle" opacity=".85">Gepäckkontrolle</text>
-  </g>
-  <g stroke="currentColor" opacity=".22">
-    <line x1="490" y1="88" x2="490" y2="290"/><line x1="710" y1="88" x2="710" y2="290"/>
-    <line x1="270" y1="189" x2="930" y2="189"/>
-  </g>
-  <g font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".6">
-    <text x="70" y="316">Die Modulart steuert, welche Felder Pflicht sind. Die Pflichtstufe steuert, ob das Modul für eine Veranstaltung gilt.</text>
+<svg viewBox="0 0 1000 320" role="img" aria-label="Drei Ebenen: eine Modulgruppe über mehreren Modulen, unter zwei der Module je eine Variante, darunter der Parameter als Wertebene">
+  <g font-family="Google Sans, Figtree, sans-serif">
+    <!-- Ebene 1 -->
+    <rect x="40" y="26" width="920" height="54" fill="rgba(243,17,148,.07)"/>
+    <rect x="40" y="26" width="4" height="54" fill="#F31194"/>
+    <text x="62" y="50" font-size="14" font-weight="700" fill="#000">Modulgruppe</text>
+    <text x="62" y="70" font-size="12.5" fill="#6B7280">fachlich verwandte Module unter einem Namen — ordnet, steuert nichts</text>
+    <text x="940" y="58" font-size="11" fill="#6B7280" text-anchor="end">Register des Bereichs</text>
+
+    <g stroke="#E5E7EB" stroke-width="1.4">
+      <line x1="200" y1="80" x2="200" y2="110"/><line x1="500" y1="80" x2="500" y2="110"/><line x1="800" y1="80" x2="800" y2="110"/>
+    </g>
+
+    <!-- Ebene 2 -->
+    <g>
+      <rect x="60" y="110" width="280" height="46" fill="#FFF" stroke="#E5E7EB"/>
+      <rect x="60" y="110" width="280" height="3" fill="#E00229"/>
+      <text x="80" y="141" font-size="14" font-weight="700" fill="#000">Modul</text>
+      <rect x="360" y="110" width="280" height="46" fill="#FFF" stroke="#E5E7EB"/>
+      <rect x="360" y="110" width="280" height="3" fill="#F31194"/>
+      <text x="380" y="141" font-size="14" font-weight="700" fill="#000">Modul</text>
+      <rect x="660" y="110" width="280" height="46" fill="#FFF" stroke="#E5E7EB"/>
+      <rect x="660" y="110" width="280" height="3" fill="#E00229"/>
+      <text x="680" y="141" font-size="14" font-weight="700" fill="#000">Modul</text>
+    </g>
+
+    <g stroke="#E5E7EB" stroke-width="1.4">
+      <line x1="200" y1="156" x2="200" y2="186"/><line x1="800" y1="156" x2="800" y2="186"/>
+    </g>
+
+    <!-- Ebene 3 -->
+    <g>
+      <rect x="60" y="186" width="280" height="42" fill="#F8F8F8" stroke="#E5E7EB" stroke-dasharray="4 3"/>
+      <text x="80" y="213" font-size="13" font-weight="700" fill="#000">Variante</text>
+      <rect x="660" y="186" width="280" height="42" fill="#F8F8F8" stroke="#E5E7EB" stroke-dasharray="4 3"/>
+      <text x="680" y="213" font-size="13" font-weight="700" fill="#000">Variante</text>
+    </g>
+
+    <!-- Legende -->
+    <text x="60" y="256" font-size="12.5" fill="#6B7280"><tspan font-weight="700" fill="#000">Modul</tspan> — die Leistungseinheit: ein Ergebnis, eine Verantwortung, ein Steckbrief; einzeln bestellbar, bemessbar und prüfbar</text>
+    <text x="60" y="276" font-size="12.5" fill="#6B7280"><tspan font-weight="700" fill="#000">Variante</tspan> — dieselbe Anleitung, anderer Mitteleinsatz, gleiches Ergebnis</text>
+
+    <line x1="40" y1="292" x2="960" y2="292" stroke="#F94F14" stroke-width="1.5"/>
+    <text x="40" y="310" font-size="12.5" fill="#6B7280"><tspan font-weight="700" fill="#000">Parameter</tspan> — ein Wert innerhalb der Ausprägung. Ändert sich nur er, entsteht weder ein Modul noch eine Variante.</text>
   </g>
 </svg>
-<figcaption>Die beiden Achsen sind unabhängig: Ein Leistungsmodul kann Pflicht sein, weil die Messe es gesetzt hat, und ein Compliance-Modul kann in Ausprägungen zur Wahl stehen. Die Beispiele stammen aus der Security-Landkarte.</figcaption>
+<figcaption>Ein Modul gehört zu genau einer Gruppe. Wechselt es die Gruppe, ändert sich am Modul selbst nichts — deshalb darf an der Gruppe keine Verantwortung hängen.</figcaption>
 </figure>
 
-  <h3>Achse 1 — Modulart: <span class="term">Compliance</span> oder <span class="term">Leistung</span></h3>
+  <div class="panel f">
+    <p class="plabel">Die Regel, an der alles hängt</p>
+    <p style="margin-bottom:0"><strong>Die Modulgruppe ordnet und steuert nichts.</strong> Sie ist kein Träger, keine Organisationseinheit und keine Verantwortung; sie hat keinen Steckbrief, keine Rolle und keine Pflichtstufe. Sie macht den Katalog lesbar — mehr nicht. Welche Gruppen ein Bereich führt, entscheidet der Bereich mit dem Fachbereich; das Grundkonzept sagt nur, dass es die Ebene gibt und was sie nicht darf.</p>
+  </div>
+
+  <h3>Was am Modul hängt, ordnet den Katalog nicht</h3>
+  <p>Drei Angaben stehen am einzelnen Modul. Sie sind <strong>Merkmale, keine Gliederungsachsen</strong>: Der Katalog wird nicht nach ihnen geschnitten, und zwei Module derselben Gruppe dürfen sich in allen dreien unterscheiden.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>Angabe</th><th>Werte</th><th>sagt</th></tr></thead>
+  <tbody>
+    <tr><td class="n">Modulart</td><td>Compliance · Leistung</td><td><em>Was</em> das Modul ist — und damit, welche Felder Pflicht sind</td></tr>
+    <tr><td class="n">Pflichtstufe</td><td>Muss · Wählen · Kann</td><td><em>Ob</em> es für eine Veranstaltung gilt</td></tr>
+    <tr><td class="n">Grundmodul /<br>Alternative zu</td><td>— · Modul-ID</td><td>Ob es mit anderen Modulen eine Wahl bildet</td></tr>
+  </tbody>
+</table>
+</div>
+
+  <div class="panel c">
+    <p class="plabel">Was sich damit geändert hat</p>
+    <p style="margin-bottom:0"><strong>Compliance ist ein Tag, keine Achse.</strong> Die frühere Sortierung stellte Compliance und Leistung an die Spitze; der Katalog war damit zuerst nach Adressat geordnet. Jetzt ordnet die fachliche Nähe, und die Modulart hängt am einzelnen Modul. In den Ordnungs- und Wachdiensten steht ein Compliance-Dienst (Ordnungsdienst) neben einer verkauften Leistung (Standbewachung) — dieselbe Gruppe, dieselben Kräfte, zwei Modularten. Unverändert gilt: Die Modulart steuert, welche Felder Pflicht sind, und die beiden werden nie in einem Modul vermischt.</p>
+  </div>
+
+  <h3>Vier Achsen, die quer liegen</h3>
+  <p>Phase, Akteur, Betriebszustand und Eskalationsstufe beschreiben ein Modul ebenfalls — aber sie stehen nicht in der Hierarchie. Ein Modul liegt quer zu allen vieren; sie werden auf den Katalog <strong>gemappt</strong>, nicht in ihn eingebaut.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>Achse</th><th>Werte</th><th>steht im Modul als</th></tr></thead>
+  <tbody>
+    <tr><td class="n">Phase</td><td>P0 bis P7</td><td>Deadlines und Schwerpunkt-Phase</td></tr>
+    <tr><td class="n">Akteur</td><td>Veranstalter · Dienstleister · Genehmigungsbehörde · Gefahrenabwehr</td><td>Durchführung, Auftragsverantwortung, beteiligte Rollen, Übergaben</td></tr>
+    <tr><td class="n">Betriebszustand</td><td>noch nicht gesetzt</td><td>Geltungsbereich, zeitlicher Teil</td></tr>
+    <tr><td class="n">Eskalationsstufe</td><td>noch nicht gesetzt</td><td>Zusatzfeld des Security-Detailkonzepts</td></tr>
+  </tbody>
+</table>
+</div>
+
+  <h3>Modulart — <span class="term">Compliance</span> oder <span class="term">Leistung</span></h3>
   <p>Sie steuert, welche Felder Pflicht sind. Die beiden werden <strong>nie in einem Modul vermischt</strong>, auch dann nicht, wenn derselbe Kräftepool beides erbringt: Adressat, Nachweis und Abrechnung sind verschieden.</p>
 
 <div class="scroll">
@@ -405,71 +437,70 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
 </table>
 </div>
 
-  <h3>Achse 2 — Pflichtstufe: <span class="term">Pflicht</span>, <span class="term">Wahlpflicht</span>, <span class="term">Optional</span></h3>
-  <p>Sie steuert, ob ein Modul für eine Veranstaltung gilt. Die drei Begriffe sind die, die im Haus benutzt werden.</p>
+  <p>Im Register darf <span class="term">offen</span> stehen, solange die Art nicht gesetzt ist — ein Bearbeitungsstand, keine dritte Art. Solange sie offen ist, steht nicht fest, welche Felder Pflicht sind, und der Steckbrief wird nicht freigegeben.</p>
+
+  <h3>Pflichtstufe — <span class="term">Muss</span>, <span class="term">Wählen</span>, <span class="term">Kann</span></h3>
+  <p>Sie steuert, ob ein Modul für eine Veranstaltung gilt. Drei Werte, in der Sprache, in der im Haus über eine Veranstaltung entschieden wird.</p>
   <ul class="check">
-    <li><span class="term">Pflicht</span> — gibt es bei jeder Veranstaltung.</li>
-    <li><span class="term">Wahlpflicht</span> — gibt es bei jeder Veranstaltung, aber in unterschiedlichen Ausprägungen; eine davon muss gewählt werden. Nicht <em>ob</em>, sondern <em>wie</em>.</li>
-    <li><span class="term">Optional</span> — gibt es bei manchen Veranstaltungen, nicht bei allen.</li>
+    <li><span class="term">Muss</span> — gibt es bei jeder Veranstaltung.</li>
+    <li><span class="term">Wählen</span> — gibt es bei jeder Veranstaltung, aber in unterschiedlichen Ausprägungen; eine davon muss gewählt werden. Nicht <em>ob</em>, sondern <em>wie</em>.</li>
+    <li><span class="term">Kann</span> — gibt es bei manchen Veranstaltungen, nicht bei allen.</li>
   </ul>
 
   <div class="panel c">
     <p class="plabel">Zwei Regeln, die im Gespräch immer wieder gebraucht werden</p>
-    <p><strong>Woraus eine Pflicht entsteht.</strong> Nur aus Recht — Gesetz, Verordnung, Behördenauflage — oder aus einer Setzung der Messe. Ein Wunsch des Veranstalters, des Ausstellers oder eines internen Auftraggebers erzeugt <em>keine</em> Pflicht, auch wenn er im Einzelfall unabweisbar wirkt. Er wird als <span class="term">Optional</span> geführt und bestellt.</p>
+    <p><strong>Woraus eine Pflicht entsteht.</strong> Nur aus Recht — Gesetz, Verordnung, Behördenauflage — oder aus einer Setzung der Messe. Ein Wunsch des Veranstalters, des Ausstellers oder eines internen Auftraggebers erzeugt <em>keine</em> Pflicht, auch wenn er im Einzelfall unabweisbar wirkt. Er wird als <span class="term">Kann</span> geführt und bestellt.</p>
     <p><strong>Schwellen erzeugen kein Hochstufen, sondern ein anderes Modul.</strong> Wo eine Ausprägung ab einem Schwellenwert verlangt ist — ab einer Besucherzahl, ab einer Risikoeinstufung, ab einer Auflage im Bescheid —, ist das ein eigenes Modul mit der Schwelle im Namen. Sonst trägt ein Steckbrief zwei verschiedene Sollzustände und ist nicht mehr prüfbar.</p>
   </div>
 
-  <h3>Wie eine Wahlpflicht funktioniert</h3>
+  <h3>Grundmodul und Alternativen</h3>
+  <p>Wo mehrere Module Ausprägungen derselben Sache sind und immer nur eine davon gilt, ist eines das <strong>Grundmodul</strong> und die übrigen sind <strong>Alternativen</strong>. Der frühere Sammelbegriff „Gruppenrolle“ entfällt — „Gruppe“ heißt jetzt Modulgruppe und nichts anderes.</p>
 
 <figure>
 <svg viewBox="0 0 1000 250" role="img" aria-label="Ein Grundmodul trägt Entscheider, Frist und die Liste der Alternativen; die Alternativen tragen nur den Rückverweis; ohne Entscheidung gilt das Grundmodul">
   <defs>
     <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/>
     </marker>
   </defs>
-  <!-- Grundmodul -->
-  <rect x="40" y="60" width="270" height="118" fill="#1D6273" opacity=".10"/>
-  <rect x="40" y="60" width="270" height="118" fill="none" stroke="currentColor" stroke-width="1.4"/>
-  <text x="58" y="86" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="currentColor">Grundmodul</text>
-  <g font-family="IBM Plex Mono, monospace" font-size="11.5" fill="currentColor" opacity=".85">
+  <rect x="40" y="60" width="270" height="118" fill="rgba(243,17,148,.08)"/>
+  <rect x="40" y="60" width="270" height="118" fill="none" stroke="#000" stroke-width="1.4"/>
+  <text x="58" y="86" font-family="Google Sans, Figtree, sans-serif" font-size="14" font-weight="700" fill="#000">Grundmodul</text>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="11.5" fill="#000">
     <text x="58" y="110">Entscheider</text>
     <text x="58" y="130">Entscheidungsfrist</text>
     <text x="58" y="150">Alternativen: A, B</text>
   </g>
-  <text x="58" y="170" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".6">die einfachste Ausprägung</text>
-  <!-- Alternativen -->
-  <rect x="530" y="42" width="250" height="62" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
-  <text x="548" y="66" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="currentColor">Alternative A</text>
-  <text x="548" y="86" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="currentColor" opacity=".8">statt: Grundmodul</text>
-  <rect x="530" y="134" width="250" height="62" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
-  <text x="548" y="158" font-family="Archivo, sans-serif" font-size="13" font-weight="600" fill="currentColor">Alternative B</text>
-  <text x="548" y="178" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="currentColor" opacity=".8">statt: Grundmodul</text>
-  <!-- Pfeile -->
-  <line x1="315" y1="90" x2="525" y2="73" stroke="currentColor" opacity=".55" marker-end="url(#ar2)"/>
-  <line x1="315" y1="148" x2="525" y2="165" stroke="currentColor" opacity=".55" marker-end="url(#ar2)"/>
-  <text x="352" y="76" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">tritt an seine Stelle</text>
-  <!-- Fallback -->
-  <path d="M175 178 L175 216 L860 216 L860 105" fill="none" stroke="#A6362C" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ar2)" opacity=".9"/>
-  <text x="400" y="236" font-family="Archivo, sans-serif" font-size="12" font-weight="600" fill="#A6362C">Wird nichts entschieden, gilt das Grundmodul</text>
-  <text x="808" y="126" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".6">keine</text>
-  <text x="808" y="142" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".6">Entscheidung</text>
+  <text x="58" y="170" font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="#6B7280">die einfachste Ausprägung</text>
+  <rect x="530" y="42" width="250" height="62" fill="none" stroke="#E5E7EB"/>
+  <text x="548" y="66" font-family="Google Sans, Figtree, sans-serif" font-size="13" font-weight="700" fill="#000">Alternative A</text>
+  <text x="548" y="86" font-family="ui-monospace, Menlo, monospace" font-size="11.5" fill="#6B7280">Alternative zu: Grundmodul</text>
+  <rect x="530" y="134" width="250" height="62" fill="none" stroke="#E5E7EB"/>
+  <text x="548" y="158" font-family="Google Sans, Figtree, sans-serif" font-size="13" font-weight="700" fill="#000">Alternative B</text>
+  <text x="548" y="178" font-family="ui-monospace, Menlo, monospace" font-size="11.5" fill="#6B7280">Alternative zu: Grundmodul</text>
+  <line x1="315" y1="90" x2="525" y2="73" stroke="#6B7280" marker-end="url(#ar2)"/>
+  <line x1="315" y1="148" x2="525" y2="165" stroke="#6B7280" marker-end="url(#ar2)"/>
+  <text x="352" y="76" font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="#6B7280">tritt an seine Stelle</text>
+  <path d="M175 178 L175 216 L860 216 L860 105" fill="none" stroke="#F94F14" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ar2)"/>
+  <text x="400" y="236" font-family="Google Sans, Figtree, sans-serif" font-size="12" font-weight="700" fill="#F94F14">Wird nichts entschieden, gilt das Grundmodul</text>
+  <text x="808" y="126" font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="#6B7280">keine</text>
+  <text x="808" y="142" font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="#6B7280">Entscheidung</text>
 </svg>
 <figcaption>Entscheider, Frist und die Liste der Alternativen stehen genau einmal — im Grundmodul. Die Alternativen tragen nur den Rückverweis. Damit können die beiden Angaben nicht auseinanderlaufen, und eine nicht getroffene Entscheidung hat ein definiertes Ergebnis.</figcaption>
 </figure>
 
   <div class="panel l">
     <p class="plabel">Zwei Folgen, die leicht übersehen werden</p>
-    <p><strong>Jede Alternative ist ein eigenes Modul</strong> — mit eigener ID, eigenem Steckbrief und eigenem Eintrag im Register. Das Feld <span class="term">Alternativen</span> führt Modul-IDs, keine Beschreibungen. Eine Gruppe besteht also aus mindestens zwei Modulen. Ein einzelnes Modul, dessen Ausprägungen mit derselben Anleitung laufen, ist keine Gruppe, sondern ein Modul mit einer Varianten-Tabelle.</p>
-    <p style="margin-bottom:0"><strong>Die Gruppenrolle ist unabhängig von der Pflichtstufe.</strong> Grundmodul und Alternative gibt es auch innerhalb von <span class="term">Optional</span> — zwei optionale Module, von denen eines Grundmodul ist, sagen genau „wenn überhaupt, dann eines von beiden". Was bei Nichtentscheidung gilt, hängt dagegen an der Pflichtstufe:</p>
+    <p><strong>Jede Alternative ist ein eigenes Modul</strong> — mit eigener ID, eigenem Steckbrief und eigenem Eintrag im Register. Das Feld <span class="term">Alternativen</span> führt Modul-IDs, keine Beschreibungen. Eine Wahl besteht also aus mindestens zwei Modulen. Ein einzelnes Modul, dessen Ausprägungen mit derselben Anleitung laufen, ist keine Wahl, sondern ein Modul mit einer Varianten-Tabelle.</p>
+    <p style="margin-bottom:0"><strong>Grundmodul und Alternative sind unabhängig von der Pflichtstufe.</strong> Es gibt sie auch innerhalb von <span class="term">Kann</span> — zwei Kann-Module, von denen eines Grundmodul ist, sagen genau „wenn überhaupt, dann eines von beiden“. Was bei Nichtentscheidung gilt, hängt dagegen an der Pflichtstufe:</p>
   </div>
 
   <div class="scroll">
   <table>
-    <thead><tr><th>Pflichtstufe der Gruppe</th><th>Wird nichts entschieden, dann …</th></tr></thead>
+    <thead><tr><th>Pflichtstufe</th><th>Wird nichts entschieden, dann …</th></tr></thead>
     <tbody>
-      <tr><td class="n">Wahlpflicht</td><td>gilt das <strong>Grundmodul</strong>. Eine der Ausprägungen muss laufen, also greift die Vorbelegung</td></tr>
-      <tr><td class="n">Optional</td><td>gilt <strong>keine</strong> der Ausprägungen. Das Grundmodul ist hier keine Vorbelegung, sondern die einfachste Ausprägung, falls die Gruppe gebucht wird</td></tr>
+      <tr><td class="n">Wählen</td><td>gilt das <strong>Grundmodul</strong>. Eine der Ausprägungen muss laufen, also greift die Vorbelegung</td></tr>
+      <tr><td class="n">Kann</td><td>gilt <strong>keine</strong> der Ausprägungen. Das Grundmodul ist hier keine Vorbelegung, sondern die einfachste Ausprägung, falls gebucht wird</td></tr>
     </tbody>
   </table>
   </div>
@@ -482,7 +513,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
 
 <section>
   <div class="sec-head"><span class="sec-no">07</span><h2>Modul, Variante oder Parameter</h2></div>
-  <p>Die häufigste Frage beim Befüllen: Ist das ein neues Modul oder nur eine Abwandlung? Drei Ebenen halten das auseinander — der <strong>Modulkatalog</strong> (welche Bausteine existieren, bereichsweit und stabil), die <strong>Modulauswahl je Veranstaltung</strong> (welche gelten — das regelt die Pflichtstufe) und die <strong>Parametrisierung</strong> (mit welchen Werten der gewählte Baustein läuft).</p>
+  <p>Die häufigste Frage beim Befüllen: Ist das ein neues Modul, eine Variante desselben Moduls oder nur ein anderer Wert? Der Katalog selbst ist bereichsweit und stabil; welche seiner Module für eine einzelne Veranstaltung gelten, regelt die Pflichtstufe, und mit welchen Werten sie laufen, regeln die Parameter.</p>
 
 <figure>
 <svg viewBox="0 0 1000 240" role="img" aria-label="Entscheidungstest: dieselbe Anleitung bedeutet Variante, zwei Anleitungen bedeuten zwei Module, nur ein geänderter Wert bedeutet Parameter">
@@ -492,14 +523,14 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
     </marker>
   </defs>
   <rect x="30" y="86" width="250" height="64" fill="none" stroke="currentColor" stroke-width="1.4"/>
-  <text x="48" y="112" font-family="Archivo, sans-serif" font-size="13.5" font-weight="600" fill="currentColor">Zwei Ausprägungen</text>
-  <text x="48" y="133" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".7">liegen nebeneinander</text>
+  <text x="48" y="112" font-family="Google Sans, Figtree, sans-serif" font-size="13.5" font-weight="600" fill="currentColor">Zwei Ausprägungen</text>
+  <text x="48" y="133" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".7">liegen nebeneinander</text>
 
   <line x1="285" y1="118" x2="360" y2="60" stroke="currentColor" opacity=".5" marker-end="url(#ar3)"/>
   <line x1="285" y1="118" x2="360" y2="118" stroke="currentColor" opacity=".5" marker-end="url(#ar3)"/>
   <line x1="285" y1="118" x2="360" y2="188" stroke="currentColor" opacity=".5" marker-end="url(#ar3)"/>
 
-  <g font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor">
+  <g font-family="Google Sans, Figtree, sans-serif" font-size="12.5" fill="currentColor">
     <text x="372" y="46">Dieselben Menschen, <tspan font-weight="600">dieselbe Anleitung</tspan>?</text>
     <text x="372" y="112">Bräuchte eine Vertretung <tspan font-weight="600">zwei Anleitungen</tspan>?</text>
     <text x="372" y="182">Ändert sich nur <tspan font-weight="600">ein Wert</tspan>?</text>
@@ -507,13 +538,13 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <line x1="770" y1="41" x2="820" y2="41" stroke="currentColor" opacity=".5" marker-end="url(#ar3)"/>
   <line x1="800" y1="107" x2="850" y2="107" stroke="currentColor" opacity=".5" marker-end="url(#ar3)"/>
   <line x1="660" y1="177" x2="710" y2="177" stroke="currentColor" opacity=".5" marker-end="url(#ar3)"/>
-  <g font-family="Archivo, sans-serif" font-size="14" font-weight="600">
-    <text x="830" y="46" fill="#1D6273">Variante</text>
-    <text x="860" y="112" fill="#A6362C">Zwei Module</text>
-    <text x="720" y="182" fill="#1D6273">Parameter</text>
+  <g font-family="Google Sans, Figtree, sans-serif" font-size="14" font-weight="600">
+    <text x="830" y="46" fill="#F31194">Variante</text>
+    <text x="860" y="112" fill="#E00229">Zwei Module</text>
+    <text x="720" y="182" fill="#F31194">Parameter</text>
   </g>
   <line x1="30" y1="212" x2="960" y2="212" stroke="currentColor" opacity=".2"/>
-  <text x="30" y="232" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".65">Der Test hängt an der Vertretungsfähigkeit — demselben Kriterium wie die Definition of Done. Modulgrenzen werden aus der Praxis entschieden, nicht am Reißbrett.</text>
+  <text x="30" y="232" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".65">Der Test hängt an der Vertretungsfähigkeit — demselben Kriterium wie die Definition of Done. Modulgrenzen werden aus der Praxis entschieden, nicht am Reißbrett.</text>
 </svg>
 <figcaption>Der Werkstatt-Test. Beispiel aus dem Sparring: Tagwache und Nachtwache sind zwei Module, weil die Zielrichtung verschieden ist — öffentliche Veranstaltungssicherheit gegen private Vermögenssicherung — und eine Vertretung zwei verschiedene Anleitungen bräuchte.</figcaption>
 </figure>
@@ -588,7 +619,13 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <div class="fields">
     <div class="field">
       <div><span class="field-n">Modul-ID</span><div class="chips"><span class="chip req">Pflicht</span></div></div>
-      <div class="field-b"><p><span class="tok">MOD-&lt;BEREICH&gt;-&lt;NR&gt;</span></p></div>
+      <div class="field-b"><p><span class="tok">MOD-&lt;BEREICH&gt;-&lt;NR&gt;</span></p>
+      <p class="why">Das Register Security arbeitet mit sprechenden Arbeitsnummern <span class="tok">&lt;BEREICH&gt;-&lt;GRUPPE&gt;-&lt;NR&gt;</span>, weil ein Verweis damit die Gruppe mitnennt. Welches Muster gilt, wird gesetzt, sobald der Gruppenzuschnitt steht.</p></div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Modulgruppe</span><div class="chips"><span class="chip req">Pflicht</span><span class="chip">neu</span></div></div>
+      <div class="field-b"><p>Genau eine Gruppe aus dem Register des Bereichs.</p>
+      <p class="why">Ohne sie ist der Katalog eine Liste. Sie trägt keine Verantwortung und steuert kein Feld — ein Gruppenwechsel ändert am Modul selbst nichts.</p></div>
     </div>
     <div class="field">
       <div><span class="field-n">Modulname</span><div class="chips"><span class="chip req">Pflicht</span></div></div>
@@ -619,7 +656,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
     <div class="field">
       <div><span class="field-n">Ablauf in Abschnitten</span><div class="chips"><span class="chip req">Pflicht</span><span class="chip">Tabelle</span></div></div>
       <div class="field-b">
-        <p>Richtwert vier bis acht Abschnitte, je mit Auslöser, Tätigkeit, Ergebnis und Rolle.</p>
+        <p>Je Phase ein Abschnitt, mit Auslöser, Tätigkeit, Ergebnis und Rolle.</p>
         <p class="why">Steuerungstiefe, nicht Ausführungstiefe. Ein Prüfergebnis wie „auffällig / unauffällig“ ist erlaubt; zwei danach parallel weiterlaufende Zweige nicht — das wäre eine Variante. Der <em>Auslöser</em> des Moduls hat kein eigenes Feld mehr, er steht in Zeile 1.</p>
       </div>
     </div>
@@ -636,6 +673,13 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
       <div class="field-b">
         <p>Je Zeile: Phase, bis wann, was bis dahin entschieden oder erledigt sein muss, Ergebnis, führende Rolle.</p>
         <p class="why">Das ist die wichtigste Tabelle für die Steuerung. Sie beantwortet die Frage, die das Lead Committee je Phase stellt: Was muss bis zum nächsten Gate stehen? Deshalb steht die Phase in der Zeile und nicht als eigenes Feld darüber — ein Modul kann in einer Phase mehrere Termine haben und in anderen keinen.</p>
+      </div>
+    </div>
+    <div class="field">
+      <div><span class="field-n">Entscheidungsfrist</span><div class="chips"><span class="chip">nur Grundmodul</span><span class="chip">verschoben</span></div></div>
+      <div class="field-b">
+        <p>Bis wann die Wahl zwischen Grundmodul und Alternativen getroffen sein muss. Zeitpunkt relativ T0, mit der Phase, in die er fällt.</p>
+        <p class="why">Sie ist verbindlich gemeint: Sie sagt, bis wann entschieden sein muss, damit das Modul in der laufenden Planung noch greifen kann. Damit ist sie ein Steuerungstermin und steht neben den Deadlines — nicht bei den Feldern, die beschreiben, wie das Modul variiert.</p>
       </div>
     </div>
     <div class="field">
@@ -721,17 +765,17 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <div class="fields">
     <div class="field">
       <div><span class="field-n">Pflichtstufe</span><div class="chips"><span class="chip req">Pflicht</span><span class="chip">umbenannt</span></div></div>
-      <div class="field-b"><p><span class="tok">Pflicht</span> · <span class="tok">Wahlpflicht</span> · <span class="tok">Optional</span>. Siehe Abschnitt 06.</p></div>
+      <div class="field-b"><p><span class="tok">Muss</span> · <span class="tok">Wählen</span> · <span class="tok">Kann</span>. Siehe Abschnitt 06.</p></div>
     </div>
     <div class="field">
-      <div><span class="field-n">Gruppenrolle</span><div class="chips"><span class="chip">nur bei Gruppen</span><span class="chip">neu</span></div></div>
-      <div class="field-b"><p><span class="tok">Grundmodul</span> oder <span class="tok">Alternative zu &lt;Modul-ID&gt;</span>. Unabhängig von der Pflichtstufe — auch innerhalb von Optional möglich.</p></div>
+      <div><span class="field-n">Grundmodul · Alternative zu</span><div class="chips"><span class="chip">nur bei einer Wahl</span><span class="chip">geändert</span></div></div>
+      <div class="field-b"><p><span class="tok">Grundmodul: ja</span> oder <span class="tok">Alternative zu &lt;Modul-ID&gt;</span>. Unabhängig von der Pflichtstufe — auch innerhalb von Kann möglich.</p>
+      <p class="why">Zwei klare Felder statt eines Sammelbegriffs. „Gruppenrolle“ entfällt, weil „Gruppe“ jetzt die Ordnungsebene meint.</p></div>
     </div>
     <div class="field">
-      <div><span class="field-n">Entscheider · Entscheidungsfrist · Alternativen</span><div class="chips"><span class="chip">nur Grundmodul</span></div></div>
+      <div><span class="field-n">Entscheider · Alternativen</span><div class="chips"><span class="chip">nur Grundmodul</span></div></div>
       <div class="field-b">
-        <p>Wer entscheidet, bis wann, und welche Alternativen es gibt.</p>
-        <p class="why">Die Entscheidungsfrist ist verbindlich gemeint: Sie sagt, bis wann entschieden sein muss, damit das Modul in der laufenden Planung noch greifen kann.</p>
+        <p>Wer entscheidet, und welche Alternativen es gibt. Die Frist dazu steht in Block 2, neben den Deadlines.</p>
       </div>
     </div>
     <div class="field">
@@ -785,27 +829,27 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
     </marker>
   </defs>
   <rect x="40" y="86" width="280" height="108" fill="none" stroke="currentColor" stroke-width="1.6"/>
-  <text x="60" y="116" font-family="Archivo, sans-serif" font-size="15" font-weight="600" fill="currentColor">Innensicht</text>
-  <text x="60" y="140" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor" opacity=".75">der führende Datensatz</text>
-  <text x="60" y="164" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="currentColor" opacity=".7">Block 1 bis 5</text>
-  <text x="60" y="182" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".55">operativ — womit gearbeitet wird</text>
+  <text x="60" y="116" font-family="Google Sans, Figtree, sans-serif" font-size="15" font-weight="600" fill="currentColor">Innensicht</text>
+  <text x="60" y="140" font-family="Google Sans, Figtree, sans-serif" font-size="12.5" fill="currentColor" opacity=".75">der führende Datensatz</text>
+  <text x="60" y="164" font-family="ui-monospace, Menlo, monospace" font-size="11.5" fill="currentColor" opacity=".7">Block 1 bis 5</text>
+  <text x="60" y="182" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".55">operativ — womit gearbeitet wird</text>
 
-  <line x1="325" y1="118" x2="600" y2="66" stroke="#A6362C" stroke-width="1.6" opacity=".85" marker-end="url(#ar4)"/>
-  <line x1="325" y1="162" x2="600" y2="214" stroke="#1D6273" stroke-width="1.6" opacity=".85" marker-end="url(#ar4)"/>
-  <text x="392" y="82" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">bei Compliance</text>
-  <text x="392" y="210" font-family="Archivo, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">bei Leistung</text>
+  <line x1="325" y1="118" x2="600" y2="66" stroke="#E00229" stroke-width="1.6" opacity=".85" marker-end="url(#ar4)"/>
+  <line x1="325" y1="162" x2="600" y2="214" stroke="#F31194" stroke-width="1.6" opacity=".85" marker-end="url(#ar4)"/>
+  <text x="392" y="82" font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">bei Compliance</text>
+  <text x="392" y="210" font-family="Google Sans, Figtree, sans-serif" font-size="11.5" fill="currentColor" opacity=".7">bei Leistung</text>
 
-  <rect x="608" y="34" width="330" height="76" fill="#A6362C" opacity=".08"/>
+  <rect x="608" y="34" width="330" height="76" fill="#E00229" opacity=".08"/>
   <rect x="608" y="34" width="330" height="76" fill="none" stroke="currentColor" opacity=".55"/>
-  <text x="628" y="62" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="#A6362C">Nachweissicht</text>
-  <text x="628" y="84" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor" opacity=".8">Adressat: Behörde, Geschäftsleitung</text>
-  <text x="628" y="102" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".6">„Wir haben das getan, hier ist der Beleg“</text>
+  <text x="628" y="62" font-family="Google Sans, Figtree, sans-serif" font-size="14" font-weight="600" fill="#E00229">Nachweissicht</text>
+  <text x="628" y="84" font-family="Google Sans, Figtree, sans-serif" font-size="12.5" fill="currentColor" opacity=".8">Adressat: Behörde, Geschäftsleitung</text>
+  <text x="628" y="102" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".6">„Wir haben das getan, hier ist der Beleg“</text>
 
-  <rect x="608" y="180" width="330" height="76" fill="#1D6273" opacity=".08"/>
+  <rect x="608" y="180" width="330" height="76" fill="#F31194" opacity=".08"/>
   <rect x="608" y="180" width="330" height="76" fill="none" stroke="currentColor" opacity=".55"/>
-  <text x="628" y="208" font-family="Archivo, sans-serif" font-size="14" font-weight="600" fill="#1D6273">Katalogsicht</text>
-  <text x="628" y="230" font-family="Archivo, sans-serif" font-size="12.5" fill="currentColor" opacity=".8">Adressat: Aussteller, Gastveranstalter</text>
-  <text x="628" y="248" font-family="Archivo, sans-serif" font-size="12" fill="currentColor" opacity=".6">„Das ist buchbar, das ist nicht enthalten“</text>
+  <text x="628" y="208" font-family="Google Sans, Figtree, sans-serif" font-size="14" font-weight="600" fill="#F31194">Katalogsicht</text>
+  <text x="628" y="230" font-family="Google Sans, Figtree, sans-serif" font-size="12.5" fill="currentColor" opacity=".8">Adressat: Aussteller, Gastveranstalter</text>
+  <text x="628" y="248" font-family="Google Sans, Figtree, sans-serif" font-size="12" fill="currentColor" opacity=".6">„Das ist buchbar, das ist nicht enthalten“</text>
 </svg>
 <figcaption>Die Außensicht wird abgeleitet, nicht neu erfunden. Änderungen laufen innen zuerst; außen wird neu erzeugt. Das Schaufenster darf nichts zusagen, wofür in der Werkstatt kein Messpunkt existiert.</figcaption>
 </figure>
@@ -844,7 +888,7 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
     <li>Übergabetest bestanden: Eine benannte Vertretung kann den Ablauf ohne Rückfrage ausführen</li>
     <li>Übergaben beidseitig bestätigt — die empfangende Rolle hat gegengezeichnet</li>
     <li>Mindestens eine Selbstprüfungskennzahl benannt</li>
-    <li>Pflichtstufe formuliert, auch wenn sie <span class="term">Pflicht</span> lautet</li>
+    <li>Pflichtstufe formuliert, auch wenn sie <span class="term">Muss</span> lautet</li>
     <li>Fortschreibungsverantwortung benannt</li>
     <li>Im Modulindex registriert, Ablageort und Version gesetzt</li>
     <li>Bei Compliance-Modulen: Rechtsgrundlage, Nachweisart und Zustimmung belegt</li>
@@ -883,7 +927,10 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
   <div class="sec-head"><span class="sec-no">14</span><h2>Was noch offen ist</h2></div>
   <p>Ehrlich benannt statt geglättet — diese Punkte gehören ins Gespräch, nicht in eine Fußnote.</p>
   <ul>
-    <li><strong>Dritte Modulart</strong> für Befähigungsleistungen. Kandidat aus dem Haus ist die veranstaltungsspezifische Dienstleistereinweisung. Die Recherche spricht dagegen, weil die meisten Kandidaten rechtlich verlangt und damit Compliance sind. Mit der Messe zu entscheiden.</li>
+    <li><strong>Muster der Modul-ID.</strong> Im Grundkonzept gilt <span class="term">MOD-&lt;BEREICH&gt;-&lt;NR&gt;</span>, im Register Security die sprechende Arbeitsnummer <span class="term">&lt;BEREICH&gt;-&lt;GRUPPE&gt;-&lt;NR&gt;</span>. Beides nebeneinander ist ein Übergangszustand: Das Muster wird gesetzt, sobald der Gruppenzuschnitt steht — mit einer Regel für die dann abgelösten IDs.</li>
+    <li><strong>Der Gruppenzuschnitt ist vorläufig.</strong> Neun Gruppen sind vorgeschlagen, mit dem Fachbereich nicht validiert. Eine Gruppe hat ein Modul, eine andere neun. Ob das ein Schnittproblem ist oder die Sache so liegt, ist zu prüfen.</li>
+    <li><strong>Die Werte der Pflichtstufe sind am Haus zu bestätigen.</strong> Muss, Wählen und Kann sind gesetzt; die frühere Fassung war damit begründet, dass das Haus von Pflicht und Wahlpflicht spricht. Im ersten Workshop zu prüfen, welches Wort im Katalog stehen soll — die Bedeutung ist dieselbe.</li>
+    <li><strong>Das Mapping auf die Querachsen steht aus.</strong> Phase und Akteur sind als Achsen benannt und im Modul als Felder verankert; ein Register, das den Katalog je Phase oder je Akteur zeigt, gibt es noch nicht. Betriebszustand und Eskalationsstufe sind nicht gesetzt.</li>
     <li><strong>Vorrang zwischen Modulen.</strong> Das Feld Abhängigkeiten kennt nur <span class="term">setzt voraus</span> und <span class="term">nicht gemeinsam mit</span>. Ein Modul, das andere stillstellen kann, hat dafür keine Form.</li>
     <li><strong>Die Schnittregeln fehlen.</strong> Was ein Modul ist, steht hier. Wie man in der Praxis entscheidet, wo eines aufhört, stand im Schwesterdokument des Frameworks, das nicht vorliegt. Der Werkstatt-Test ist bisher der einzige Ersatz.</li>
     <li><strong>Übungs- und Trainingsformate</strong> — Modul oder Linie, ungeklärt.</li>
@@ -892,21 +939,27 @@ hr{border:none;border-top:1px solid var(--rule);margin:44px 0}
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">15</span><h2>Was sich seit dem 29.08.2026 geändert hat</h2></div>
-  <p>Aus dem ersten echten Durchgang durch die Vorlage und dem Rücklauf danach. Wer die frühere Fassung kennt, findet hier die Unterschiede.</p>
+  <div class="sec-head"><span class="sec-no">15</span><h2>Was sich zuletzt geändert hat</h2></div>
+  <p>Oben die Umstellung der Ordnung, darunter die Änderungen aus dem ersten Durchgang durch die Vorlage. Wer die frühere Fassung kennt, findet hier die Unterschiede.</p>
   <div class="log">
+    <div class="log-item"><span class="log-id">E-91</span><span><strong>Die Pflichtstufe heißt Muss, Wählen, Kann.</strong> Drei Werte wie bisher, dieselbe Bedeutung — die Wörter sagen jetzt, was zu tun ist, statt wie der Status heißt. Revidiert E-67 in der Benennung.</span></div>
+    <div class="log-item"><span class="log-id">E-92</span><span><strong>Der Ablauf wird je Phase geschnitten</strong> — ein Abschnitt je Phase, in der das Modul wirkt. Ersetzt den Richtwert vier bis acht Abschnitte.</span></div>
+    <div class="log-item"><span class="log-id">E-93</span><span><strong>Die Entscheidungsfrist steht in Block 2</strong>, neben den Deadlines. Entscheider und Alternativen bleiben in Block 4.</span></div>
+    <div class="log-item"><span class="log-id">E-94</span><span><strong>Die Abgrenzung „kein Controlling-Objekt" entfällt.</strong> Die Aussagen stehen an den Feldern Selbstprüfungskennzahl und Meldeweg.</span></div>
+    <div class="log-item"><span class="log-id">E-88</span><span><strong>Die Ordnung lautet Modulgruppe → Modul → Variante.</strong> Die konsolidierte Modullandkarte ist als Register die Source of Truth. Modulart und Pflichtstufe sind damit Tags am Modul und keine Ordnungsachsen — Compliance ordnet den Katalog nicht mehr. Neues Pflichtfeld Modulgruppe.</span></div>
+    <div class="log-item"><span class="log-id">E-89</span><span><strong>Der Begriff Gruppenrolle entfällt.</strong> Das Modul trägt <span class="term">Grundmodul: ja</span> oder <span class="term">Alternative zu &lt;Modul-ID&gt;</span>. „Gruppe“ bedeutet nur noch die Ordnungsebene. Revidiert E-67 und E-85 in der Benennung, nicht in der Sache.</span></div>
     <div class="log-item"><span class="log-id">E-63</span><span><strong>Feld Ergebnis gestrichen.</strong> „Fertig ist, wenn …“ wurde in zwei unvereinbaren Lesarten beantwortet. Zweck und Schutzziel trägt die Aussage; „ein Ergebnis“ bleibt Schnittprüfung.</span></div>
     <div class="log-item"><span class="log-id">E-64</span><span><strong>Feld Geltungsbereich neu</strong>, zeitlich und räumlich.</span></div>
     <div class="log-item"><span class="log-id">E-65</span><span><strong>Feld Auslöser gestrichen.</strong> Steht in der ersten Ablaufzeile; Voraussetzungen stehen in Abhängigkeiten.</span></div>
     <div class="log-item"><span class="log-id">E-66</span><span><strong>Phasenprofil heißt Deadlines</strong> und trägt Phase und Termin. Feld Fristen in Block 3 neu, für fremdgesetzte Ketten.</span></div>
-    <div class="log-item"><span class="log-id">E-67</span><span><strong>Bindung heißt Pflichtstufe</strong>, drei Werte statt vier. Die Gruppenrolle wird eigenes Feld.</span></div>
+    <div class="log-item"><span class="log-id">E-67</span><span><strong>Bindung heißt Pflichtstufe</strong>, drei Werte statt vier. Grundmodul und Alternative werden eigene Felder.</span></div>
     <div class="log-item"><span class="log-id">E-68</span><span><strong>Woraus eine Pflicht entsteht</strong>, und: Schwellen erzeugen ein eigenes Modul statt einer Hochstufung.</span></div>
     <div class="log-item"><span class="log-id">E-69</span><span><strong>Durchführung ist responsible, Fortschreibung accountable.</strong></span></div>
     <div class="log-item"><span class="log-id">E-70</span><span><strong>Beauftragung und Abnahme gehören ins Modul.</strong> In der Linie liegen Auswahl, Vertrag und Onboarding.</span></div>
     <div class="log-item"><span class="log-id">E-71</span><span><strong>Übergabetest ohne „fachfremd“.</strong> Eine benannte Vertretung muss den Ablauf ausführen können.</span></div>
     <div class="log-item"><span class="log-id">E-82</span><span><strong>Jede Alternative ist ein eigenes Modul</strong> mit eigener ID und eigenem Eintrag im Register.</span></div>
     <div class="log-item"><span class="log-id">E-84</span><span><strong>Drei Verantwortungen statt zwei.</strong> Neues Pflichtfeld Auftragsverantwortung (A); die Fortschreibung trägt keinen RACI-Buchstaben mehr, sondern ihre eigene Aussage. Revidiert E-69.</span></div>
-    <div class="log-item"><span class="log-id">E-85</span><span><strong>Die Gruppenrolle ist unabhängig von der Pflichtstufe</strong> — Grundmodul und Alternative gibt es auch innerhalb von Optional. Revidiert E-67.</span></div>
+    <div class="log-item"><span class="log-id">E-85</span><span><strong>Grundmodul und Alternative sind unabhängig von der Pflichtstufe</strong> — es gibt sie auch innerhalb von Kann. Revidiert E-67.</span></div>
   </div>
 </section>
 

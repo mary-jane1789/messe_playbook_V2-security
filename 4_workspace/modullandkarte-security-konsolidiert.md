@@ -1,6 +1,6 @@
 ---
 status: entwurf
-stand: 2026-09-08
+stand: 2026-09-17
 quelle: Modullandkarte Security V0.2 vom 02.09.2026 (34 Module unverändert übernommen); Ergänzungen aus Veranstaltungssicherheit — Leitfaden der Branddirektion München / BaSiGo, 3. Auflage Juni 2015, Kap. 3.3.2.2., 6.2.6., 7.1.; Phasen nach 1_grundkonzepte/phasen.md
 ---
 
@@ -29,18 +29,22 @@ steuert nichts. Das Modul ist die Leistungseinheit: einzeln bestellbar,
 bemessbar und prüfbar, mit einem Ergebnis. Die Variante ist eine Ausprägung
 desselben Moduls — anderer Mitteleinsatz, gleiches Ergebnis.
 
-**Zwei steuernde Achsen**, aus V0.2 übernommen:
+**Tags am Modul, keine Ordnungsebenen.** Die drei Angaben aus V0.2 hängen am
+einzelnen Modul und schneiden den Katalog nicht: Compliance ist ein Merkmal,
+keine Achse. Zwei Module derselben Gruppe dürfen sich in allen dreien
+unterscheiden.
 
-| Achse | Werte | steuert |
+| Tag | Werte | sagt |
 |---|---|---|
-| Modulart | Compliance · Leistung · offen | welche Felder Pflicht sind |
-| Pflichtstufe | Pflicht · Wahlpflicht · Optional | ob ein Modul für eine Veranstaltung gilt |
+| Modulart | Compliance · Leistung · offen | was das Modul ist — und damit, welche Felder Pflicht sind |
+| Pflichtstufe | Muss · Wählen · Kann | ob ein Modul für eine Veranstaltung gilt |
+| Grundmodul / Alternative zu | — · Modul-ID | ob es mit anderen Modulen eine Wahl bildet |
 
-**Zwei Mapping-Achsen, die quer liegen** und deshalb nicht in der Hierarchie
-stehen: Phase (P0 bis P7 nach [phasen.md](../1_grundkonzepte/phasen.md)) und
-Akteur (Veranstalter · Dienstleister · Genehmigungsbehörde · Gefahrenabwehr).
-Beide Mappings stehen noch aus. Als dritte Querachse zeichnet sich der
-Betriebszustand ab (siehe `betriebszustaende-entwurf.md`).
+**Mapping-Achsen, die quer liegen** und deshalb nicht in der Hierarchie stehen:
+Phase (P0 bis P7 nach [phasen.md](../1_grundkonzepte/phasen.md)) und Akteur
+(Veranstalter · Dienstleister · Genehmigungsbehörde · Gefahrenabwehr). Beide
+Mappings stehen noch aus. Als dritte Querachse zeichnet sich der Betriebszustand
+ab; er ist noch nicht gesetzt.
 
 **Nummerierung** `SEC-<Gruppe>-<Modul>`, beide Teile zweistellig. Die Nummer ist
 an die Gruppe gebunden — ein Gruppenwechsel ändert damit die ID. Das steht gegen
@@ -59,12 +63,12 @@ Störungen und prüfen Sondertatbestände mit eigenem Rechtsrahmen.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-01-01 | Risikobeurteilung je Veranstaltung | Compliance (Vorschlag) | Pflicht | — | V0.2 |
-| SEC-01-02 | Sicherheitskonzept und Einvernehmen | Compliance (Vorschlag) | Wahlpflicht | Ergänzung zum Rahmensicherheitskonzept (Default) · vollumfängliches Sicherheitskonzept · erweiterte Veranstaltungsbeschreibung | V0.2 |
-| SEC-01-03 | Notfall- und Szenarienplanung | Compliance (Vorschlag) | Pflicht | eigenständige Notfallplanung · Ergänzung zum Rahmenkonzept | neu |
-| SEC-01-04 | Freigabe sicherheitskritischer Exponate | offen | Optional | Waffen (WaffG) · Gefahrgut und Gefahrstoffe · Maschinen im Betrieb | V0.2 |
-| SEC-01-05 | Drohnenflug | offen | Optional | — | V0.2 |
-| SEC-01-06 | Sicherheitstechnische Nachbereitung | offen | Pflicht | interner Erfahrungsbericht · gemeinsame Nachbesprechung mit den Behörden | neu |
+| SEC-01-01 | Risikobeurteilung je Veranstaltung | Compliance (Vorschlag) | Muss | — | V0.2 |
+| SEC-01-02 | Sicherheitskonzept und Einvernehmen | Compliance (Vorschlag) | Wählen | Ergänzung zum Rahmensicherheitskonzept (Default) · vollumfängliches Sicherheitskonzept · erweiterte Veranstaltungsbeschreibung | V0.2 |
+| SEC-01-03 | Notfall- und Szenarienplanung | Compliance (Vorschlag) | Muss | eigenständige Notfallplanung · Ergänzung zum Rahmenkonzept | neu |
+| SEC-01-04 | Freigabe sicherheitskritischer Exponate | offen | Kann | Waffen (WaffG) · Gefahrgut und Gefahrstoffe · Maschinen im Betrieb | V0.2 |
+| SEC-01-05 | Drohnenflug | offen | Kann | — | V0.2 |
+| SEC-01-06 | Sicherheitstechnische Nachbereitung | offen | Muss | interner Erfahrungsbericht · gemeinsame Nachbesprechung mit den Behörden | neu |
 
 ## 2 · Perimeter- und Geländeschutz
 
@@ -73,10 +77,10 @@ einzelne Personen, über alle Betriebszustände von Nullbetrieb bis Abbau.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-02-01 | Hallenstreife Laufzeit | Compliance | Pflicht | Halle · Freigelände | V0.2 |
-| SEC-02-02 | Hallenstreife Auf- und Abbau | Compliance | Pflicht | — | V0.2 |
-| SEC-02-03 | Geländeabsicherung und Absperrungen | offen | Pflicht | Bauzaun und feste Absperrung · mobile Absperrung | V0.2 |
-| SEC-02-04 | Zufahrtsschutz (Überfahrtschutz) | offen | Optional | Poller und feste Sperren · mobile Fahrzeugsperren | V0.2 |
+| SEC-02-01 | Hallenstreife Laufzeit | Compliance | Muss | Halle · Freigelände | V0.2 |
+| SEC-02-02 | Hallenstreife Auf- und Abbau | Compliance | Muss | — | V0.2 |
+| SEC-02-03 | Geländeabsicherung und Absperrungen | offen | Muss | Bauzaun und feste Absperrung · mobile Absperrung | V0.2 |
+| SEC-02-04 | Zufahrtsschutz (Überfahrtschutz) | offen | Kann | Poller und feste Sperren · mobile Fahrzeugsperren | V0.2 |
 
 Die Videoüberwachung des Geländes stand in V0.2 hier, mit dem Vermerk, dass
 eine Setzung nötig ist. Sie steht jetzt in Gruppe 9.
@@ -89,15 +93,15 @@ Zielgruppe und Übergang.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-03-01 | Personenkontrolle — Stichprobe mit Spotter | Compliance | Wahlpflicht (Grundmodul) | — | V0.2 |
-| SEC-03-02 | Personenkontrolle — Torbogen und Handgerät | Compliance | Wahlpflicht | — | V0.2 |
-| SEC-03-03 | Personenkontrolle — Vollkontrolle | Compliance | Wahlpflicht | — | V0.2 |
-| SEC-03-04 | Gepäckkontrolle | offen | Optional | Nachschau durch die kontrollierende Person · X-Ray | V0.2 |
-| SEC-03-05 | Identitätsmanagement und Ticketkontrolle | Leistung | Pflicht | — | V0.2 |
-| SEC-03-06 | Prüfung personifizierter Tickets | Leistung | Optional | — | V0.2 |
-| SEC-03-07 | SDP — Service-Ticketing-Portal | Leistung | Pflicht | — | V0.2 |
-| SEC-03-08 | Zu- und Ausfahrtkontrolle Lieferverkehr | offen | Pflicht | — | V0.2 |
-| SEC-03-09 | Ausschleuskontrolle Abbau | offen | Optional | — | V0.2 |
+| SEC-03-01 | Personenkontrolle — Stichprobe mit Spotter | Compliance | Wählen (Grundmodul) | — | V0.2 |
+| SEC-03-02 | Personenkontrolle — Torbogen und Handgerät | Compliance | Wählen | — | V0.2 |
+| SEC-03-03 | Personenkontrolle — Vollkontrolle | Compliance | Wählen | — | V0.2 |
+| SEC-03-04 | Gepäckkontrolle | offen | Kann | Nachschau durch die kontrollierende Person · X-Ray | V0.2 |
+| SEC-03-05 | Identitätsmanagement und Ticketkontrolle | Leistung | Muss | — | V0.2 |
+| SEC-03-06 | Prüfung personifizierter Tickets | Leistung | Kann | — | V0.2 |
+| SEC-03-07 | SDP — Service-Ticketing-Portal | Leistung | Muss | — | V0.2 |
+| SEC-03-08 | Zu- und Ausfahrtkontrolle Lieferverkehr | offen | Muss | — | V0.2 |
+| SEC-03-09 | Ausschleuskontrolle Abbau | offen | Kann | — | V0.2 |
 
 ## 4 · Ordnungs- und Wachdienste
 
@@ -107,12 +111,12 @@ nebeneinander.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-04-01 | Ordnungsdienst | Compliance (Vorschlag) | Pflicht | — | V0.2 |
-| SEC-04-02 | Interventionsdienst | Leistung | Pflicht | — | V0.2 |
-| SEC-04-03 | Standbewachung | Leistung (Vorschlag) | Optional | — | V0.2 |
-| SEC-04-04 | Bühnen- und Forenabsicherung | offen | Optional | — | V0.2 |
-| SEC-04-05 | VIP- und Personenschutz | Leistung | Optional | — | V0.2 |
-| SEC-04-06 | Bestellung und Nachweis des Ordnungsdienstleiters | Compliance (Vorschlag) | Pflicht | — | neu |
+| SEC-04-01 | Ordnungsdienst | Compliance (Vorschlag) | Muss | — | V0.2 |
+| SEC-04-02 | Interventionsdienst | Leistung | Muss | — | V0.2 |
+| SEC-04-03 | Standbewachung | Leistung (Vorschlag) | Kann | — | V0.2 |
+| SEC-04-04 | Bühnen- und Forenabsicherung | offen | Kann | — | V0.2 |
+| SEC-04-05 | VIP- und Personenschutz | Leistung | Kann | — | V0.2 |
+| SEC-04-06 | Bestellung und Nachweis des Ordnungsdienstleiters | Compliance (Vorschlag) | Muss | — | neu |
 
 ## 5 · Personenstrom und Crowd Management
 
@@ -121,10 +125,10 @@ Ströme je Phase und Betriebsart steuern, Dichten überwachen.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-05-01 | Kapazitäts- und Rettungswegnachweis | Compliance (Vorschlag) | Pflicht | — | V0.2 |
-| SEC-05-02 | Personenlenkung und -steuerung | offen | Pflicht | Einlass · Betrieb · Auslass / Regelbetrieb · Störungsfall | V0.2 |
-| SEC-05-03 | Crowd Monitoring (Dichteüberwachung) | offen | Optional | — | V0.2 |
-| SEC-05-04 | Querüberwachung Parallelveranstaltung | Leistung | Optional | — | V0.2 |
+| SEC-05-01 | Kapazitäts- und Rettungswegnachweis | Compliance (Vorschlag) | Muss | — | V0.2 |
+| SEC-05-02 | Personenlenkung und -steuerung | offen | Muss | Einlass · Betrieb · Auslass / Regelbetrieb · Störungsfall | V0.2 |
+| SEC-05-03 | Crowd Monitoring (Dichteüberwachung) | offen | Kann | — | V0.2 |
+| SEC-05-04 | Querüberwachung Parallelveranstaltung | Leistung | Kann | — | V0.2 |
 
 ## 6 · Brandschutz und Rettungswege
 
@@ -136,12 +140,12 @@ Eröffnungs-Gate.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-06-01 | Freihaltung Flucht- und Rettungswege | offen | Pflicht | Auf- und Abbau · Laufzeit | V0.2 |
-| SEC-06-02 | Brandschutzprüfung Standbau und Dekoration | Compliance (Vorschlag) | Pflicht | Prüfung nach Standbauantrag · Prüfung vor Ort in P4 | neu |
-| SEC-06-03 | Offenes Feuer, Pyrotechnik und Flüssiggas | Compliance (Vorschlag) | Optional | offenes Feuer und Kochvorführung · Flüssiggas auf Ständen · Bühnenpyrotechnik | neu |
-| SEC-06-04 | Löschmittel- und Löschwasservorhaltung | Compliance (Vorschlag) | Pflicht | — | neu |
-| SEC-06-05 | Brandsicherheitswache | Compliance | Optional | — | V0.2 |
-| SEC-06-06 | Brandschutz-Check vor Eröffnung | Compliance (Vorschlag) | Pflicht | — | V0.2 |
+| SEC-06-01 | Freihaltung Flucht- und Rettungswege | offen | Muss | Auf- und Abbau · Laufzeit | V0.2 |
+| SEC-06-02 | Brandschutzprüfung Standbau und Dekoration | Compliance (Vorschlag) | Muss | Prüfung nach Standbauantrag · Prüfung vor Ort in P4 | neu |
+| SEC-06-03 | Offenes Feuer, Pyrotechnik und Flüssiggas | Compliance (Vorschlag) | Kann | offenes Feuer und Kochvorführung · Flüssiggas auf Ständen · Bühnenpyrotechnik | neu |
+| SEC-06-04 | Löschmittel- und Löschwasservorhaltung | Compliance (Vorschlag) | Muss | — | neu |
+| SEC-06-05 | Brandsicherheitswache | Compliance | Kann | — | V0.2 |
+| SEC-06-06 | Brandschutz-Check vor Eröffnung | Compliance (Vorschlag) | Muss | — | V0.2 |
 
 ## 7 · Sanitätsdienst
 
@@ -150,7 +154,7 @@ Bemessungsverfahren und eigener Leitungsrolle.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-07-01 | Sanitätswachdienst | Compliance (Vorschlag) | Pflicht | — | V0.2 |
+| SEC-07-01 | Sanitätswachdienst | Compliance (Vorschlag) | Muss | — | V0.2 |
 
 ## 8 · Sicherheitskommunikation und Lage
 
@@ -159,10 +163,10 @@ aus, wird keine andere Leistung wirksam.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-08-01 | Lagebesprechung der Veranstaltung | Leistung | Pflicht | — | V0.2 |
-| SEC-08-02 | Sicherheitskommunikation | offen | Pflicht | — | V0.2 |
-| SEC-08-03 | Koordinierungsstelle je Veranstaltung | offen | Pflicht | — | V0.2 |
-| SEC-08-04 | Ereignisdokumentation | Compliance (Vorschlag) | Pflicht | — | neu |
+| SEC-08-01 | Lagebesprechung der Veranstaltung | Leistung | Muss | — | V0.2 |
+| SEC-08-02 | Sicherheitskommunikation | offen | Muss | — | V0.2 |
+| SEC-08-03 | Koordinierungsstelle je Veranstaltung | offen | Muss | — | V0.2 |
+| SEC-08-04 | Ereignisdokumentation | Compliance (Vorschlag) | Muss | — | neu |
 
 ## 9 · Sicherheitstechnische Anlagen
 
@@ -179,11 +183,11 @@ Bedienung während der Laufzeit, Kompensation bei Abschaltung.
 
 | ID | Modul | Modulart | Pflichtstufe | Varianten | Herkunft |
 |---|---|---|---|---|---|
-| SEC-09-01 | Videoüberwachung und Auswertung | offen | Optional | Bestandsanlage · temporäre Ergänzung | verschoben (V0.2, Gruppe 2) |
-| SEC-09-02 | Brandmelde- und Alarmierungstechnik | Compliance (Vorschlag) | Pflicht | Vollbetrieb · Bereichsabschaltung mit Kompensation | neu |
-| SEC-09-03 | Sprachalarmierung und Evakuierungstechnik | Compliance (Vorschlag) | Pflicht | — | neu |
-| SEC-09-04 | Sicherheitsbeleuchtung und Notstromversorgung | Compliance (Vorschlag) | Pflicht | Bestandsanlage Halle · temporäre Versorgung Freigelände | neu |
-| SEC-09-05 | Blitzschutz temporärer Aufbauten | offen | Optional | — | neu |
+| SEC-09-01 | Videoüberwachung und Auswertung | offen | Kann | Bestandsanlage · temporäre Ergänzung | verschoben (V0.2, Gruppe 2) |
+| SEC-09-02 | Brandmelde- und Alarmierungstechnik | Compliance (Vorschlag) | Muss | Vollbetrieb · Bereichsabschaltung mit Kompensation | neu |
+| SEC-09-03 | Sprachalarmierung und Evakuierungstechnik | Compliance (Vorschlag) | Muss | — | neu |
+| SEC-09-04 | Sicherheitsbeleuchtung und Notstromversorgung | Compliance (Vorschlag) | Muss | Bestandsanlage Halle · temporäre Versorgung Freigelände | neu |
+| SEC-09-05 | Blitzschutz temporärer Aufbauten | offen | Kann | — | neu |
 
 ## Die neuen Module im Einzelnen
 
@@ -276,11 +280,11 @@ Zuständigkeit, nicht über Form.
   `MOD-<BEREICH>-<NR>` in `1_grundkonzepte/modul.md` auf
   `<BEREICH>-<GRUPPE>-<NR>` zu ändern und MOD-SEC-01 zu SEC-03-01 zu überführen
   — als F-Entscheidung mit Begründung.
-- **„Gruppe" ist doppelt belegt.** `modul.md` nennt Gruppenrolle das Bündel sich
-  ausschließender Ausprägungen (Grundmodul plus Alternativen), die Landkarte
-  nennt Modulgruppe die Ordnungsebene. Trägt die ID die Gruppennummer, stehen
-  beide Bedeutungen in einer Zeile: `SEC-03-01 · Grundmodul · Alternativen
-  SEC-03-02, SEC-03-03`. Einer der beiden Begriffe braucht einen eigenen Namen.
+- **„Gruppe" ist doppelt belegt — erledigt am 16.09.2026.** `modul.md` nannte
+  Gruppenrolle das Bündel sich ausschließender Ausprägungen, die Landkarte nennt
+  Modulgruppe die Ordnungsebene. Der Begriff Gruppenrolle entfällt: Das Modul
+  trägt jetzt `Grundmodul: ja` oder `Alternative zu <Modul-ID>`. „Gruppe"
+  bedeutet damit nur noch die Ordnungsebene (E-88).
 - **Modulart der neuen Module.** Als Vorschlag gesetzt, wo die Zuordnung
   eindeutig erscheint; offen bei SEC-01-06 und SEC-09-05. Zu setzen im Workshop.
 - **Gruppe 9 gegen die Betreiberrolle.** Der Schnitt auf die veranstaltungs­-

@@ -1,10 +1,21 @@
 ---
 status: entwurf
-stand: 2026-08-31
+stand: 2026-09-16
 quelle: Landkarten-Sparring und Modulbefüllung am 24.08.2026; Einordnungen bestätigt durch die Projektleitung am 29.08.2026
 ---
 
 # Modullandkarte Security
+
+> **Abgelöster Stand — nicht der aktuelle Katalog.** Diese Fassung führt
+> vierzehn Module ohne Modulgruppen. Der aktuelle Katalog ist die konsolidierte
+> Modullandkarte mit 45 Modulen in neun Gruppen in
+> `../../../4_workspace/modullandkarte-security-konsolidiert.md`; sie ist als
+> Register die Source of Truth. Diese Datei bleibt stehen, weil ihre
+> Einordnungen mit E-78 geloggt und mit der Projektleitung durchgegangen sind:
+> Wo die konsolidierte Fassung abweicht — Ordnungsdienstleiter als eigenes
+> Modul, Brandsicherheitswache als Pflicht —, braucht es Revisionszeilen im
+> Entscheidungslog, keine stille Änderung. Sie wandert hierher zurück, sobald
+> der Gruppenzuschnitt mit dem Fachbereich bestätigt ist.
 
 Das Register der Security-Module: welche es gibt, wie sie eingeordnet sind, und
 was ausdrücklich **kein** Modul ist.
@@ -20,45 +31,46 @@ Prüfungen stehen noch aus: der Abgleich gegen das anonymisierte
 veranstaltungsbezogene Sicherheitskonzept in `../../../0_meta/quellen/`, und der
 Vollständigkeitstest über die Phasenachse.
 
-## Die zwei Achsen
+## Die zwei Tags
 
 **Modulart** sagt, *was* es ist: `Compliance` oder `Leistung`.
-**Pflichtstufe** sagt, *ob* es für eine Veranstaltung gilt: `Pflicht`,
-`Wahlpflicht` oder `Optional`.
+**Pflichtstufe** sagt, *ob* es für eine Veranstaltung gilt: `Muss`, `Wählen`
+oder `Kann`.
 
-Sie sind unabhängig. Ein Leistungsmodul kann Pflicht sein, weil die Messe es
+Beide hängen am einzelnen Modul und ordnen den Katalog nicht (E-88). Sie sind
+voneinander unabhängig: Ein Leistungsmodul kann Pflicht sein, weil die Messe es
 gesetzt hat; ein Compliance-Modul kann in Ausprägungen zur Wahl stehen.
 
-**Konsistenzregel für dieses Register.** Eine Gruppe sich ausschließender
-Ausprägungen besteht aus mindestens zwei Modulen — Grundmodul plus mindestens
-eine Alternative, jede mit eigener Modul-ID und eigenem Eintrag hier. Bei
-`Wahlpflicht` gilt zusätzlich: Steht dort nur ein Modul, ist entweder die
+**Konsistenzregel für dieses Register.** Eine Wahl besteht aus mindestens zwei
+Modulen — Grundmodul plus mindestens eine Alternative, jede mit eigener
+Modul-ID und eigenem Eintrag hier. Bei
+`Wählen` gilt zusätzlich: Steht dort nur ein Modul, ist entweder die
 Pflichtstufe falsch oder es fehlen Einträge, denn eine Ausprägung muss laufen.
-Eine Gruppe kann auch innerhalb von `Optional` stehen; dann gilt bei
+Eine Wahl kann auch innerhalb von `Kann` stehen; dann gilt bei
 Nichtentscheidung keine der Ausprägungen. Der Gegenfall in beiden Fällen: Ein
 einzelnes Modul, dessen Ausprägungen mit derselben Anleitung laufen, ist keine
-Gruppe, sondern ein Modul mit einer Varianten-Tabelle.
+Wahl, sondern ein Modul mit einer Varianten-Tabelle.
 
 ## Module
 
 | Modul | Modulart | Pflichtstufe | Anmerkung |
 |---|---|---|---|
-| Personenkontrolle — Stichprobe mit Spotter | Compliance | Wahlpflicht · **Grundmodul** | `MOD-SEC-01`, befüllt. Einfachste Ausprägung: Spotter beobachtet die ankommende Menge und veranlasst stichprobenartig Kontrollen. Gilt, solange nichts anderes entschieden ist. Dem Identitätsmanagement räumlich vorgeschaltet |
-| Personenkontrolle — Torbogen und Handgerät | Compliance | Wahlpflicht · Alternative zu MOD-SEC-01 | Technische Detektion an besetzten Positionen. Anderer Aufbau, anderes Personaltableau, andere Bemessung. Modul-ID noch nicht vergeben |
-| Personenkontrolle — Vollkontrolle | Compliance | Wahlpflicht · Alternative zu MOD-SEC-01 | Alle Personen, über Zelt und Zaun geführt. Maximale Ausprägung mit eigener Infrastruktur. Modul-ID noch nicht vergeben |
-| Gepäckkontrolle | Leistung | Optional | Eigene Zielrichtung, nicht Teil der Personenkontrolle. Ausprägungen: Nachschau durch die kontrollierende Person, X-Ray. Verlangt ein Bescheid sie, ist das nach der Schwellenregel ein eigenes Modul — noch nicht geschnitten |
-| Identitätsmanagement und Ticketkontrolle | Leistung | Pflicht | Immer technisch über das Drehkreuz; es werden nur digitale Tickets verkauft |
-| Prüfung personifizierter Tickets | Leistung | Optional | Abgleich Ticket gegen Ausweis. Aus Frankreich mitgebracht, im Haus in Vorbereitung |
-| SDP — Service-Ticketing-Portal | Leistung | Pflicht | Legitimierung von Personen, die weder Besucher noch Aussteller sind. Außerhalb der Laufzeit |
-| Hallenstreife Laufzeit | Compliance | Pflicht | Veranstaltungssicherheit während der Öffnungszeit; überwacht auch das Rauchverbot. Die Zahl der Streifen skaliert, das ist ein Parameter |
-| Hallenstreife Auf- und Abbau | Compliance | Pflicht | Eigenes Modul, nicht dieselbe Streife: andere Zielrichtung (Rettungswegfreiheit, Diebstahlprävention), andere Einweisung. Der Vertretungstest schlägt an |
-| Ordnungsdienstleiter | Compliance | Pflicht | Aus der VStättV. Separat bestellt, nur für die Veranstaltung |
-| Brandsicherheitswache | Compliance | Pflicht | Das Mengengerüst kommt von der Feuerwehr und lässt keine Abweichung zu |
-| Lagebesprechung der Veranstaltung | Leistung | Pflicht | Morgenlage vor Veranstaltungsbeginn im Kriseninterventionsraum, mit standardisiertem Besprechungsprotokoll. Bei Gastveranstaltungen führt der Gastveranstalter sie |
-| Interventionsdienst | Leistung | Pflicht | Anlassbezogenes Eingreifen bei Verstößen in der Veranstaltung — von unzulässigen Ausstellungsstücken bis zu Datenschutzverstößen auf Ständen |
-| VIP- und Personenschutz | Leistung | Optional | Auslöser sind Schutzpersonen oder gefährdete Aussteller. Teils mit eigenem Werkschutz des Kunden, dann Abstimmung nötig |
-| Querüberwachung Parallelveranstaltung | Leistung | Optional | Trennung der Besuchergruppen bei gleichzeitigen Veranstaltungen. Fällt überwiegend in die Betreiberrolle |
-| Drohnenflug | Leistung | Optional | Prüfung der Nachweise: Pilotenqualifikation, Drohnengröße, Genehmigung des Luftfahrt-Bundesamts |
+| Personenkontrolle — Stichprobe mit Spotter | Compliance | Wählen · **Grundmodul** | `MOD-SEC-01`, befüllt. Einfachste Ausprägung: Spotter beobachtet die ankommende Menge und veranlasst stichprobenartig Kontrollen. Gilt, solange nichts anderes entschieden ist. Dem Identitätsmanagement räumlich vorgeschaltet |
+| Personenkontrolle — Torbogen und Handgerät | Compliance | Wählen · Alternative zu MOD-SEC-01 | Technische Detektion an besetzten Positionen. Anderer Aufbau, anderes Personaltableau, andere Bemessung. Modul-ID noch nicht vergeben |
+| Personenkontrolle — Vollkontrolle | Compliance | Wählen · Alternative zu MOD-SEC-01 | Alle Personen, über Zelt und Zaun geführt. Maximale Ausprägung mit eigener Infrastruktur. Modul-ID noch nicht vergeben |
+| Gepäckkontrolle | Leistung | Kann | Eigene Zielrichtung, nicht Teil der Personenkontrolle. Ausprägungen: Nachschau durch die kontrollierende Person, X-Ray. Verlangt ein Bescheid sie, ist das nach der Schwellenregel ein eigenes Modul — noch nicht geschnitten |
+| Identitätsmanagement und Ticketkontrolle | Leistung | Muss | Immer technisch über das Drehkreuz; es werden nur digitale Tickets verkauft |
+| Prüfung personifizierter Tickets | Leistung | Kann | Abgleich Ticket gegen Ausweis. Aus Frankreich mitgebracht, im Haus in Vorbereitung |
+| SDP — Service-Ticketing-Portal | Leistung | Muss | Legitimierung von Personen, die weder Besucher noch Aussteller sind. Außerhalb der Laufzeit |
+| Hallenstreife Laufzeit | Compliance | Muss | Veranstaltungssicherheit während der Öffnungszeit; überwacht auch das Rauchverbot. Die Zahl der Streifen skaliert, das ist ein Parameter |
+| Hallenstreife Auf- und Abbau | Compliance | Muss | Eigenes Modul, nicht dieselbe Streife: andere Zielrichtung (Rettungswegfreiheit, Diebstahlprävention), andere Einweisung. Der Vertretungstest schlägt an |
+| Ordnungsdienstleiter | Compliance | Muss | Aus der VStättV. Separat bestellt, nur für die Veranstaltung |
+| Brandsicherheitswache | Compliance | Muss | Das Mengengerüst kommt von der Feuerwehr und lässt keine Abweichung zu |
+| Lagebesprechung der Veranstaltung | Leistung | Muss | Morgenlage vor Veranstaltungsbeginn im Kriseninterventionsraum, mit standardisiertem Besprechungsprotokoll. Bei Gastveranstaltungen führt der Gastveranstalter sie |
+| Interventionsdienst | Leistung | Muss | Anlassbezogenes Eingreifen bei Verstößen in der Veranstaltung — von unzulässigen Ausstellungsstücken bis zu Datenschutzverstößen auf Ständen |
+| VIP- und Personenschutz | Leistung | Kann | Auslöser sind Schutzpersonen oder gefährdete Aussteller. Teils mit eigenem Werkschutz des Kunden, dann Abstimmung nötig |
+| Querüberwachung Parallelveranstaltung | Leistung | Kann | Trennung der Besuchergruppen bei gleichzeitigen Veranstaltungen. Fällt überwiegend in die Betreiberrolle |
+| Drohnenflug | Leistung | Kann | Prüfung der Nachweise: Pilotenqualifikation, Drohnengröße, Genehmigung des Luftfahrt-Bundesamts |
 
 ## Kein Modul
 
@@ -92,8 +104,8 @@ erneut als Kandidat auftauchen.
 - **Gepäckkontrolle — Varianten oder zwei Module?** Nachschau durch die
   kontrollierende Person und X-Ray unterscheiden sich in Aufbau und Personal
   ähnlich stark wie die Ausprägungen der Personenkontrolle. Sind es zwei Module,
-  bilden sie eine Gruppe innerhalb von `Optional`: Nachschau als Grundmodul,
-  X-Ray als Alternative. Beide bleiben Optional — wird nichts gebucht, gilt
+  bilden sie eine Wahl innerhalb von `Kann`: Nachschau als Grundmodul,
+  X-Ray als Alternative. Beide bleiben Kann — wird nichts gebucht, gilt
   keine der beiden. Die Form dafür gibt es (E-85); zu entscheiden ist nur der
   fachliche Schnitt.
 - **Überlappung Vollkontrolle und Gepäckkontrolle.** Die maximale Ausprägung der

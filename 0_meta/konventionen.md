@@ -1,6 +1,6 @@
 ---
 status: entwurf
-stand: 2026-09-08
+stand: 2026-09-16
 ---
 
 # Konventionen
@@ -90,6 +90,10 @@ optional, Wertebereich.
 
 Modul-IDs folgen dem Muster `MOD-<BEREICH>-<NR>`. Das Präfix `M-` ist für
 Schemata reserviert und wird für Module nicht verwendet.
+
+Die Modullandkarte Security nummeriert abweichend `<BEREICH>-<GRUPPE>-<NR>`,
+etwa `SEC-03-01`. Das sind **Arbeitsnummern**, solange der Gruppenzuschnitt
+vorläufig ist; welches Muster gilt, wird entschieden, sobald er steht (F-34).
 
 ## Verweise
 

@@ -9,16 +9,17 @@ auftragsverantwortung: 214 Security Management
 rechtlich-verantwortlich: LÜCKE
 fortschreibung: Leitung Security, Abteilung 214 — Name zu bestätigen
 schwerpunkt-phase: P5
-pflichtstufe: Wahlpflicht
-gruppenrolle: Grundmodul
+pflichtstufe: Wählen
+grundmodul: ja
+modulgruppe: Zugangs- und Personenkontrolle — zugeordnet nach der konsolidierten Modullandkarte, zu bestätigen
 rechtsgrundlage: LÜCKE — WaffG und Marktfestsetzung genannt, Fundstellen nicht belegt
 qualifikationsnachweis: LÜCKE
 zustimmung: LÜCKE
 risikostufe: LÜCKE
 reifegrad-ist: 1
 reifegrad-ziel: 2
-version: 0.4
-stand: 2026-08-31
+version: 0.6
+stand: 2026-09-17
 pruefintervall: LÜCKE
 dokumentfreigabe: noch nicht freigegeben
 quelle: Live-Erfassung Modulbefüllung, 24.08.2026; übertragen 29.08.2026
@@ -163,10 +164,10 @@ zu belegen.*
 
 ### Pflichtstufe
 
-**Pflichtstufe:** Wahlpflicht · **Gruppenrolle:** Grundmodul
+**Pflichtstufe:** Wählen · **Grundmodul:** ja
 
-*Weil die Gruppe Wahlpflicht ist, gilt dieses Modul, solange nichts anderes
-entschieden wird.*
+*Weil die Pflichtstufe Wählen ist, gilt dieses Modul, solange nichts
+anderes entschieden wird.*
 
 | | |
 |---|---|
@@ -205,7 +206,7 @@ Modul.*
 - Modul-IDs und Steckbriefe der beiden Alternativen fehlen
 
 **Vom Übertragenden gesetzt, nicht vom Fach gesagt:** Modul-ID, Schwerpunkt-Phase
-P5, Pflichtstufe Wahlpflicht mit Gruppenrolle Grundmodul, Reifegrad Ist 1
+P5, Pflichtstufe Wählen als Grundmodul, Modulgruppe, Reifegrad Ist 1
 (begründet mit der heutigen Dokumentationslage: E-Mail und Security-Postfach),
 Reifegrad Ziel 2 (im Projekt erreichbar). Alle fünf sind zu bestätigen.
 

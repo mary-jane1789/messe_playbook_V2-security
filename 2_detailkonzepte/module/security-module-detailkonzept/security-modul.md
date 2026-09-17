@@ -1,6 +1,6 @@
 ---
 status: entwurf
-stand: 2026-08-31
+stand: 2026-09-17
 quelle: Modul-Framework V0.2, Kap. 2.2 (Rechtsrahmen, behördliche Anschlussfähigkeit, verkaufbare Leistung); eigene Recherche zu VStättVO, § 34a GewO, vfdb 13-01, BaSiGo, DSGVO und zur Praxis deutscher Messegesellschaften; anonymisiertes veranstaltungsbezogenes Sicherheitskonzept in `../../../0_meta/quellen/` als Realprobe
 ---
 
@@ -99,7 +99,7 @@ fragen — und wo ist Rücksprache zwingend, auch wenn es drängt.
 Der Impuls kommt dabei aus einem Ereignis, nicht aus einer Rolle. Niemand
 entscheidet planvoll, jetzt eine Zusatzkontrolle anzusetzen; etwas passiert, und
 daraus folgt eine Maßnahme in Minuten. Deshalb genügen die vorhandenen Felder
-nicht: Die Entscheidungsfrist der Wahlpflicht ist relativ zu T0 bemessen und
+nicht: Die Entscheidungsfrist eines Grundmoduls ist relativ zu T0 bemessen und
 damit ein Planungskonstrukt.
 
 Zwei Fälle aus dem Haus zeigen die Grenze:
@@ -232,8 +232,8 @@ Mit Stand der Klärung in `../../../0_meta/offene-punkte.md`.
   Achse. Das Haus unterscheidet Nullbetrieb, technischen Aufbau, vorgezogenen
   Aufbau, regulären Aufbau, Laufzeit, Abendveranstaltung und Abbau; drei davon
   liegen innerhalb von P4. Ob die Phasenbeschreibung das aufnimmt, ist mit der
-  Projektleitung zu klären — Entwurf in
-  `../../../4_workspace/betriebszustaende-entwurf.md`.
+  Projektleitung zu klären. Der Optionen-Entwurf dazu liegt nicht mehr im
+  Workspace; die Frage steht in `../../../0_meta/offene-punkte.md`.
 - **Vier Bestandteile ohne bekannten Ort.** Die Realprobe verweist auf
   Gefahrenabwehrplan, Funkregeln, sicherheitstechnische Anlagen und Glossar als
   Anlagen eines Rahmensicherheitskonzepts. Ob es diese Bestandteile im Haus gibt

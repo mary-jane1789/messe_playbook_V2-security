@@ -1,6 +1,6 @@
 ---
 status: laufend
-stand: 2026-08-31
+stand: 2026-09-17
 ---
 
 # Offene Punkte
@@ -25,7 +25,7 @@ fehlt.
 **Benennung der Veranstaltungsarten.** Warum wird die Messe auf der Achse Art
 nach B2B und B2C getrennt, ist eine Partnermesse eine eigene Art, und verwendet
 die Messe die Begriffe B2B und B2C oder Eigenmesse und Gastmesse? Reine
-Wording-Frage, gesammelt in `../4_workspace/fragen-an-ma.md`.
+Wording-Frage, an die Messe zu stellen.
 
 **Gate P6 → P7 bei Eigenveranstaltungen.** V1.0 Kap. 2 setzt das Gate „nur bei
 Gastveranstaltungen" (Rückabnahme durch TVK) und sagt für Eigenveranstaltungen
@@ -44,28 +44,12 @@ ohne RACI-Wirkung sind, entschärft — für die Modulbemessung aber zu bestäti
 (Das Feld „Auslöser-Phase" gibt es seit E-65 nicht mehr; die Phasen eines Moduls
 stehen in den Deadlines.)
 
-**Braucht die Modulart eine dritte Kategorie?** Ein Modul ist entweder eine
-Pflicht aus dem Recht oder eine Leistung, die an Aussteller oder einen internen
-Auftraggeber verkauft wird. Offen ist, ob es eine dritte Art für
-Befähigungsleistungen braucht — Dinge, die keines von beidem sind, aber trotzdem
-jemanden brauchen, der sie verantwortet. Die Frage an die Messe: Gibt es bei
-Security mindestens zwei solche Bausteine? Kandidaten sind Übungen und
-Einweisungen, aber ein Teil davon ist rechtlich verlangt und wäre damit ohnehin
-Pflicht. Wenn nein, genügen zwei Arten und das Modell wird einfacher. Die
-Modulart steuert, welche Felder Pflicht sind — die Frage ist also nicht
-folgenlos.
-
-Die Recherche zum Security-Detailkonzept spricht gegen eine dritte Art: Die
-Kandidaten sind rechtlich verlangt und damit Compliance. Die Unterweisung folgt
-aus § 42 Abs. 2 VStättVO (bei Beginn des Arbeitsverhältnisses und danach
-mindestens jährlich, der Bauaufsichtsbehörde auf Verlangen nachzuweisen), aus
-§ 12 ArbSchG und aus § 4 DGUV Vorschrift 1. Das ist Evidenz, keine Entscheidung —
-die Frage an die Messe bleibt.
-
 **Übungs- und Trainingsformate — Modul oder Linie?** Jährliche Unterweisung und
-auflagenbasierte Räumungsübung sind Pflicht und damit Modulkandidaten.
-Freiwillige Trainingsformate könnten Personalentwicklung sein und in die Linie
-gehören. Hängt mit der Frage nach der dritten Modulart zusammen.
+auflagenbasierte Räumungsübung sind rechtlich verlangt und damit
+Compliance-Module. Offen bleibt nur der freiwillige Teil: Trainingsformate ohne
+Rechtsgrundlage könnten Personalentwicklung sein und in die Linie gehören. Die
+Frage nach einer dritten Modulart ist damit **nicht** mehr verbunden — sie ist
+mit E-87 entschieden.
 
 **Wo die vier Dauerbestandteile geführt werden — teilweise beantwortet am
 24.08.2026.** Es **gibt** ein Rahmensicherheitskonzept. Es ist stark
@@ -206,17 +190,17 @@ Nullbetrieb, technischen Aufbau, vorgezogenen Aufbau, regulären Aufbau,
 Laufzeit, Abendveranstaltung und Abbau. Das ist eine Zeitachse, feiner als die
 Phasen und mit ihnen überlappend — drei der Zustände liegen innerhalb von P4,
 der vorgezogene Aufbau beginnt davor. In `phasen.md` steht davon nichts. Drei
-Optionen mit Empfehlung stehen in `../4_workspace/betriebszustaende-entwurf.md`;
-zu entscheiden mit der Projektleitung.
+Der Optionen-Entwurf lag im Workspace und ist dort gelöscht; er ist über die
+Git-Historie erreichbar. Zu entscheiden mit der Projektleitung.
 
 **Ausgabeformat der Steckbrief-Vorlage.** Der Weg ist entschieden (F-15), das
 Format nicht. Dazu kommt: Weil keine Beispiele ins Repository übernommen sind,
 muss die Vorlage die Ausfüllhinweise allein tragen. Sie wird damit wichtiger als
 bisher geplant.
 
-**Workflow für Dokumente, Inputs und Kundeninteraktionen.** Fehlt bisher; als
-Entwurf notiert in `../4_workspace/workflow-dokumente-inputs-kundeninteraktionen.md`.
-Offen ist zuerst der Ort — Konvention in `0_meta/` oder Ablauf in
+**Workflow für Dokumente, Inputs und Kundeninteraktionen.** Fehlt bisher. Der
+Entwurf dazu lag im Workspace und ist dort gelöscht; er ist über die
+Git-Historie erreichbar. Offen ist zuerst der Ort — Konvention in `0_meta/` oder Ablauf in
 `2_detailkonzepte/ablauf/`.
 
 ### Neu aus den Sparrings vom 24.08.2026
@@ -249,6 +233,63 @@ Deadlines-Tabelle im Modul.
 Mit der Modullandkarte in Ebene 3 gibt es jetzt ein Register; ob es der
 Modulindex im Sinne der DoD ist oder ein zweites Ding gebraucht wird, ist zu
 entscheiden.
+
+### Neu aus der konsolidierten Modullandkarte (08.09.2026)
+
+Die Landkarte in `../4_workspace/modullandkarte-security-konsolidiert.md` führt
+45 Module in neun Gruppen und ist als Register die Source of Truth. Sie ist mit
+dem Fachbereich nicht validiert. Fünf Fragen entscheiden über Zuschnitt und
+Zuständigkeit; sie stehen dort ausführlich und hier als Merkposten:
+
+1. **Gehören die sicherheitstechnischen Anlagen in Security?** Betrifft die
+   ganze Gruppe 9. Wird der Schnitt auf die veranstaltungsbezogene
+   Betriebsbereitschaft nicht getragen, bleiben diese Leistungen nach dem
+   Verwerfen der SCU ohne Träger — ebenso die Fundsachen.
+2. **Brandschutz am Standbau und Blitzschutz — Security oder Abt. 420?** Dieselbe
+   Frage betrifft den Arbeitsschutzanteil der Hallenstreife im Auf- und Abbau.
+3. **Ist die Brandsicherheitswache Pflicht oder schwellenausgelöst?** Hängt
+   daran, ob die Pflichtstufen einen Wert für „ab Schwelle" bekommen.
+4. **Gepäckkontrolle: ein Modul mit zwei Varianten oder zwei Module?** Dazu:
+   Setzt die Vollkontrolle die Gepäckkontrolle voraus?
+5. **Notfallplanung und Nachbereitung: eigene Module oder Teil anderer
+   Bausteine?**
+
+**Modulzahl je Gruppe.** Gruppe 7 hat ein Modul, Gruppe 3 hat neun. Ob das ein
+Schnittproblem ist oder die Sache so liegt, ist am Fachbereich zu prüfen.
+
+**Widerspruch zur alten Landkarte in Ebene 3.**
+`../3_instanzen/module/security-module-instanzen/modullandkarte.md` führt den
+Ordnungsdienstleiter als eigenes Modul und die Brandsicherheitswache als
+Pflicht. Beides ist in der konsolidierten Fassung anders. Die Einordnungen der
+alten Fassung sind mit E-78 geloggt; die Abweichungen brauchen Revisionszeilen
+im Entscheidungslog, keine stille Änderung.
+
+**Werte der Pflichtstufe am Haus bestätigen.** Sie heißen seit dem 17.09.2026
+`Muss`, `Wählen`, `Kann` (E-91). Die frühere Fassung war mit der Sprache des
+Hauses begründet. Im ersten Workshop zu prüfen: Werden die neuen Werte dort
+wiedererkannt, oder spricht der Fachbereich weiter von Pflicht und Wahlpflicht?
+Die Bedeutung ist in beiden Fällen dieselbe; zu entscheiden ist nur, welches
+Wort im Katalog steht.
+
+### Aus der Umstellung der Ordnung (16.09.2026)
+
+**Muster der Modul-ID — bewusst offen gelassen.** `modul.md` und
+`konventionen.md` führen `MOD-<BEREICH>-<NR>` (F-24), die Landkarte sprechende
+Arbeitsnummern `<BEREICH>-<GRUPPE>-<NR>`. Das Muster wird gesetzt, sobald der
+Gruppenzuschnitt steht — als F-Entscheidung, mit einer Regel für die dann
+abgelösten IDs. Solange bleibt `MOD-SEC-01` die einzige vergebene ID.
+
+**Mapping auf Phase und Akteur steht aus.** Beide sind als Querachsen benannt
+und im Modul als Felder verankert; ein Register, das den Katalog je Phase oder
+je Akteur zeigt, gibt es nicht. Ohne das Phasen-Mapping ist die Frage „Was muss
+bis zum nächsten Gate stehen?" nur je Modul beantwortbar, nicht über den
+Bereich hinweg.
+
+**Ausgabeformat der Steckbrief-Vorlage — teilweise beantwortet.** Der
+Kurzsteckbrief liegt als phasengeführtes Erfassungsformular in
+`../4_workspace/modulsteckbrief-security-live.html` und gibt Markdown aus.
+Offen bleibt das Format für den Vollsteckbrief und für die Fassung, die das Fach
+außerhalb eines Termins ausfüllt.
 
 ### Aus Veranstaltung (V1.0 Kap. 1 und 4), dort selbst als offen markiert
 

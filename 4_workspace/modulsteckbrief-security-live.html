@@ -1,722 +1,558 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulsteckbrief Security — Live-Erfassung</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modulsteckbrief Security — Kurzfassung</title>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+/* Brand System Hello Opportunities — siehe 0_meta/konventionen.md.
+   Rot: Überschriften · Pink: Gliederung · Orange: Akzent und Interaktion */
 :root{
-  --orange:#F94F14; --red:#E00229; --pink:#F31194; --nav:#DB2F00;
+  --orange:#F94F14; --red:#E00229; --pink:#F31194;
   --text:#000; --muted:#6B7280; --border:#E5E7EB; --surface:#F8F8F8; --white:#fff;
   --font:'Google Sans','Product Sans','Figtree',system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.55}
+body{margin:0;padding:0 0 120px;background:var(--surface);color:var(--text);
+     font:15px/1.6 var(--font)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
 
-.top{position:sticky;top:0;z-index:20;background:var(--nav);color:#fff;
-  display:flex;align-items:center;gap:12px;padding:10px 24px;flex-wrap:wrap}
-.top .name{font-weight:700;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
-.top .sp{flex:1}
-.top .prog{font-size:13px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums;white-space:nowrap}
-button{font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.02em;cursor:pointer;
-  border-radius:9999px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;padding:7px 14px}
-button:hover{background:rgba(255,255,255,.16)}
-button:focus-visible{outline:3px solid #fff;outline-offset:2px}
-button.solid{background:#fff;color:var(--nav);border-color:#fff}
-button.solid:hover{background:rgba(255,255,255,.85)}
-button.on{background:var(--orange);border-color:var(--orange);color:#fff}
+/* Kopfleiste */
+.top{position:sticky;top:0;z-index:20;background:var(--white);
+     border-bottom:2px solid var(--orange);padding:10px 0}
+.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.top h1{margin:0;font-size:17px;font-weight:700;color:var(--red);flex:1 1 auto}
+.count{font:500 12px/1 var(--mono);color:var(--muted)}
+.btn{font:500 13px var(--font);border:1px solid var(--border);background:var(--white);
+     color:var(--text);border-radius:6px;padding:7px 13px;cursor:pointer}
+.btn:hover{border-color:var(--orange);color:var(--orange)}
+.btn.primary{background:var(--orange);border-color:var(--orange);color:var(--white);font-weight:700}
+.btn.primary:hover{color:var(--white);opacity:.9}
 
-.wrap{max-width:1000px;margin:0 auto;padding:28px 24px 120px}
+/* Einleitung */
+.intro{background:var(--white);border:1px solid var(--border);border-left:5px solid var(--orange);
+       border-radius:8px;padding:18px 22px;margin:24px 0}
+.intro p{margin:0 0 8px}
+.intro p:last-child{margin:0}
+.intro b{font-weight:700}
 
-.intro{background:#fff;border-radius:14px;padding:24px 28px;margin-bottom:24px;border-left:5px solid var(--orange)}
-.intro h1{font-size:30px;font-weight:700;color:var(--red);margin:0 0 8px;letter-spacing:-.015em}
-.intro p{margin:0 0 8px;font-size:15px;color:var(--muted)}
-.intro p:last-child{margin-bottom:0}
-.intro b{color:var(--text)}
+/* Abschnitte */
+section{background:var(--white);border:1px solid var(--border);border-radius:8px;
+        padding:20px 22px;margin:0 0 18px}
+h2{font-size:18px;font-weight:700;color:var(--red);margin:0 0 4px;
+   padding-bottom:7px;border-bottom:2px solid var(--orange)}
+.sub{color:var(--muted);font-size:13px;margin:8px 0 16px}
+h3{font-size:14px;font-weight:700;margin:22px 0 8px}
 
-section.block{background:#fff;border-radius:14px;margin-bottom:18px;overflow:hidden;border:1px solid var(--border)}
-.bhead{display:flex;align-items:center;gap:12px;padding:16px 24px;cursor:pointer;user-select:none;
-  border-left:5px solid var(--border);background:#fff}
-.bhead:hover{background:var(--surface)}
-.bhead h2{font-size:19px;font-weight:700;color:var(--red);margin:0;flex:1}
-.bhead .tw{font-size:18px;color:var(--muted);width:16px;text-align:center}
-section.block.today .bhead{border-left-color:var(--orange)}
-.badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  padding:3px 9px;border-radius:9999px;background:var(--orange);color:#fff}
-.badge.later{background:var(--surface);color:var(--muted);border:1px solid var(--border)}
-.bbody{padding:4px 24px 22px;display:none}
-section.block.open .bbody{display:block}
-.about{font-size:13.5px;color:var(--muted);margin:10px 0 2px;padding:10px 14px;
-  background:var(--surface);border-radius:8px;line-height:1.5}
+/* Felder */
+.grid{display:grid;gap:14px 18px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:1fr 1fr 1fr}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.02em;margin:0 0 4px}
+label .opt{font-weight:400;color:var(--muted)}
+.help{font-size:12px;color:var(--muted);margin:0 0 5px;line-height:1.45}
+input[type=text],textarea,select{width:100%;font:15px/1.5 var(--font);color:var(--text);
+  background:var(--white);border:1px solid var(--border);border-radius:6px;padding:8px 10px}
+input[type=text]:focus,textarea:focus,select:focus{outline:2px solid var(--orange);
+  outline-offset:-1px;border-color:var(--orange)}
+textarea{resize:vertical;min-height:62px}
+.filled{background:rgba(249,79,20,.04);border-color:rgba(249,79,20,.35)}
 
-.f{padding:14px 0;border-top:1px solid var(--border)}
-.f:first-of-type{border-top:none}
-.lrow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.lrow label{font-size:14px;font-weight:700;margin:0}
-.req{color:var(--orange);margin-left:2px}
-.q{flex:0 0 auto;width:19px;height:19px;padding:0;border-radius:9999px;
-  border:1px solid var(--border);background:#fff;color:var(--muted);
-  font-size:11px;font-weight:700;line-height:1;display:inline-flex;align-items:center;justify-content:center}
-.q:hover{border-color:var(--orange);color:var(--orange);background:#fff}
-.q[aria-expanded="true"]{background:var(--orange);border-color:var(--orange);color:#fff}
-.q:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+/* Phasenband */
+.pbar{display:flex;gap:4px;margin:0 0 18px}
+.pbar div{flex:1;text-align:center;font:700 11px/1 var(--mono);color:var(--muted);
+  background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px 0}
+.pbar div.on{background:var(--orange);border-color:var(--orange);color:var(--white)}
+.pbar div.focus{background:var(--red);border-color:var(--red);color:var(--white)}
 
-.expl{display:none;background:#fffaf7;border:1px solid #f6d3c2;border-radius:8px;
-  padding:12px 14px;margin:0 0 10px;font-size:13.5px;line-height:1.55}
-.expl.open{display:block}
-.expl dt{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:3px}
-.expl dd{margin:0 0 10px}
-.expl dd:last-child{margin-bottom:0}
-.expl .ex{color:var(--muted);font-style:italic}
-.expl ul{margin:4px 0 0;padding-left:18px}
-.expl li{margin-bottom:3px}
-.expl b{color:var(--text)}
+.phase{border:1px solid var(--border);border-radius:8px;margin:0 0 10px;overflow:hidden}
+.phase.on{border-color:var(--orange)}
+.phead{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;
+       padding:10px 14px;background:var(--surface);cursor:pointer}
+.phase.on .phead{background:rgba(249,79,20,.06)}
+.pid{font:700 14px/1 var(--mono);color:var(--orange)}
+.pname{font-weight:700;font-size:14px}
+.pwin{font-size:12px;color:var(--muted)}
+.pgate{font-size:12px;color:var(--muted);margin-top:2px}
+.pgate b{color:var(--text);font-weight:500}
+.ptoggle{font-size:12px;color:var(--muted);white-space:nowrap;display:flex;gap:14px;align-items:center}
+.ptoggle label{display:flex;gap:5px;align-items:center;font-size:12px;font-weight:500;margin:0;cursor:pointer}
+.pbody{padding:14px;border-top:1px solid var(--border);display:none}
+.phase.on .pbody{display:block}
 
-.hint{font-size:13px;line-height:1.45;color:var(--muted);margin:0 0 8px;display:none;
-  border-left:2px solid var(--pink);padding-left:10px}
-body.hints .hint{display:block}
+/* Tabellen */
+table{width:100%;border-collapse:collapse;margin:6px 0 8px}
+th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+   color:var(--muted);padding:0 6px 6px 0;border-bottom:1px solid var(--border)}
+td{padding:4px 6px 4px 0;vertical-align:top}
+td input{padding:6px 8px;font-size:14px}
+.addb{font:500 12px var(--font);border:1px dashed var(--border);background:none;color:var(--muted);
+      border-radius:6px;padding:5px 11px;cursor:pointer}
+.addb:hover{border-color:var(--orange);color:var(--orange)}
 
-input[type=text],textarea,select{
-  width:100%;font-family:inherit;font-size:15px;line-height:1.5;color:var(--text);
-  border:1px solid var(--border);border-radius:8px;padding:9px 11px;background:#fff}
-textarea{resize:vertical;overflow:hidden;min-height:44px}
-input[type=text]:focus,textarea:focus,select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,79,20,.18)}
-input.filled,textarea.filled,select.filled{background:#fffdfa;border-color:#f6c9b4}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:760px){.two{grid-template-columns:1fr}}
+/* Später */
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin:0 0 18px}
+summary{font-weight:700;font-size:14px;color:var(--red);cursor:pointer}
+details ul{margin:12px 0 0;padding-left:18px;font-size:14px;color:var(--muted)}
+details li{margin:0 0 4px}
 
-table{width:100%;border-collapse:collapse;margin-bottom:8px}
-th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  padding:6px 8px;border-bottom:2px solid var(--orange);white-space:nowrap}
-td{padding:4px;border-bottom:1px solid var(--border);vertical-align:top}
-td input[type=text]{border-color:transparent;background:transparent;padding:7px 8px;font-size:14px}
-td input[type=text]:focus{border-color:var(--orange);background:#fff}
-td input.filled{background:#fffdfa}
-td.rm{width:34px;padding-right:0}
-.rmb{border:none;background:none;color:var(--border);font-size:17px;font-weight:700;padding:4px 6px;line-height:1;border-radius:6px}
-.rmb:hover{background:#fee;color:var(--red)}
-.addb{border:1px dashed var(--border);color:var(--muted);background:#fff;font-weight:700;font-size:12px;
-  border-radius:8px;padding:6px 12px}
-.addb:hover{border-color:var(--orange);color:var(--orange);background:#fff}
-
-.park{background:#fff;border-radius:14px;border:1px solid var(--border);border-left:5px solid var(--pink);
-  padding:20px 24px;margin-bottom:18px}
-.park h2{font-size:19px;font-weight:700;color:var(--red);margin:0 0 4px}
-.park p.sub{font-size:14px;color:var(--muted);margin:0 0 12px}
-
-.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--border);
-  display:flex;align-items:center;gap:12px;padding:12px 24px;box-shadow:0 -6px 20px rgba(0,0,0,.06);flex-wrap:wrap}
-.bottom button{border-color:var(--border);color:var(--text)}
-.bottom button:hover{background:var(--surface)}
-.bottom button.solid{background:var(--orange);color:#fff;border-color:var(--orange)}
-.bottom button.solid:hover{background:#e04710}
-.bottom .note{font-size:12px;color:var(--muted);flex:1;min-width:200px}
-.toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);z-index:60;
-  background:var(--text);color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:9999px;
-  opacity:0;pointer-events:none;transition:opacity .2s}
-.toast.show{opacity:1}
-
-/* Begriffe */
-.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40;display:none}
-.scrim.open{display:block}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);z-index:50;background:#fff;
-  transform:translateX(100%);transition:transform .2s ease;display:flex;flex-direction:column}
-.drawer.open{transform:none}
-@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
-.dhead{background:var(--nav);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:12px}
-.dhead h2{font-size:16px;font-weight:700;margin:0;flex:1}
-.dsearch{padding:14px 20px 10px;border-bottom:1px solid var(--border)}
-.dsearch input{width:100%}
-.dlist{overflow-y:auto;padding:8px 20px 28px}
-.term{padding:12px 0;border-bottom:1px solid var(--border)}
-.term:last-child{border-bottom:none}
-.term h3{font-size:14px;font-weight:700;color:var(--red);margin:0 0 3px}
-.term p{font-size:13.5px;line-height:1.5;margin:0;color:var(--text)}
-.term.hide{display:none}
-.empty{font-size:13.5px;color:var(--muted);padding:16px 0}
-
+footer{color:var(--muted);font-size:12.5px;line-height:1.7;border-top:2px solid var(--orange);
+       padding-top:14px;margin-top:28px}
+.save{font:500 12px/1 var(--mono);color:var(--muted)}
+@media (max-width:760px){
+  .g2,.g3{grid-template-columns:1fr}
+  .phead{grid-template-columns:44px 1fr;row-gap:8px}
+  .ptoggle{grid-column:1 / -1}
+  .pbar{flex-wrap:wrap}
+}
 @media print{
-  .top,.bottom,.addb,.rmb,.toast,.scrim,.drawer,.q{display:none}
-  body{background:#fff}
-  .bbody{display:block!important}
-  section.block{break-inside:avoid;border:none}
-  .hint,.expl{display:none!important}
+  .top,.addb,.btn{display:none}
+  body{background:var(--white)} .pbody{display:block!important}
 }
 </style>
 </head>
-<body class="hints">
+<body>
 
 <div class="top">
-  <span class="name">Modulsteckbrief Security</span>
-  <span class="sp"></span>
-  <span class="prog" id="prog">Kurzsteckbrief 0 / 0</span>
-  <button id="glossBtn">Begriffe</button>
-  <button id="explBtn">Alle Erklärungen</button>
-  <button id="hintBtn" class="on">Hinweise aus</button>
-  <button id="openAll">Alle Blöcke</button>
+  <div class="wrap">
+    <h1>Modulsteckbrief Security — Kurzfassung</h1>
+    <span class="count" id="count">0 Felder gefüllt</span>
+    <span class="save" id="save"></span>
+    <button class="btn" id="reset" type="button">Leeren</button>
+    <button class="btn" id="copy" type="button">Markdown kopieren</button>
+    <button class="btn primary" id="dl" type="button">Als Markdown sichern</button>
+  </div>
 </div>
 
 <div class="wrap">
-  <div class="intro">
-    <h1>Live-Erfassung · ein Modul</h1>
-    <p><b>Block 1 und 2 sind der Kurzsteckbrief.</b> Davon kann ein Team bereits arbeiten. Die Blöcke 3 bis 5 sind eingeklappt und wachsen später.</p>
-    <p><b>Das Fragezeichen neben jedem Feld</b> öffnet eine Erklärung: was der Begriff bedeutet und wozu das Feld da ist. „Begriffe“ oben rechts schlägt Wörter nach, die in den Erklärungen vorkommen.</p>
-    <p><b>Leer bleibt leer.</b> Was niemand weiß, kommt in den Parkplatz unten oder wird mit „LÜCKE“ vermerkt.</p>
-    <p><b>Zwischenstand sichern:</b> unten „Als Markdown sichern“. Der Browser speichert nichts von allein.</p>
-  </div>
 
-  <div id="form"></div>
-
-  <div class="park">
-    <h2>Parkplatz</h2>
-    <p class="sub">Was gesagt wurde und in kein Feld passt · offene Punkte · Rückmeldungen zum Format</p>
-    <textarea id="park" rows="5" placeholder="…"></textarea>
-  </div>
+<div class="intro">
+  <p><b>Wofür das hier ist.</b> Der Kurzsteckbrief eines Moduls — die Angaben, von denen ein Team bereits arbeiten kann. Rechtsgrundlagen, Nachweise, Risiken, Bemessung und Kennzahlen kommen später dazu; sie stehen unten als Liste, nicht als Formular.</p>
+  <p><b>Das Phasenband ist der Kern.</b> Es beantwortet die Frage, die das Lead Committee je Phase stellt: Was muss bis zum nächsten Gate entschieden oder erledigt sein? Eine Phase, in der das Modul nichts tut, bleibt leer — das ist eine Aussage, kein Versäumnis.</p>
+  <p><b>Leer bleibt leer.</b> Was niemand weiß, kommt in den Parkplatz oder wird mit <span style="font-family:var(--mono)">LÜCKE</span> vermerkt. Keine plausiblen Vervollständigungen.</p>
 </div>
 
-<div class="bottom">
-  <span class="note" id="note">Noch nichts erfasst.</span>
-  <button id="copyBtn">Als Markdown kopieren</button>
-  <button id="saveBtn" class="solid">Als Markdown sichern</button>
-</div>
-<div class="toast" id="toast"></div>
+<section>
+  <h2>1 · Das Modul</h2>
+  <p class="sub">Ordnung: Modulgruppe → Modul → Variante. Die Gruppe ordnet, sie steuert nichts. Modulart und Pflichtstufe hängen am Modul.</p>
+  <div class="grid g3">
+    <div>
+      <label for="f_id">Modul-ID</label>
+      <p class="help">Arbeitsnummer genügt.</p>
+      <input type="text" id="f_id" data-k="id" placeholder="MOD-SEC-01 oder SEC-03-01">
+    </div>
+    <div>
+      <label for="f_gruppe">Modulgruppe</label>
+      <p class="help">Genau eine, aus der Modullandkarte.</p>
+      <select id="f_gruppe" data-k="modulgruppe">
+        <option value="">— wählen —</option>
+        <option>1 · Sicherheitsplanung und Behördenverfahren</option>
+        <option>2 · Perimeter- und Geländeschutz</option>
+        <option>3 · Zugangs- und Personenkontrolle</option>
+        <option>4 · Ordnungs- und Wachdienste</option>
+        <option>5 · Personenstrom und Crowd Management</option>
+        <option>6 · Brandschutz und Rettungswege</option>
+        <option>7 · Sanitätsdienst</option>
+        <option>8 · Sicherheitskommunikation und Lage</option>
+        <option>9 · Sicherheitstechnische Anlagen</option>
+      </select>
+    </div>
+    <div>
+      <label for="f_art">Modulart</label>
+      <p class="help">Steuert, welche Felder später Pflicht sind.</p>
+      <select id="f_art" data-k="modulart">
+        <option value="">— wählen —</option>
+        <option>Compliance</option>
+        <option>Leistung</option>
+        <option>offen</option>
+      </select>
+    </div>
+  </div>
 
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="Begriffe" aria-hidden="true">
-  <div class="dhead"><h2>Begriffe</h2><button id="dClose">Schließen</button></div>
-  <div class="dsearch"><input type="text" id="dq" placeholder="Begriff suchen …" autocomplete="off"></div>
-  <div class="dlist" id="dlist"></div>
-</aside>
+  <div class="grid g3" style="margin-top:14px">
+    <div>
+      <label for="f_name">Modulname</label>
+      <p class="help">Substantivisch, nach dem Ergebnis. Kein Verb, kein Toolname, kein Abteilungsname.</p>
+      <input type="text" id="f_name" data-k="modulname" placeholder="z. B. Personenkontrolle — Stichprobe mit Spotter">
+    </div>
+    <div>
+      <label for="f_stufe">Pflichtstufe</label>
+      <p class="help">Muss bei jeder · Wählen in Ausprägungen · Kann bei manchen. Ein Muss entsteht nur aus Recht oder aus einer Setzung der Messe.</p>
+      <select id="f_stufe" data-k="pflichtstufe">
+        <option value="">— wählen —</option>
+        <option>Muss</option>
+        <option>Wählen</option>
+        <option>Kann</option>
+      </select>
+    </div>
+    <div>
+      <label for="f_wahl">Grundmodul oder Alternative <span class="opt">— nur bei einer Wahl</span></label>
+      <p class="help">Mehrere Module, von denen nur eines gilt.</p>
+      <input type="text" id="f_wahl" data-k="grundmodul-alternative" placeholder="Grundmodul: ja · oder: Alternative zu <Modul-ID>">
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div>
+      <label for="f_zweck">Zweck und Schutzziel</label>
+      <p class="help">Wovor schützt es wen — als angestrebter Zustand, nicht als Tätigkeit. Trägt zugleich, was am Ende vorliegt.</p>
+      <textarea id="f_zweck" data-k="zweck"></textarea>
+    </div>
+    <div>
+      <label for="f_geltung">Geltungsbereich — zeitlich und räumlich</label>
+      <p class="help">Ab wann bis wann, und wo. Beide Angaben; ohne sie sind zwei Module mit gleicher Tätigkeit nicht unterscheidbar.</p>
+      <textarea id="f_geltung" data-k="geltungsbereich"></textarea>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2 · Wer</h2>
+  <p class="sub">Drei Verantwortungen: R erbringt, A steht dafür ein, F pflegt über die Zeit. Rollen, kein Name — Ausnahme ist die Fortschreibung.</p>
+  <div class="grid g2">
+    <div>
+      <label for="f_r">Durchführung <span class="opt">· R · eine Rolle</span></label>
+      <p class="help">Wer erbringt die Leistung, von Anfang bis Ende? Kann der Dienstleister sein.</p>
+      <input type="text" id="f_r" data-k="durchfuehrung">
+    </div>
+    <div>
+      <label for="f_v">Vertretung <span class="opt">· eine Rolle</span></label>
+      <p class="help">Wer springt im Ausfall ein — nicht, wer zusätzlich eingreifen darf.</p>
+      <input type="text" id="f_v" data-k="vertretung">
+    </div>
+    <div>
+      <label for="f_a">Auftragsverantwortung <span class="opt">· A · Rolle im Haus</span></label>
+      <p class="help">Beauftragt, überwacht, nimmt ab. Bleibt im Haus, auch wenn die Durchführung vergeben ist.</p>
+      <input type="text" id="f_a" data-k="auftragsverantwortung">
+    </div>
+    <div>
+      <label for="f_f">Fortschreibung <span class="opt">· F · ein Name</span></label>
+      <p class="help">Wer verantwortet das Modul im Playbook über die Zeit? Eine Rolle, die niemand besetzt, pflegt nichts.</p>
+      <input type="text" id="f_f" data-k="fortschreibung">
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3 · Das Phasenband</h2>
+  <p class="sub">Je Phase: Was muss bis zum Gate entschieden oder erledigt sein, was liegt dann vor, wer führt. Phase anklicken, um sie zu öffnen. „Schwerpunkt“ markiert, wo das Gewicht liegt.</p>
+
+  <div class="grid g2" style="margin-bottom:18px">
+    <div>
+      <label for="f_frist">Entscheidungsfrist <span class="opt">— nur bei einem Grundmodul</span></label>
+      <p class="help">Bis wann die Wahl zwischen Grundmodul und Alternativen getroffen sein muss. Relativ zu T0, mit der Phase, in die der Termin fällt.</p>
+      <input type="text" id="f_frist" data-k="entscheidungsfrist" placeholder="z. B. T0 minus 6 Wochen · P3">
+    </div>
+  </div>
+
+  <div class="pbar" id="pbar"></div>
+  <div id="phases"></div>
+</section>
+
+<section>
+  <h2>4 · Ablauf in Abschnitten</h2>
+  <p class="sub">Ein Abschnitt je Phase, in der das Modul wirkt. Steuerungstiefe, nicht Ausführungstiefe. Was andere Verantwortliche tun, steht nicht hier, sondern als Übergabe. Der Auslöser des Moduls steht in Zeile 1.</p>
+  <table id="t_ablauf" data-k="ablauf" data-cols="Phase|Auslöser|Tätigkeit|Ergebnis|Rolle" data-rows="4"></table>
+  <button class="addb" type="button" data-add="t_ablauf">+ Zeile</button>
+</section>
+
+<section>
+  <h2>5 · Was rein- und rausgeht</h2>
+  <p class="sub">Übergaben brauchen ein benanntes Medium und eine Rolle auf beiden Seiten — sonst passieren sie per Zuruf. Ein Lieferobjekt ohne Ablageort ist kein Nachweis.</p>
+  <h3>Übergaben</h3>
+  <table id="t_ueber" data-k="uebergaben" data-cols="rein / raus|Objekt|Medium|Auslöser|von Rolle|an Rolle" data-rows="3"></table>
+  <button class="addb" type="button" data-add="t_ueber">+ Zeile</button>
+  <h3>Lieferobjekte</h3>
+  <table id="t_liefer" data-k="lieferobjekte" data-cols="Objekt|Ablageort" data-rows="3"></table>
+  <button class="addb" type="button" data-add="t_liefer">+ Zeile</button>
+</section>
+
+<section>
+  <h2>6 · Was offen bleibt</h2>
+  <p class="sub">Nichts ergänzen, nichts verlieren. Was gesagt wurde und in kein Feld passt, kommt in den Parkplatz und geht zurück an die Projektleitung.</p>
+  <div class="grid g2">
+    <div>
+      <label for="f_luecken">Offene Lücken</label>
+      <p class="help">Benannt — oder ausdrücklich „keine“. Nicht leer.</p>
+      <textarea id="f_luecken" data-k="offene-luecken"></textarea>
+    </div>
+    <div>
+      <label for="f_park">Parkplatz</label>
+      <p class="help">Gesagtes ohne Feld · Rückfragen · Rückmeldungen zum Format.</p>
+      <textarea id="f_park" data-k="parkplatz"></textarea>
+    </div>
+  </div>
+</section>
+
+<details>
+  <summary>Was später dazukommt — nicht in diesem Termin</summary>
+  <p class="sub" style="margin-top:10px">Der Vollsteckbrief umfasst drei weitere Blöcke. Sie wachsen beim Befüllen und bei der ersten Anwendung; der Feldkatalog steht in <span style="font-family:var(--mono)">1_grundkonzepte/modul.md</span>.</p>
+  <ul>
+    <li><b>Sicherheit und Nachweis</b> — Rechtsgrundlage, Auslöseschwelle, Fristen, Nachweise, Meldeweg und Eskalation, Qualifikationsnachweis, Zustimmung, Startbedingung, Abbruchkriterien, Risikostufe und Risiken. Bei Compliance-Modulen Pflicht.</li>
+    <li><b>Anpassung</b> — Varianten, Parameter, Bemessungsregel, Ressourcenbedarf; bei einem Grundmodul zusätzlich der Entscheider und die Liste der Alternativen. Die Frist dazu steht oben im Phasenband.</li>
+    <li><b>Lernen und Pflege</b> — Selbstprüfungskennzahl, Nachbereitung, Reifegrad, Version, Prüfintervall, Dokumentfreigabe.</li>
+    <li><b>Security-Zusätze aus Ebene 2</b> — Befugnisgrundlage und ihre Grenze, Verhalten je Eskalationsstufe, Handlungsvollmacht ohne Rückfrage, rechtlich verantwortliche Stelle bei Gastveranstaltungen.</li>
+  </ul>
+</details>
+
+<footer>
+  Ordnung nach der konsolidierten Modullandkarte Security: Modulgruppe → Modul → Variante.
+  Modulart und Pflichtstufe sind Tags am Modul, keine Ordnungsachsen.<br>
+  Feldkatalog: <span style="font-family:var(--mono)">1_grundkonzepte/modul.md</span> ·
+  Phasen und Gates: <span style="font-family:var(--mono)">1_grundkonzepte/phasen.md</span> ·
+  Security-Zusätze: <span style="font-family:var(--mono)">2_detailkonzepte/module/security-module-detailkonzept/security-modul.md</span><br>
+  Die Datei im Repository ist der Datenstand. Dieses Formular ist Erfassungsoberfläche, nicht Ablage.
+</footer>
+
+</div>
 
 <script>
-/* ============ Begriffe ============ */
-var GLOSSAR = [
-["Modul","Die kleinste eigenständig verantwortbare Leistungseinheit eines Bereichs — mit einem Namen, einer Durchführungsverantwortung, einem definierten Ergebnis und prüfbaren Übergabepunkten. Über Veranstaltungen hinweg wiederverwendbar."],
-["Ebene 1 / 2 / 3","Ebene 1 sind die Grundkonzepte, die für alle Bereiche gelten (was ein Modul ist). Ebene 2 sind die Detailkonzepte je Bereich (was bei Security zusätzlich gilt). Ebene 3 sind die ausgefüllten Steckbriefe — die Instanzen."],
-["Instanz","Ein ausgefülltes Schema. Dieser Steckbrief wird eine Instanz, sobald er befüllt ist."],
-["Kurzsteckbrief","Block 1 und 2 des Formats: Kern und Zusammenspiel. Davon kann ein Team bereits arbeiten. Der Vollsteckbrief umfasst alle fünf Blöcke."],
-["T0","Der erste offizielle Laufzeittag der Veranstaltung. Alle Zeitangaben im Playbook sind relativ dazu, etwa „T0 minus 6 Wochen“."],
-["Phasen P0–P7","P0 Strategische Konzeption · P1 Sales und Marketing · P2 Feinplanung · P3 Realisierung (heiße Phase) · P4 Aufbau · P5 Laufzeit · P6 Abbau · P7 Nachbereitung. Die Grenzen sind weich, Aktivitäten überlappen."],
-["Gate","Eine Bedingung an einem Phasenübergang: was vorliegen muss, bevor die nächste Phase beginnt."],
-["Rolle","Eine Funktion, keine Person und keine Abteilung. Rollen sind strukturell, Personen situativ besetzt. Ausnahme im Steckbrief: die Fortschreibung wird namentlich benannt."],
-["Übergabetest","Das Abnahmekriterium für einen Steckbrief: Eine fachfremde Vertretung muss den Ablauf ohne Rückfrage ausführen können."],
-["Definition of Done","Die Liste der Bedingungen, unter denen ein Steckbrief als fertig gilt — unter anderem Vier-Augen-Review, bestandener Übergabetest und beidseitig bestätigte Übergaben."],
-["Werkstatt-Test","Die Regel zur Abgrenzung: Genügt dieselbe Anleitung für beide Ausprägungen, ist es eine Variante. Bräuchte eine Vertretung zwei verschiedene Anleitungen, sind es zwei Module. Ändert sich nur ein Wert, ist es ein Parameter."],
-["Tailoring","Das Anpassen des Standards an eine konkrete Veranstaltung — über Bindung, Varianten und Parameter. Ein Mindestwert darf dabei nicht unterschritten werden."],
-["Bindung","Die Angabe, ob ein Modul für eine bestimmte Veranstaltung gilt. Vier Werte: gilt immer · gilt auf Bedarf, wenn … · Wahlpflicht Grundmodul · Wahlpflicht Alternative."],
-["Wahlpflicht","Zwischen mehreren Alternativen muss eine gewählt werden. Eine davon ist das Grundmodul und trägt die Entscheidung: wer entscheidet, bis wann, welche Alternativen es gibt."],
-["Grundmodul","Die Vorbelegung einer Wahlpflicht — die einfachste Variante, die gilt, solange nichts anderes entschieden ist. Sie darf nie unter eine Pflichtschwelle fallen, sonst führt eine vergessene Entscheidung zur schwächeren Sicherheitsausprägung."],
-["Compliance-Modul","Erfüllt eine rechtliche oder normative Pflicht und erbringt dafür einen Nachweis. Adressat ist eine Behörde oder die Geschäftsleitung."],
-["Leistungs-Modul","Erbringt eine Leistung für Aussteller, Gastveranstalter oder einen internen Auftraggeber. Hat Preis, Verrechnungseinheit, Bestellweg und Fristen."],
-["Enablement","Eine mögliche dritte Modulart für Befähigungsleistungen wie Übungen und Einweisungen. Noch nicht entschieden, weil die Kandidaten größtenteils rechtlich verlangt und damit Compliance sind."],
-["Innensicht / Außensicht","Die Innensicht ist der führende Datensatz — alle Felder. Die Außensicht wird daraus abgeleitet: bei Leistungs-Modulen als Katalogsicht für Aussteller, bei Compliance-Modulen als Nachweissicht für Behörden. Änderungen laufen innen zuerst."],
-["Schutzziel","Der angestrebte Zustand eines Schutzguts, etwa „Vermeidung kritischer Personendichten“. Er begründet die Maßnahme."],
-["Pre-mortem","Eine Vorab-Betrachtung möglicher Fehlschläge, bevor etwas eingesetzt wird. Wird durch die Risikostufe „hoch“ ausgelöst."],
-["Selbstprüfungskennzahl","Eine prozessbegleitende Messung für das ausführende Team. Ausdrücklich keine Berichtskennzahl an die Führung — Kennzahlen, die nach oben berichtet werden, werden erfahrungsgemäß manipuliert."],
-["Reifegrad","Wie weit ein Modul in der Praxis ist: 1 personengebunden · 2 beschrieben · 3 angewendet · 4 fortgeschrieben. Im Projekt erreichbar ist Stufe 2."],
-["Normqualität","Was eine Fundstelle rechtlich ist: Rechtsverordnung, Verwaltungsvorschrift, Gesetz, Behördenauflage, Branchenstandard oder Hausentscheidung."],
-["Verbindlichkeitsstufe","Was aus einer Fundstelle für das Modul folgt: nicht unterschreitbar · im Einvernehmen zu bestimmen · empfohlen · frei gesetzt. Ohne diese Angabe wird Freiwilliges als Pflicht geführt."],
-["VStättVO","Versammlungsstättenverordnung. Regelt unter anderem Sicherheitskonzept und Ordnungsdienst (§ 43), Brandschutzordnung (§ 42), Brandsicherheitswache (§ 41) und die Betreiberpflichten samt Anwesenheitspflicht (§ 38). Bezugsfassung ist die Musterverordnung."],
-["Auflage / Genehmigungsbescheid","Eine Anforderung, welche die Behörde für eine konkrete Veranstaltung zusätzlich stellt. Sie kann über die Verordnung hinausgehen und ist je Veranstaltung verschieden."],
-["Einvernehmen","Die Abstimmung mit den für Sicherheit und Ordnung zuständigen Behörden, die der Veranstalter herstellen muss. Ein eigener Verfahrensschritt, der scheitern kann."],
-["§ 34a GewO","Das Bewachungsgewerberecht. Es unterscheidet Unterrichtung und Sachkundeprüfung, je nach Tätigkeit. Wachpersonen haben keine hoheitlichen Befugnisse, sondern nur Notwehr, Notstand und Selbsthilfe."],
-["Bewacherregister","Das behördliche Register, in dem Bewachungsunternehmen und Wachpersonen eingetragen sind. Der Auftraggeber kann es nicht selbst abfragen — geprüft wird über die Zusicherung des Erbringers und den Ausweis der Person."],
-["vfdb 13-01","Merkblatt der Vereinigung zur Förderung des Deutschen Brandschutzes: Sicherheitskonzept für Großveranstaltungen. Benennt die üblichen Teilkonzepte und empfiehlt Entwurf sechs und Endfassung vier Wochen vor Beginn."],
-["Ordnungsdienst","Die Kräfte, die Kontrollen an Ein- und Ausgängen durchführen, die zulässige Besucherzahl überwachen, Sicherheitsdurchsagen machen und im Gefahrenfall räumen. Bestellt wird ein Ordnungsdienstleiter."],
-["Betreiber / Veranstalter","Der Betreiber verantwortet das Gelände, der Veranstalter die inhaltliche Konzeption und das wirtschaftliche Risiko. Bei Eigenveranstaltungen ist beides die Messe, bei Gastveranstaltungen fällt es auseinander."],
-["Lieferobjekt","Was am Ende vorliegt — ein Plan, ein Protokoll, ein Konzept. Ein Lieferobjekt ist kein eigenes Modul, sondern ein Feld darin."],
-["Übergabemedium","Worüber eine Übergabe läuft: Formular, Plan, Protokoll, Besprechung. Pflichtangabe, weil eine Übergabe ohne benanntes Medium über den kürzesten Weg passiert — den direkten Anruf."],
-["Betriebszustand","Der Zustand der Veranstaltung im Verlauf, unabhängig von der Phase. Fachlich verbreitet ist eine Dreiteilung: Regelbetrieb, abstimmungsbedürftiges Ereignis, Schadensfall. Mit dem Zustand wechselt die Führung."]
+/* ---------- Phasen und Gates nach 1_grundkonzepte/phasen.md ---------- */
+var PHASEN = [
+ ["P0","Strategische Konzeption","T0 −12 bis −9 Monate","Security-/Logistik-Check, Checkliste, Briefing und Ernennung des Lead Committees"],
+ ["P1","Sales + Marketing","T0 −9 bis −6 Monate","Briefing für die operativen Bereiche ist von den Leads abgenommen"],
+ ["P2","Feinplanung","T0 −6 bis −2 Monate","Hallenplan in OrgaNice erfasst, Cross-Check durchgeführt"],
+ ["P3","Realisierung (heiße Phase)","T0 −2 Monate bis −1 Tag","Finale Hallenplanung liegt vor"],
+ ["P4","Aufbauphase","T0 −3/4 Tage bis T0","Standabnahme durch Veranstaltungstechniker, Feuerwehr-/Brandschutz-Check"],
+ ["P5","Laufzeitphase","T0 bis letzter Laufzeittag","Abbaubesprechung"],
+ ["P6","Abbauphase","Ende der Laufzeit +1 bis +2 Tage","Bei Gast: Rückabnahme durch TVK. Bei Eigen keine Bedingung benannt — offen"],
+ ["P7","Nachbereitung","T0 +1 bis +4 Wochen","Lessons Learned — schließt den Kreis zur nächsten Edition"]
 ];
 
-/* ============ Feldspezifikation ============ */
-var SPEC = [
-{ block:"Kopf", badge:"heute", today:true, open:true,
-  about:"Die Angaben, mit denen das Modul identifiziert und eingeordnet wird. Die Modulart entscheidet, welche Felder weiter unten überhaupt Pflicht sind.",
-  fields:[
-  {t:"row", of:[
-    {t:"text", id:"id", label:"Modul-ID", ph:"MOD-SEC-01", core:true,
-      expl:{was:"Der eindeutige Schlüssel des Bausteins, nach dem Muster MOD-&lt;BEREICH&gt;-&lt;NR&gt;. SEC steht für Security. Über diese ID verweisen andere Module auf dieses.", bsp:"MOD-SEC-03"}},
-    {t:"select", id:"art", label:"Modulart", core:true, opts:["","Compliance","Leistung","Enablement (tbd)"],
-      expl:{was:"Eine von zwei Grundarten — sie steuert, welche Felder Pflicht sind.<ul><li><b>Compliance:</b> erfüllt eine rechtliche oder normative Pflicht und weist sie nach. Adressat ist eine Behörde oder die Geschäftsleitung. Zusätzlich Pflicht: Rechtsgrundlage, Auslöseschwelle, Nachweisart, Fristen, Zustimmung.</li><li><b>Leistung:</b> wird für Aussteller, Gastveranstalter oder intern erbracht. Zusätzlich Pflicht: Preis und Verrechnungseinheit, Bestellweg, Vorlauf- und Stornofrist, Mitwirkung, Servicezeiten.</li><li><b>Enablement:</b> noch nicht entschieden. Nur wählen, wenn der Baustein weder Rechtspflicht noch verkaufbare Leistung ist und trotzdem eine Verantwortung braucht.</li></ul>"},
-      hint:"Felder, die für die gewählte Art nicht gelten, bleiben leer und werden beim Übertragen gelöscht."}
-  ]},
-  {t:"text", id:"name", label:"Modulname", core:true, ph:"substantivisch, ergebnisorientiert",
-    expl:{was:"Der dauerhafte Name des Bausteins. Substantivisch und nach dem Ergebnis benannt, damit er eine Reorganisation und einen Toolwechsel überlebt.", bsp:"„Einlasskontrolle mit Vollkontrolle“ — nicht „Einlass kontrollieren“, nicht „OrgaNice-Modul“, nicht „Team Logistik“."},
-    hint:"Wo eine behördlich etablierte Benennung existiert — Ordnungsdienst-, Sanitätsdienst-, Räumungs-, Verkehrskonzept —, wird sie übernommen."}
-]},
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
 
-{ block:"Block 1 · Kern", badge:"heute", today:true, open:true,
-  about:"Damit überhaupt jemand handeln kann: wozu es dient, woran man das Ende erkennt, wer es verantwortet und wie es abläuft.",
-  fields:[
-  {t:"area", id:"zweck", label:"Zweck und Schutzziel", core:true, rows:2, ph:"wovor schützt es wen",
-    expl:{was:"Wozu es das Modul gibt — und welches Schutzgut in welchem Zustand gehalten werden soll. Das Schutzziel begründet später jede Maßnahme im Ablauf: Wer nicht sagen kann, worauf eine Maßnahme einzahlt, hat sie nicht begründet.", bsp:"„Verhindern, dass verbotene Gegenstände auf das Gelände gelangen. Schutzziel: Unversehrtheit von Menschen.“"},
-    hint:"Als angestrebter Zustand formulieren, nicht als Tätigkeit."},
-  {t:"area", id:"ergebnis", label:"Ergebnis — „Fertig ist, wenn …“", core:true, rows:2, ph:"Fertig ist, wenn …",
-    expl:{was:"Der Zustand, an dem alle Beteiligten erkennen, dass die Leistung erbracht ist. Das Feld beantwortet die Frage, die heute im Haus unbeantwortet ist: Was heißt fertig? Bei einer Dauerleistung ist das kein Zeitpunkt, sondern ein erfüllter Zustand über einen Zeitraum.", bsp:"„Fertig ist, wenn die Laufzeit ohne unkontrollierten Zutritt beendet ist und das Kontrollprotokoll vorliegt.“"},
-    hint:"Ein Satz, kein „und“ — wer zwei Dinge aufzählt, hat zwei Module. Gelingt der Satz nicht, stimmt der Zuschnitt: dann zurück zur Landkarte."},
-  {t:"row", of:[
-    {t:"text", id:"durch", label:"Durchführung", core:true, ph:"eine Rolle",
-      expl:{was:"Die eine Rolle, die verantwortet, dass das Modul bei der Veranstaltung erbracht wird — von Anfang bis Ende, über alle Phasen hinweg. Ohne sie entsteht kein Entwurf.", bsp:"„Leitung Security“ — nicht „Team Logistics &amp; Security“ und nicht ein Personenname."}},
-    {t:"text", id:"vertr", label:"Vertretung", core:true, ph:"eine Rolle",
-      expl:{was:"Die benannte Rolle, die einspringt. Sie ist zugleich der Maßstab des Übergabetests: Diese Person muss den Ablauf ohne Rückfrage ausführen können."}}
-  ], hint:"Rollen, keine Abteilungen und keine Personen."},
-  {t:"row", of:[
-    {t:"text", id:"fort", label:"Fortschreibung", core:true, ph:"ein Name",
-      expl:{was:"Wer das Modul über die Zeit pflegt: Prüfintervall einhalten, Änderungen einarbeiten, Erkenntnisse aus Retrospektiven aufnehmen. Hier steht ausnahmsweise ein Name statt einer Rolle — eine Rolle, die niemand konkret besetzt, pflegt nichts."}},
-    {t:"text", id:"rechtl", label:"Rechtlich verantwortliche Stelle", ph:"nur bei Gastveranstaltungen",
-      expl:{was:"Security-Zusatzangabe. Wer die Pflicht rechtlich trägt, wenn das eine andere Stelle ist als die durchführende Rolle. Bei Gastveranstaltungen liegt die Pflicht zum Sicherheitskonzept beim Betreiber — also bei der Messe —, auch wenn der Gastveranstalter die Veranstaltung verantwortet. Eine Übertragung ist nur schriftlich möglich und lässt die Verantwortung des Betreibers unberührt.", bsp:"Leer lassen, solange das Modul nur bei Eigenveranstaltungen läuft."}}
-  ]},
-  {t:"area", id:"ausloeser", label:"Auslöser", core:true, rows:2, ph:"woran erkennt man, dass es losgeht",
-    expl:{was:"Das Ereignis, an dem erkennbar wird, dass das Modul jetzt anläuft. Ohne Auslöser startet ein Modul erfahrungsgemäß dann, wenn jemand daran denkt.", bsp:"„Die Veranstaltung ist als Messe B2B mit mehr als 5.000 Besucherplätzen eingestuft“ oder „Die Entscheidung in der Wahlpflichtgruppe fällt auf Vollkontrolle“."}},
-  {t:"table", id:"ablauf", label:"Ablauf in Abschnitten", core:true, cols:["#","Auslöser","Tätigkeit","Ergebnis","Rolle"], rows:4,
-    expl:{was:"Die Arbeit in Steuerungstiefe, nicht in Ausführungstiefe. Ein Abschnitt ist ein zusammenhängendes Stück Arbeit mit eigenem Zwischenergebnis und einer Rolle. Vier bis acht Abschnitte — mehr wird eine Arbeitsanweisung, weniger sagt nichts.", bsp:"1 Kontrollkonzept erstellen · 2 Postenplan ableiten · 3 Bedarf an die Linie übergeben · 4 Einweisung durchführen · 5 Kontrollbetrieb · 6 Protokoll und Debrief"},
-    hint:"Keine Verzweigungen — „und wenn …, dann …“ ist eine Variante oder ein Parameter. Was andere Verantwortliche tun, steht als Übergabe."},
-  {t:"table", id:"liefer", label:"Lieferobjekte", core:true, cols:["Objekt","Ablageort","Adressat","Form","Zeitpunkt","Gegenzeichnung"], rows:3,
-    expl:{was:"Was am Ende vorliegt — Pläne, Protokolle, Konzepte, Nachweise. Der Ablageort ist Pflicht, sonst existiert das Objekt nur auf dem Papier des Steckbriefs.<br><br>Die letzten vier Spalten gelten, sobald ein Objekt <b>Rechtswirkung</b> hat: Ein Bestellungsschreiben muss gegengezeichnet werden, eine Dienstanweisung vor Arbeitsbeginn ausgehändigt, ein Sicherheitskonzept zu einer Frist eingereicht.", bsp:"Kontrollkonzept · Postenplan · Einweisungsnachweis · Kontrollprotokoll"}}
-]},
+/* ---------- Phasenband aufbauen ---------- */
+var phaseHost=document.getElementById('phases'), pbar=document.getElementById('pbar');
+PHASEN.forEach(function(p,i){
+  var id=p[0];
+  var box=el('div','phase'); box.dataset.p=id;
 
-{ block:"Block 2 · Zusammenspiel", badge:"heute", today:true, open:true,
-  about:"Damit das Modul an seine Nachbarn anschließt: wann es wirkt, was rein- und rausgeht, wer mitwirkt.",
-  fields:[
-  {t:"row", of:[
-    {t:"select", id:"aphase", label:"Auslöser-Phase", core:true, opts:["","P0","P1","P2","P3","P4","P5","P6","P7"],
-      expl:{was:"Die Phase, in der das Modul anläuft. Die acht Phasen: P0 Strategische Konzeption · P1 Sales und Marketing · P2 Feinplanung · P3 Realisierung · P4 Aufbau · P5 Laufzeit · P6 Abbau · P7 Nachbereitung. Zeitachse relativ zu T0, dem ersten Laufzeittag."}},
-    {t:"text", id:"sphase", label:"Schwerpunkt-Phase", core:true, ph:"eine oder mehrere aus P0–P7",
-      expl:{was:"Wo der Hauptaufwand liegt. Legt man alle Module übereinander, wird sichtbar, welche Phasen überlastet sind — die Stressphase als Bild statt als Klage."}}
-  ]},
-  {t:"table", id:"phasen", label:"Phasenprofil", core:true, cols:["Phase","Was passiert","Ergebnis am Phasenende","Führende Rolle"], rows:3,
-    expl:{was:"Eine Zeile je Phase, in der das Modul etwas tut. Ein Modul liegt quer zu den Phasen: Ein Sicherheitsmodul beginnt in der Konzeption, wird in der Feinplanung bestellt, in der Laufzeit erbracht und in der Nachbereitung ausgewertet.", bsp:"P0 Risikoeinstufung · P2 Konzept und Postenplan · P5 Kontrollbetrieb · P7 Auswertung"}},
-  {t:"table", id:"ueber", label:"Übergaben rein und raus", core:true, cols:["rein/raus","Objekt","Medium","Auslöser","gebende Rolle","nehmende Rolle"], rows:3,
-    expl:{was:"Die Grenzen des Moduls. Ein Modul endet dort, wo eine andere Verantwortung beginnt — was dort passiert, steht nicht als Ablaufschritt, sondern als Übergabe.<br><br><b>Objekt</b> ist, was übergeben wird. <b>Medium</b> ist, worüber: Formular, Plan, Protokoll, Besprechung. <b>Auslöser</b> ist, woran erkennbar wird, dass die Übergabe fällig ist.", bsp:"raus · Postenbedarf · Bestellformular · Abschluss Feinplanung, T-8 Wochen · Security-Planung → Einkauf"},
-    hint:"Das Medium ist Pflicht. Ohne benanntes Medium passiert die Übergabe über den kürzesten Weg. Geht sie an Polizei, Feuerwehr, Ordnungsamt oder Zoll, wird sie genauso beschrieben."},
-  {t:"table", id:"rollen", label:"Beteiligte Rollen", core:true, cols:["Rolle","wirkt mit in Abschnitt"], rows:3,
-    expl:{was:"Wer mitwirkt, ohne das Modul zu verantworten. Verweist auf die Nummern aus dem Ablauf oben."}},
-  {t:"row", of:[
-    {t:"text", id:"setzt", label:"Setzt voraus", ph:"Modul-ID",
-      expl:{was:"Ein anderes Modul, das ebenfalls aktiv sein muss, damit dieses funktioniert.", bsp:"Eine Vollkontrolle setzt ein Warteflächen- und Rückstaukonzept voraus."}},
-    {t:"text", id:"nichtmit", label:"Nicht gemeinsam mit", ph:"Modul-ID",
-      expl:{was:"Ein Modul, das dieses ausschließt — typisch bei zwei Alternativen derselben Wahlpflicht."}}
-  ]}
-]},
+  var head=el('div','phead');
+  head.appendChild(el('div','pid',id));
+  var mid=el('div');
+  mid.appendChild(el('div','pname',p[1]));
+  mid.appendChild(el('div','pwin',p[2]));
+  var gate=el('div','pgate'); gate.innerHTML='<b>Gate:</b> '+p[3];
+  mid.appendChild(gate);
+  head.appendChild(mid);
 
-{ block:"Block 3 · Sicherheit und Nachweis", badge:"später",
-  about:"Was belegt sein muss und was schiefgehen kann. Hier stehen die vier Security-Zusatzangaben, die es im Standardformat nicht gibt.",
-  fields:[
-  {t:"row", of:[
-    {t:"text", id:"befug", label:"Befugnisgrundlage", ph:"Hausrecht · Einwilligung · Jedermannsrecht · behördliche Anordnung",
-      expl:{was:"Security-Zusatzangabe. Worauf sich die Maßnahme gegenüber Dritten stützt.<ul><li><b>Hausrecht:</b> das Recht des Geländeeigentümers zu bestimmen, wer unter welchen Bedingungen das Gelände betritt.</li><li><b>Einwilligung:</b> die Zustimmung, die jemand mit dem Betreten oder mit dem Ticketkauf erklärt.</li><li><b>Jedermannsrecht:</b> Notwehr, Notstand, Selbsthilfe — steht jeder Person zu, nicht nur dem Sicherheitsdienst.</li><li><b>Behördliche Anordnung:</b> eine Maßnahme, die Polizei oder Ordnungsamt anordnen.</li></ul>Ein Ordnungsdienst hat keine hoheitlichen Befugnisse.", bsp:"Eine Taschenkontrolle ist rechtlich keine Durchsuchung. Sie stützt sich auf Hausrecht und Einwilligung: Wer nicht möchte, wird nicht durchsucht — er kommt nicht hinein."}},
-    {t:"text", id:"befuggrenze", label:"…und ihre Grenze", ph:"was das Modul ausdrücklich nicht darf",
-      expl:{was:"Wo die Befugnis endet. Ohne diese Angabe beschreibt das Modul eine Handlung, ohne zu sagen, wo sie unzulässig wird — und die ausführende Kraft steht im Ernstfall allein da.", bsp:"„Keine körperliche Durchsuchung gegen den Willen der Person, keine Festhaltung über die vorläufige Festnahme hinaus.“"}}
-  ]},
-  {t:"table", id:"betrieb", label:"Verhalten im eskalierten Betriebszustand", cols:["Betriebszustand","läuft weiter / ändert Ausprägung / ruht","wer führt dann"], rows:3,
-    expl:{was:"Security-Zusatzangabe. Der Betriebszustand ist der Zustand der Veranstaltung im Verlauf — unabhängig davon, in welcher Phase man ist. Fachlich verbreitet ist eine Dreiteilung: <b>Regelbetrieb</b> (der Veranstalter führt), <b>abstimmungsbedürftiges Ereignis</b> (ein Koordinierungskreis stimmt ab), <b>Schadensfall</b> (die Gefahrenabwehrbehörde übernimmt).<br><br>Der Punkt: Die Verantwortung für ein Security-Modul ist keine Konstante. Sie kann sich innerhalb weniger Minuten verschieben.", bsp:"Die Zustände sind im Playbook noch nicht gesetzt — hier die eintragen, die im Haus tatsächlich unterschieden werden."}},
-  {t:"table", id:"vollmacht", label:"Handlungsvollmacht ohne Rückfrage", cols:["Maßnahme","auslösende Rolle","Voraussetzung","wer beendet","wer wird informiert"], rows:2,
-    expl:{was:"Security-Zusatzangabe. Eine vorab erteilte Erlaubnis, in einer bestimmten Lage sofort zu handeln, ohne vorher zu fragen. Das Format regelt sonst nur das Aufhören (Abbruchkriterien) und das Informieren (Meldeweg) — das Anfangen fehlt.", bsp:"Bei Meldung über den Verlust eines sicherheitsrelevanten Exponats leitet der Sicherheitsdienst eigenständig Ausgangskontrollen an allen Ausgängen ein. Beendet werden sie durch die Polizei."},
-    hint:"Wenn es keine gibt: ausdrücklich „keine“ eintragen."},
-  {t:"table", id:"recht", label:"Rechtsgrundlage", cols:["Fundstelle","Fassungsstand","Normqualität","Verbindlichkeitsstufe"], rows:2,
-    expl:{was:"Nur bei Compliance-Modulen. Die Belegstelle, aus der die Pflicht folgt.<br><br><b>Fundstelle:</b> Norm und Paragraph, etwa § 43 VStättVO. <b>Fassungsstand:</b> welche Fassung — Novellen verschieben Inhalte. <b>Normqualität:</b> Rechtsverordnung · Verwaltungsvorschrift · Gesetz · Behördenauflage · Branchenstandard · Hausentscheidung. <b>Verbindlichkeitsstufe:</b> nicht unterschreitbar · im Einvernehmen zu bestimmen · empfohlen · frei gesetzt.", bsp:"Die Veranstaltungsleitung hat in der Verordnung keine Qualifikationsanforderung. Was dazu verbreitet ist, ist ein Branchenstandard — und muss auch so eingetragen werden."}},
-  {t:"table", id:"schwelle", label:"Auslöseschwelle", cols:["Auslöser","Art (Zahl / Bewertung / Bescheid)","ab wann die Pflicht greift"], rows:2,
-    expl:{was:"Ab wann die Pflicht überhaupt greift. Drei Arten kommen nebeneinander vor:<ul><li><b>Zahl:</b> ein harter Schwellenwert, etwa mehr als 5.000 Besucherplätze.</li><li><b>Bewertung:</b> ein unbestimmter Rechtsbegriff wie „erfordert es die Art der Veranstaltung“ — jemand muss ihn auslegen.</li><li><b>Bescheid:</b> die Behörde verlangt es für diese Veranstaltung, auch unterhalb der Verordnungsschwelle.</li></ul>Es gilt der zuerst greifende.", bsp:"Für Ausstellungsräume rechnet die Verordnung mit einem Besucher je Quadratmeter. Eine Halle über 5.000 m² überschreitet damit rechnerisch automatisch die Schwelle."}},
-  {t:"table", id:"fristen", label:"Fristen", cols:["Frist","Bezugspunkt","wer setzt sie","Verbindlichkeit","Folge, wenn sie reißt"], rows:2,
-    expl:{was:"Termine, an die das Modul gebunden ist. Bezugspunkt ist meist T0, der erste Laufzeittag — „T-6 Wochen“ heißt sechs Wochen davor.<br><br>Bei Security ist das selten ein einzelnes Datum, sondern eine Kette mit Zwischenständen und einer Rückmeldezeit, die nicht in der Hand des Hauses liegt.", bsp:"Entwurf des Sicherheitskonzepts T-6 Wochen, Endfassung T-4 Wochen — dazwischen liegt die Zeit, die die Behörde braucht."}},
-  {t:"table", id:"zustim", label:"Zustimmung", cols:["Stelle","intern/extern","Form des Nachweises","Frist","Folge, wenn sie ausbleibt"], rows:2,
-    expl:{was:"Die Stellen, die inhaltlich einverstanden sein müssen, bevor es weitergeht. Bei Security ist eine davon oft außerhalb des Hauses: Das <b>Einvernehmen</b> mit den für Sicherheit und Ordnung zuständigen Behörden ist ein eigener Verfahrensschritt — und er kann scheitern. Deshalb gehört dazu, was dann gilt.", bsp:"Nachweis ist häufig eine Unterschrift auf einer Einvernehmenserklärung."}},
-  {t:"table", id:"quali", label:"Qualifikationsnachweis vor Einsatz", cols:["Stufe","zulässige Belegarten","Gültigkeitsdauer","Prüfweg"], rows:2,
-    expl:{was:"Welcher Nachweis vorliegen muss, bevor jemand Dienst tut.<br><br><b>Stufe:</b> hängt an der Tätigkeit, nicht an der Person. Das Bewachungsgewerberecht unterscheidet die einfachere <i>Unterrichtung</i> von der <i>Sachkundeprüfung</i>, die etwa für Leitungsfunktionen bei zugangsgeschützten Großveranstaltungen verlangt wird. <b>Belegarten:</b> es gibt mehrere gleichwertige Abschlüsse. <b>Gültigkeitsdauer:</b> die Zuverlässigkeit wird spätestens nach fünf Jahren erneut geprüft. <b>Prüfweg:</b> das Bewacherregister kann der Auftraggeber nicht selbst abfragen — geprüft wird über die Zusicherung des Erbringers und den Ausweis der Person."}},
-  {t:"table", id:"nachweise", label:"Nachweise und Dokumentation", cols:["Nachweis","Aufbewahrungsdauer","Begründung der Dauer","wo der Beleg liegt"], rows:2,
-    expl:{was:"Was aufbewahrt wird und wie lange. Für Kontrollprotokolle und Vorfallmeldungen gibt es keine normierte Frist — die Dauer ist also zu setzen und zu begründen, und zwar gegen den Haftungshorizont: Ansprüche wegen Personenschäden verjähren erst nach dreißig Jahren.<br><br><b>Wo der Beleg liegt</b> ist die Frage, die im Ernstfall entscheidet: Bei Fremdvergabe liegt er beim Dienstleister und ist ohne vertraglichen Zugriff nicht verfügbar.", bsp:"Dokumentierte regelmäßige Kontrollen sind das Mittel, mit dem sich die Erfüllung der Verkehrssicherungspflicht belegen lässt."}},
-  {t:"area", id:"meldeweg", label:"Meldeweg und Eskalation", rows:2,
-    expl:{was:"Wer erfährt was, über welchen Weg, in welcher Stufe. Zwei unabhängige Erreichbarkeitswege, damit ein Ausfall die Meldung nicht stoppt.<br><br>Wichtig bei Compliance-Modulen: Die Abweichung von einer Rechtspflicht oder Behördenauflage ist meldepflichtig an eine benannte Rolle. Das ist keine Leistungskontrolle, sondern Weitergabe von Haftung."}},
-  {t:"area", id:"start", label:"Startbedingung", rows:2,
-    expl:{was:"Was erfüllt sein muss, damit der Einsatz überhaupt beginnen darf. Anders als der Auslöser, der sagt, wann es losgeht: Die Startbedingung kann den Start sperren.", bsp:"Zulassung des Erbringers · Beschilderung bei Videoüberwachung · Datenschutz-Folgenabschätzung, die vorab vorliegen muss · Auftragsverarbeitungsvertrag bei Fremdvergabe"}},
-  {t:"area", id:"abbruch", label:"Abbruchkriterien", rows:2,
-    expl:{was:"Wann der Einsatz beendet wird, auch wenn er noch nicht fertig ist. Eine dokumentierte Abweichung davon braucht Begründung, Befristung und einen Genehmiger.", bsp:"„Abbruch, wenn der Rückstau die Verkehrsfläche erreicht.“"}},
-  {t:"row", of:[
-    {t:"select", id:"risiko", label:"Risikostufe", opts:["","niedrig","mittel","hoch"],
-      expl:{was:"Wie kritisch das Modul ist. Der Wert „hoch“ löst eine <b>Pre-mortem-Pflicht</b> aus: Bevor das Modul eingesetzt wird, wird durchgespielt, wie es scheitern könnte.<br><br>Bei Security ist die Stufe nicht pauschal je Veranstaltung — eingetragen wird die höchste im Zeitverlauf."}},
-    {t:"text", id:"risikozeit", label:"erreicht in Zeitabschnitten", ph:"wann die höchste Stufe erreicht wird",
-      expl:{was:"Wann die höchste Stufe erreicht wird. Kritikalität schwankt innerhalb einer Veranstaltung — ein Eröffnungstag mit Delegationen ist etwas anderes als der dritte Vormittag.", bsp:"„Laufzeittag 2, 15 bis 19 Uhr — angemeldete Versammlung am Eingang Mitte.“"}}
-  ]},
-  {t:"table", id:"risiken", label:"Risiken", cols:["Risiko","Gegenmaßnahme"], rows:3,
-    expl:{was:"Was regelmäßig schiefgeht, mit der Gegenmaßnahme. Je Risiko eine — ein Risiko ohne Gegenmaßnahme ist eine Notiz, keine Planung.", bsp:"„Rückstau bei Spitzenandrang“ · „Ausfall von Kräften am Morgen“"}}
-]},
+  var tog=el('div','ptoggle');
+  var l1=el('label'); var c1=document.createElement('input'); c1.type='checkbox'; c1.dataset.on=id;
+  l1.appendChild(c1); l1.appendChild(document.createTextNode('wirkt hier'));
+  var l2=el('label'); var c2=document.createElement('input'); c2.type='checkbox'; c2.dataset.focus=id;
+  l2.appendChild(c2); l2.appendChild(document.createTextNode('Schwerpunkt'));
+  tog.appendChild(l1); tog.appendChild(l2);
+  head.appendChild(tog);
+  box.appendChild(head);
 
-{ block:"Block 4 · Anpassung", badge:"später",
-  about:"Wie das Modul je Veranstaltung variiert — ob es gilt, in welcher Ausprägung, mit welchen Werten und wie viel davon.",
-  fields:[
-  {t:"select", id:"bindung", label:"Bindung", opts:["","gilt immer","gilt auf Bedarf, wenn …","Wahlpflicht — Grundmodul","Wahlpflicht — Alternative zu …"],
-    expl:{was:"Ob das Modul für eine bestimmte Veranstaltung gilt.<ul><li><b>gilt immer:</b> ohne Ausnahme aktiv.</li><li><b>gilt auf Bedarf:</b> aktiv bei einem benannten Auslöser.</li><li><b>Wahlpflicht — Grundmodul:</b> von mehreren Alternativen ist dies die Vorbelegung. Sie gilt, solange nichts anderes entschieden ist, und trägt die Entscheidungsangaben.</li><li><b>Wahlpflicht — Alternative:</b> tritt an die Stelle eines Grundmoduls und trägt nur den Rückverweis darauf.</li></ul>"},
-    hint:"Auch „gilt immer“ wird ausdrücklich eingetragen, nicht weggelassen."},
-  {t:"row", of:[
-    {t:"text", id:"entsch", label:"Entscheider", ph:"nur bei Wahlpflicht — Grundmodul",
-      expl:{was:"Wer die Wahl zwischen den Alternativen trifft, gegebenenfalls im Einvernehmen mit einer zweiten Stelle. Steht nur beim Grundmodul, damit Entscheider und Frist genau einmal existieren und nicht auseinanderlaufen."}},
-    {t:"text", id:"frist", label:"Entscheidungsfrist", ph:"Zeitpunkt relativ T0",
-      expl:{was:"Bis wann entschieden sein muss, damit die Wahl in der laufenden Planung noch greifen kann. Verbindlich gemeint.", bsp:"„bis T-10 Wochen, also vor Erstellung des Sicherheitskonzepts“"}}
-  ]},
-  {t:"row", of:[
-    {t:"text", id:"alt", label:"Alternativen", ph:"Modul-IDs",
-      expl:{was:"Die Modul-IDs, zwischen denen gewählt werden kann."}},
-    {t:"text", id:"statt", label:"statt", ph:"Modul-ID des Grundmoduls",
-      expl:{was:"Nur bei einer Alternative: der Rückverweis auf das Grundmodul, an dessen Stelle sie tritt."}}
-  ], hint:"Das Grundmodul ist die einfachste Variante — und darf nie unter eine Pflichtschwelle fallen."},
-  {t:"table", id:"varianten", label:"Varianten", cols:["Variante","worin sie sich unterscheidet"], rows:2,
-    expl:{was:"Ausprägungen, die mit <b>derselben Anleitung</b> laufen. Der Test: Könnten dieselben Menschen mit derselben Anleitung beide ausführen? Dann Variante. Bräuchte eine Vertretung zwei verschiedene Anleitungen, sind es zwei Module.", bsp:"Nachtwache statt Tagwache ist eine Variante. Stichprobenkontrolle statt Vollkontrolle sind zwei Module — andere Rollen, andere Flächen, andere Bemessung."}},
-  {t:"table", id:"param", label:"Parameter", cols:["Parameter","Wertebereich"], rows:2,
-    expl:{was:"Was sich nur im Wert unterscheidet, bei gleichen Rollen und gleichem Ablauf.", bsp:"„Anzahl Kontrollspuren: 4 bis 12“ · „Kräfte je Schicht“"}},
-  {t:"row", of:[
-    {t:"text", id:"verfahren", label:"Bemessung — Verfahren", ph:"mit Quelle",
-      expl:{was:"Der Rechenweg, nach dem die Menge bestimmt wird — mit Quelle und Verbindlichkeitsstufe. Bei Security ist die Bemessungsgröße Posten mal Zeit, nicht eine Stückzahl: Eine Berechnung allein nach Besucherzahl ist fachlich verworfen.<br><br>Die Verordnung liefert die Pflicht zur Staffelung, aber keinen Schlüssel — die Zahl entsteht im Sicherheitskonzept und wird mit der Behörde abgestimmt.", bsp:"Für den Sanitätsdienst existieren benannte Verfahren (Maurer-Schema, Kölner Algorithmus). Für den Ordnungsdienst gibt es keinen anerkannten Schlüssel."}},
-    {t:"text", id:"ergebnisart", label:"Ergebnisart", ph:"Mindestwert / Richtwert · wer nimmt ab",
-      expl:{was:"Ob das Ergebnis ein <b>Mindestwert</b> ist, der beim Tailoring nicht unterschritten werden darf, oder ein <b>Richtwert</b>, von dem begründet abgewichen werden kann. Dazu: wer den Wert abnimmt."}}
-  ]},
-  {t:"table", id:"ressourcen", label:"Ressourcenbedarf", cols:["Phase","Posten","Zeitfenster","internes Personal","Budget"], rows:3,
-    expl:{was:"Was das Modul kostet — in Personentagen, Kräften und Geld. Ein <b>Posten</b> ist eine besetzte Position an einem Ort über eine Zeit: ein Eingang, ein Kontrollpunkt, eine Wache. Je Phase ist bei Security zu grob, deshalb zusätzlich das Zeitfenster.", bsp:"Sanitätsdienst im Aufbau: 2 Kräfte, 08:00–18:00. In der Laufzeit: 7 Kräfte inklusive Arzt und Rettungswagen."}}
-]},
-
-{ block:"Block 5 · Lernen und Pflege", badge:"später",
-  about:"Damit das Modul aktuell bleibt: woran das Team sich selbst prüft, wohin Erkenntnisse fließen, was noch fehlt.",
-  fields:[
-  {t:"table", id:"kennzahl", label:"Selbstprüfungskennzahl", cols:["Kennzahl","wie gemessen"], rows:2,
-    expl:{was:"Eine Messung, die dem ausführenden Team zeigt, ob es auf Kurs ist — während der Arbeit, nicht danach. Höchstens zwei.<br><br>Ausdrücklich <b>keine</b> Berichtskennzahl an die Führung. Kennzahlen, die nach oben berichtet werden, geraten unter Manipulationsdruck; eine Selbstprüfungskennzahl hat den nicht.", bsp:"„Einweisungsquote vor Dienstbeginn“ · „Anteil Kontrollspuren einsatzbereit zur Öffnung“"}},
-  {t:"area", id:"nachbereitung", label:"Nachbereitung und Rückkopplung", rows:2,
-    expl:{was:"Welche Fragen nach der Veranstaltung gestellt werden und wohin die Antwort fließt. Ohne benannten Zielort versickert die Erkenntnis.<br><br>Bei Security gehört dazu der Abgleich von Bemessungsergebnis und tatsächlichem Bedarf — sonst bleibt eine dauerhafte Überdimensionierung unbemerkt.", bsp:"„Debrief mit dem Ordnungsdienstleiter; Änderungen fließen in Kontrollkonzept und Bemessungsregel.“"}},
-  {t:"area", id:"luecken", label:"Offene Lücken", rows:2, ph:"benannt — oder ausdrücklich „keine“",
-    expl:{was:"Was am Modul noch fehlt, ehrlich benannt. Dieses Feld darf nie leer bleiben: Ein leeres Feld ohne Vermerk ist ein stiller Fehler, weil niemand weiß, ob die Information fehlt oder nicht gebraucht wird.", bsp:"„Bemessung bei zwei parallelen Veranstaltungen unklar.“"}},
-  {t:"row", of:[
-    {t:"select", id:"rgIst", label:"Reifegrad Ist", opts:["","1 Personengebunden","2 Beschrieben","3 Angewendet","4 Fortgeschrieben"],
-      expl:{was:"Wo das Modul heute steht.<ul><li><b>1 Personengebunden:</b> funktioniert, ist aber nicht dokumentiert.</li><li><b>2 Beschrieben:</b> Steckbrief vorhanden, Verantwortung benannt.</li><li><b>3 Angewendet:</b> wird aus dem Standard getailort, die Vertretung funktioniert.</li><li><b>4 Fortgeschrieben:</b> Erkenntnisse aus Veranstaltungen ändern nachweisbar den Standard.</li></ul>Die Einstufung erfolgt im gemeinsamen Termin, nicht per Selbstauskunft."}},
-    {t:"select", id:"rgZiel", label:"Reifegrad Ziel", opts:["","1 Personengebunden","2 Beschrieben","3 Angewendet","4 Fortgeschrieben"],
-      expl:{was:"Wo es hinsoll. Für viele Module ist Stufe 3 der richtige Endpunkt. Innerhalb des Projekts erreichbar ist Stufe 2 — Stufe 3 entsteht erst, wenn der Standard bei einer Veranstaltung benutzt wird."}}
-  ]}
-]},
-
-{ block:"Außensicht", badge:"später",
-  about:"Die Sicht nach außen wird aus der Innensicht abgeleitet, nicht neu geschrieben. Bei Leistungs-Modulen ist sie eine Katalogsicht für Aussteller, bei Compliance-Modulen eine Nachweissicht für Behörden.",
-  fields:[
-  {t:"table", id:"aussen", label:"Abgeleitete Felder", cols:["Feld","Inhalt"], rows:6, seed:[
-    ["Name in Adressatensprache",""],["Nutzen in einem Satz",""],["Adressat",""],
-    ["Nicht enthalten — Abgrenzung",""],["Was wir vom Adressaten brauchen",""],["Ansprechpunkt bei Reklamation",""]
-  ],
-    expl:{was:"Eine gefilterte Ansicht auf denselben Datensatz, kein zweites Dokument. Zwei getrennt gepflegte Fassungen laufen auseinander — dann verspricht der Katalog etwas, das die Werkstatt nicht liefert.<br><br><b>„Nicht enthalten“ ist Pflichtfeld</b> und die häufigste Reklamationsursache. Bei Security gehören dort Haftungsgrenze, Deckungssumme, der Ausschluss einer Obhutspflicht und die Mitwirkungspflicht hinein, an der die Versicherungswirkung hängt.", bsp:"Vergleichshäuser formulieren das deutlich: Die Bewachung des Standes und des Ausstellungsguts ist nicht Aufgabe der Messegesellschaft; nur protokollierte Gegenstände sind versichert."},
-    hint:"Jede Zusage außen hat innen eine Grundlage. Änderungen laufen innen zuerst."}
-]}
-];
-
-(function(){
-  var host = document.getElementById('form');
-  var qid = 0;
-
-  function el(tag, cls, txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
-  function markFilled(inp){ inp.classList.toggle('filled', (inp.value||'').trim().length>0); }
-  function autosize(ta){ ta.style.height='auto'; ta.style.height=(ta.scrollHeight+2)+'px'; }
-
-  function makeInput(f){
-    var node;
-    if(f.t==='area'){
-      node=el('textarea'); node.rows=f.rows||2;
-      node.addEventListener('input',function(){autosize(node)});
-    } else if(f.t==='select'){
-      node=el('select');
-      (f.opts||[]).forEach(function(o){ var op=el('option',null,o||'— bitte wählen —'); op.value=o; node.appendChild(op); });
-    } else { node=el('input'); node.type='text'; }
-    if(f.ph) node.placeholder=f.ph;
-    node.id='fld-'+f.id; node.dataset.fid=f.id;
-    if(f.core) node.dataset.core='1';
-    node.addEventListener('input',function(){markFilled(node);update()});
-    node.addEventListener('change',function(){markFilled(node);update()});
-    return node;
-  }
-
-  function explBox(f){
-    if(!f.expl) return null;
-    var d=el('dl','expl'); d.id='expl-'+(++qid);
-    var dt1=el('dt',null,'Was das ist'); var dd1=el('dd'); dd1.innerHTML=f.expl.was;
-    d.appendChild(dt1); d.appendChild(dd1);
-    if(f.expl.bsp){
-      var dt2=el('dt',null,'Beispiel'); var dd2=el('dd','ex'); dd2.innerHTML=f.expl.bsp;
-      d.appendChild(dt2); d.appendChild(dd2);
-    }
-    return d;
-  }
-
-  function labelRow(f){
-    var row=el('div','lrow');
-    var lab=el('label',null,f.label);
-    if(f.core){ lab.appendChild(el('span','req','*')); }
-    if(f.id) lab.setAttribute('for','fld-'+f.id);
-    row.appendChild(lab);
-    var box=explBox(f);
-    if(box){
-      var b=el('button','q','?'); b.type='button';
-      b.setAttribute('aria-expanded','false');
-      b.setAttribute('aria-controls',box.id);
-      b.title='Erklärung';
-      b.addEventListener('click',function(){
-        var open=box.classList.toggle('open');
-        b.setAttribute('aria-expanded',open?'true':'false');
-      });
-      row.appendChild(b);
-    }
-    return {row:row, box:box};
-  }
-
-  function makeField(f, parent){
-    var wrap=el('div','f');
-    if(f.t==='row'){
-      var grid=el('div','two');
-      f.of.forEach(function(sub){
-        var cell=el('div');
-        var lr=labelRow(sub);
-        cell.appendChild(lr.row);
-        if(lr.box) cell.appendChild(lr.box);
-        if(sub.hint) cell.appendChild(el('p','hint',sub.hint));
-        cell.appendChild(makeInput(sub));
-        grid.appendChild(cell);
-      });
-      if(f.hint) wrap.appendChild(el('p','hint',f.hint));
-      wrap.appendChild(grid);
-    } else if(f.t==='table'){
-      var lr2=labelRow(f);
-      wrap.appendChild(lr2.row);
-      if(lr2.box) wrap.appendChild(lr2.box);
-      if(f.hint) wrap.appendChild(el('p','hint',f.hint));
-      var tbl=el('table'); tbl.dataset.tid=f.id;
-      var thead=el('thead'), trh=el('tr');
-      f.cols.forEach(function(c){ trh.appendChild(el('th',null,c)); });
-      trh.appendChild(el('th'));
-      thead.appendChild(trh); tbl.appendChild(thead);
-      var tb=el('tbody'); tbl.appendChild(tb);
-      wrap.appendChild(tbl);
-      var add=el('button','addb','+ Zeile'); add.type='button';
-      add.addEventListener('click',function(){ addRow(tb,f.cols.length); update(); });
-      wrap.appendChild(add);
-      var n=f.rows||3;
-      for(var i=0;i<n;i++){
-        var r=addRow(tb,f.cols.length);
-        if(f.seed && f.seed[i]){
-          var ins=r.querySelectorAll('input');
-          f.seed[i].forEach(function(v,k){ if(ins[k]){ ins[k].value=v; markFilled(ins[k]); } });
-        }
-      }
-      if(f.core) tbl.dataset.core='1';
-    } else {
-      var lr3=labelRow(f);
-      wrap.appendChild(lr3.row);
-      if(lr3.box) wrap.appendChild(lr3.box);
-      if(f.hint) wrap.appendChild(el('p','hint',f.hint));
-      wrap.appendChild(makeInput(f));
-    }
-    parent.appendChild(wrap);
-  }
-
-  function addRow(tb, cols){
-    var tr=el('tr');
-    for(var i=0;i<cols;i++){
-      var td=el('td'); var inp=el('input'); inp.type='text';
-      inp.addEventListener('input',function(){markFilled(this);update()});
-      td.appendChild(inp); tr.appendChild(td);
-    }
-    var tdx=el('td','rm');
-    var b=el('button','rmb','×'); b.type='button'; b.title='Zeile entfernen';
-    b.addEventListener('click',function(){ tr.remove(); update(); });
-    tdx.appendChild(b); tr.appendChild(tdx);
-    tb.appendChild(tr);
-    return tr;
-  }
-
-  SPEC.forEach(function(blk){
-    var sec=el('section','block'+(blk.today?' today':'')+(blk.open?' open':''));
-    var head=el('div','bhead');
-    head.appendChild(el('h2',null,blk.block));
-    head.appendChild(el('span','badge'+(blk.badge==='später'?' later':''), blk.badge));
-    head.appendChild(el('span','tw', blk.open?'▾':'▸'));
-    head.addEventListener('click',function(){
-      sec.classList.toggle('open');
-      head.querySelector('.tw').textContent = sec.classList.contains('open')?'▾':'▸';
-    });
-    sec.appendChild(head);
-    var body=el('div','bbody');
-    if(blk.about) body.appendChild(el('p','about',blk.about));
-    blk.fields.forEach(function(f){ makeField(f, body); });
-    sec.appendChild(body);
-    host.appendChild(sec);
+  var body=el('div','pbody');
+  var g=el('div','grid g3');
+  [['bis','Was bis zum Gate stehen muss','entschieden oder erledigt'],
+   ['erg','Was dann vorliegt','das Ergebnis dieser Phase'],
+   ['rolle','Führende Rolle','wer es bis dahin treibt']].forEach(function(f){
+    var cell=el('div');
+    var lab=el('label',null,f[1]); lab.setAttribute('for','p_'+id+'_'+f[0]);
+    cell.appendChild(lab);
+    cell.appendChild(el('p','help',f[2]));
+    var inp=document.createElement(f[0]==='rolle'?'input':'textarea');
+    if(f[0]==='rolle'){inp.type='text';}
+    inp.id='p_'+id+'_'+f[0]; inp.dataset.k='phase-'+id+'-'+f[0];
+    cell.appendChild(inp); g.appendChild(cell);
   });
+  body.appendChild(g);
+  box.appendChild(body);
+  phaseHost.appendChild(box);
 
-  /* ---------- Fortschritt & Export ---------- */
-  var prog=document.getElementById('prog'), note=document.getElementById('note');
+  var seg=el('div',null,id); seg.dataset.seg=id; pbar.appendChild(seg);
 
-  function coreStats(){
-    var total=0, done=0;
-    document.querySelectorAll('[data-core="1"]').forEach(function(n){
-      if(n.tagName==='TABLE'){
-        total++; var any=false;
-        n.querySelectorAll('tbody input').forEach(function(i){ if(i.value.trim()) any=true; });
-        if(any) done++;
-      } else { total++; if((n.value||'').trim()) done++; }
-    });
-    return {total:total, done:done};
-  }
-  function anyContent(){
-    var any=false;
-    document.querySelectorAll('#form input, #form textarea, #form select').forEach(function(n){ if((n.value||'').trim()) any=true; });
-    if(document.getElementById('park').value.trim()) any=true;
-    return any;
-  }
-  function update(){
-    var s=coreStats();
-    prog.textContent='Kurzsteckbrief '+s.done+' / '+s.total;
-    note.textContent = anyContent()
-      ? 'Nicht gespeichert — der Browser sichert nichts von allein.'
-      : 'Noch nichts erfasst.';
-  }
-  function val(id){ var n=document.getElementById('fld-'+id); return n?(n.value||'').trim():''; }
-
-  function mdTable(tid, cols){
-    var tbl=document.querySelector('table[data-tid="'+tid+'"]');
-    if(!tbl) return '';
-    var rows=[];
-    tbl.querySelectorAll('tbody tr').forEach(function(tr){
-      var cells=[], any=false;
-      tr.querySelectorAll('input[type=text]').forEach(function(i){
-        var v=i.value.trim(); if(v) any=true; cells.push(v.replace(/\|/g,'\\|'));
-      });
-      if(any) rows.push(cells);
-    });
-    if(!rows.length) return '_LÜCKE: noch nicht erfasst_\n';
-    var out='| '+cols.join(' | ')+' |\n|'+cols.map(function(){return '---'}).join('|')+'|\n';
-    rows.forEach(function(r){ out+='| '+r.join(' | ')+' |\n'; });
-    return out;
-  }
-
-  function buildMd(){
-    var out='', name=val('name')||'<Modulname>', id=val('id')||'MOD-SEC-<NR>';
-    var d=new Date();
-    var stamp=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-    out+='---\nstatus: entwurf\nstand: '+stamp+'\nid: '+id+'\nmodulart: '+(val('art')||'<…>')+
-         '\ndurchfuehrung: '+(val('durch')||'<…>')+'\nvertretung: '+(val('vertr')||'<…>')+
-         '\nfortschreibung: '+(val('fort')||'<…>')+
-         '\nquelle: Live-Erfassung Sparring 2, '+stamp+'\n---\n\n';
-    out+='# '+name+'\n\n';
-    SPEC.forEach(function(blk){
-      if(blk.block==='Kopf') return;
-      out+='## '+blk.block+'\n\n';
-      blk.fields.forEach(function(f){
-        function scalar(sub){
-          out+='**'+sub.label+':** '+(val(sub.id)||'_LÜCKE: noch nicht erfasst_')+'\n\n';
-        }
-        if(f.t==='row'){ f.of.forEach(scalar); }
-        else if(f.t==='table'){ out+='### '+f.label+'\n\n'+mdTable(f.id,f.cols)+'\n'; }
-        else { scalar(f); }
-      });
-    });
-    var p=document.getElementById('park').value.trim();
-    out+='## Parkplatz\n\n'+(p||'_leer_')+'\n';
-    return out;
-  }
-
-  function toast(msg){
-    var t=document.getElementById('toast');
-    t.textContent=msg; t.classList.add('show');
-    setTimeout(function(){t.classList.remove('show')},1800);
-  }
-  function fileName(){
-    var id=val('id')||'MOD-SEC-XX';
-    var n=(val('name')||'modul').toLowerCase()
-      .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
-      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,50);
-    return (id+'-'+n).replace(/[^A-Za-z0-9._-]/g,'-')+'.md';
-  }
-
-  document.getElementById('saveBtn').addEventListener('click',function(){
-    var blob=new Blob([buildMd()],{type:'text/markdown;charset=utf-8'});
-    var a=document.createElement('a');
-    a.href=URL.createObjectURL(blob); a.download=fileName();
-    document.body.appendChild(a); a.click();
-    setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},500);
-    toast('Gesichert als '+fileName());
+  head.addEventListener('click',function(e){
+    if(e.target.tagName==='INPUT'||e.target.tagName==='LABEL') return;
+    c1.checked=!c1.checked; sync();
   });
-  document.getElementById('copyBtn').addEventListener('click',function(){
-    var md=buildMd();
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(md).then(function(){toast('In die Zwischenablage kopiert')},function(){fallbackCopy(md)});
-    } else fallbackCopy(md);
+  c1.addEventListener('change',sync);
+  c2.addEventListener('change',function(){ if(c2.checked) c1.checked=true; sync(); });
+});
+
+function sync(){
+  PHASEN.forEach(function(p){
+    var id=p[0];
+    var on=document.querySelector('[data-on="'+id+'"]').checked;
+    var fo=document.querySelector('[data-focus="'+id+'"]').checked;
+    document.querySelector('.phase[data-p="'+id+'"]').classList.toggle('on',on);
+    var seg=document.querySelector('[data-seg="'+id+'"]');
+    seg.className = fo?'focus':(on?'on':'');
   });
-  function fallbackCopy(md){
-    var ta=document.createElement('textarea');
-    ta.value=md; ta.style.position='fixed'; ta.style.opacity='0';
-    document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); toast('In die Zwischenablage kopiert'); }
-    catch(e){ toast('Kopieren nicht möglich — bitte sichern'); }
-    ta.remove();
-  }
-
-  var hb=document.getElementById('hintBtn');
-  hb.addEventListener('click',function(){
-    document.body.classList.toggle('hints');
-    var on=document.body.classList.contains('hints');
-    hb.textContent = on?'Hinweise aus':'Hinweise an';
-    hb.classList.toggle('on',on);
-    document.querySelectorAll('textarea').forEach(autosize);
-  });
-
-  var eb=document.getElementById('explBtn');
-  eb.addEventListener('click',function(){
-    var boxes=[].slice.call(document.querySelectorAll('.expl'));
-    var openThem = boxes.some(function(b){ return !b.classList.contains('open'); });
-    boxes.forEach(function(b){ b.classList.toggle('open',openThem); });
-    document.querySelectorAll('.q').forEach(function(q){ q.setAttribute('aria-expanded',openThem?'true':'false'); });
-    eb.classList.toggle('on',openThem);
-    eb.textContent = openThem?'Erklärungen zu':'Alle Erklärungen';
-  });
-
-  document.getElementById('openAll').addEventListener('click',function(){
-    var openThem = document.querySelectorAll('section.block:not(.open)').length>0;
-    document.querySelectorAll('section.block').forEach(function(s){
-      s.classList.toggle('open', openThem);
-      s.querySelector('.tw').textContent = openThem?'▾':'▸';
-    });
-    this.textContent = openThem?'Blöcke zu':'Alle Blöcke';
-  });
-
-  document.getElementById('park').addEventListener('input',function(){autosize(this);update()});
-  window.addEventListener('beforeunload',function(e){ if(anyContent()){ e.preventDefault(); e.returnValue=''; } });
-
-  /* ---------- Begriffe ---------- */
-  var dlist=document.getElementById('dlist'), drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim');
-  GLOSSAR.sort(function(a,b){ return a[0].localeCompare(b[0],'de'); }).forEach(function(t){
-    var d=el('div','term');
-    d.appendChild(el('h3',null,t[0]));
-    var p=el('p'); p.innerHTML=t[1]; d.appendChild(p);
-    d.dataset.k=(t[0]+' '+t[1]).toLowerCase();
-    dlist.appendChild(d);
-  });
-  var emptyMsg=el('p','empty','Kein Begriff gefunden.');
-  emptyMsg.style.display='none'; dlist.appendChild(emptyMsg);
-
-  function openDrawer(on){
-    drawer.classList.toggle('open',on);
-    scrim.classList.toggle('open',on);
-    drawer.setAttribute('aria-hidden',on?'false':'true');
-    if(on) setTimeout(function(){document.getElementById('dq').focus()},60);
-  }
-  document.getElementById('glossBtn').addEventListener('click',function(){openDrawer(true)});
-  document.getElementById('dClose').addEventListener('click',function(){openDrawer(false)});
-  scrim.addEventListener('click',function(){openDrawer(false)});
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') openDrawer(false); });
-  document.getElementById('dq').addEventListener('input',function(){
-    var q=this.value.trim().toLowerCase(), n=0;
-    dlist.querySelectorAll('.term').forEach(function(t){
-      var hit = !q || t.dataset.k.indexOf(q)>-1;
-      t.classList.toggle('hide',!hit); if(hit) n++;
-    });
-    emptyMsg.style.display = n?'none':'block';
-  });
-
   update();
-})();
+}
+
+/* ---------- Tabellen ---------- */
+function buildTable(tbl){
+  var cols=tbl.dataset.cols.split('|');
+  var thead=el('thead'), tr=el('tr');
+  cols.forEach(function(c){ tr.appendChild(el('th',null,c)); });
+  thead.appendChild(tr); tbl.appendChild(thead);
+  tbl.appendChild(el('tbody'));
+  var n=parseInt(tbl.dataset.rows,10)||3;
+  for(var i=0;i<n;i++) addRow(tbl);
+}
+function addRow(tbl){
+  var cols=tbl.dataset.cols.split('|');
+  var tr=el('tr');
+  cols.forEach(function(){
+    var td=el('td'); var inp=document.createElement('input'); inp.type='text';
+    inp.addEventListener('input',update);
+    td.appendChild(inp); tr.appendChild(td);
+  });
+  tbl.querySelector('tbody').appendChild(tr);
+  return tr;
+}
+document.querySelectorAll('table[data-cols]').forEach(buildTable);
+document.querySelectorAll('[data-add]').forEach(function(b){
+  b.addEventListener('click',function(){ addRow(document.getElementById(b.dataset.add)); update(); });
+});
+
+/* ---------- Zählen, Markieren, Sichern ---------- */
+function allFields(){ return document.querySelectorAll('[data-k]'); }
+function tableData(tbl){
+  var out=[];
+  tbl.querySelectorAll('tbody tr').forEach(function(tr){
+    var vals=[].map.call(tr.querySelectorAll('input'),function(i){return i.value.trim();});
+    if(vals.some(function(v){return v;})) out.push(vals);
+  });
+  return out;
+}
+var KEY='steckbrief-security-kurz';
+var saveNote=document.getElementById('save');
+
+function update(){
+  var n=0;
+  allFields().forEach(function(f){
+    var v=(f.value||'').trim();
+    f.classList.toggle('filled', v.length>0 && f.tagName!=='SELECT');
+    if(v) n++;
+  });
+  document.querySelectorAll('table[data-cols]').forEach(function(t){ n+=tableData(t).length; });
+  document.querySelectorAll('table[data-cols] tbody input').forEach(function(i){
+    i.classList.toggle('filled',(i.value||'').trim().length>0);
+  });
+  document.getElementById('count').textContent=n+' Felder gefüllt';
+  store();
+}
+function store(){
+  try{
+    var d={f:{},t:{},on:{},fo:{}};
+    allFields().forEach(function(f){ d.f[f.dataset.k]=f.value; });
+    document.querySelectorAll('table[data-cols]').forEach(function(t){ d.t[t.dataset.k]=tableData(t); });
+    PHASEN.forEach(function(p){
+      d.on[p[0]]=document.querySelector('[data-on="'+p[0]+'"]').checked;
+      d.fo[p[0]]=document.querySelector('[data-focus="'+p[0]+'"]').checked;
+    });
+    localStorage.setItem(KEY,JSON.stringify(d));
+    saveNote.textContent='gesichert '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+  }catch(e){ saveNote.textContent='ohne Zwischenspeicher'; }
+}
+function restore(){
+  try{
+    var raw=localStorage.getItem(KEY); if(!raw) return;
+    var d=JSON.parse(raw);
+    allFields().forEach(function(f){ if(d.f && d.f[f.dataset.k]!=null) f.value=d.f[f.dataset.k]; });
+    document.querySelectorAll('table[data-cols]').forEach(function(t){
+      var rows=(d.t||{})[t.dataset.k]||[];
+      var tb=t.querySelector('tbody');
+      while(tb.rows.length<rows.length) addRow(t);
+      rows.forEach(function(vals,ri){
+        var ins=tb.rows[ri].querySelectorAll('input');
+        vals.forEach(function(v,ci){ if(ins[ci]) ins[ci].value=v; });
+      });
+    });
+    PHASEN.forEach(function(p){
+      if(d.on) document.querySelector('[data-on="'+p[0]+'"]').checked=!!d.on[p[0]];
+      if(d.fo) document.querySelector('[data-focus="'+p[0]+'"]').checked=!!d.fo[p[0]];
+    });
+  }catch(e){}
+}
+
+/* ---------- Markdown ---------- */
+function val(k){ var f=document.querySelector('[data-k="'+k+'"]'); return f?(f.value||'').trim():''; }
+function or(k){ return val(k) || 'LÜCKE'; }
+function mdTable(tbl,cols){
+  var rows=tableData(tbl);
+  if(!rows.length) return '*LÜCKE: nicht erfasst.*\n';
+  var out='| '+cols.join(' | ')+' |\n|'+cols.map(function(){return '---';}).join('|')+'|\n';
+  rows.forEach(function(r){ out+='| '+cols.map(function(_,i){return r[i]||'';}).join(' | ')+' |\n'; });
+  return out;
+}
+function markdown(){
+  var name=val('modulname')||'Unbenanntes Modul';
+  var focus=PHASEN.filter(function(p){return document.querySelector('[data-focus="'+p[0]+'"]').checked;})
+                  .map(function(p){return p[0];}).join(', ');
+  var m='---\n';
+  m+='id: '+or('id')+'\n';
+  m+='modulname: '+name+'\n';
+  m+='modulgruppe: '+or('modulgruppe')+'\n';
+  m+='modulart: '+or('modulart')+'\n';
+  m+='pflichtstufe: '+or('pflichtstufe')+'\n';
+  if(val('grundmodul-alternative')) m+='grundmodul-alternative: '+val('grundmodul-alternative')+'\n';
+  if(val('entscheidungsfrist')) m+='entscheidungsfrist: '+val('entscheidungsfrist')+'\n';
+  m+='durchfuehrung: '+or('durchfuehrung')+'\n';
+  m+='vertretung: '+or('vertretung')+'\n';
+  m+='auftragsverantwortung: '+or('auftragsverantwortung')+'\n';
+  m+='fortschreibung: '+or('fortschreibung')+'\n';
+  m+='schwerpunkt-phase: '+(focus||'LÜCKE')+'\n';
+  m+='status: Entwurf\n';
+  m+='stand: '+new Date().toISOString().slice(0,10)+'\n';
+  m+='quelle: Live-Erfassung Kurzsteckbrief\n';
+  m+='---\n\n# '+name+'\n\n';
+  m+='## Zweck und Schutzziel\n\n'+(val('zweck')||'*LÜCKE*')+'\n\n';
+  m+='## Geltungsbereich\n\n'+(val('geltungsbereich')||'*LÜCKE*')+'\n\n';
+  m+='## Phasenband\n\n';
+  var any=false;
+  PHASEN.forEach(function(p){
+    var on=document.querySelector('[data-on="'+p[0]+'"]').checked;
+    if(!on) return;
+    any=true;
+    var fo=document.querySelector('[data-focus="'+p[0]+'"]').checked;
+    m+='### '+p[0]+' · '+p[1]+(fo?' — Schwerpunkt':'')+'\n\n';
+    m+='| | |\n|---|---|\n';
+    m+='| bis zum Gate | '+(val('phase-'+p[0]+'-bis')||'LÜCKE')+' |\n';
+    m+='| Ergebnis | '+(val('phase-'+p[0]+'-erg')||'LÜCKE')+' |\n';
+    m+='| führende Rolle | '+(val('phase-'+p[0]+'-rolle')||'LÜCKE')+' |\n\n';
+  });
+  if(!any) m+='*LÜCKE: keine Phase markiert.*\n\n';
+  m+='## Ablauf in Abschnitten\n\n'+mdTable(document.getElementById('t_ablauf'),['Phase','Auslöser','Tätigkeit','Ergebnis','Rolle'])+'\n';
+  m+='## Übergaben\n\n'+mdTable(document.getElementById('t_ueber'),['rein / raus','Objekt','Medium','Auslöser','von Rolle','an Rolle'])+'\n';
+  m+='## Lieferobjekte\n\n'+mdTable(document.getElementById('t_liefer'),['Objekt','Ablageort'])+'\n';
+  m+='## Offene Lücken\n\n'+(val('offene-luecken')||'*LÜCKE: nicht benannt.*')+'\n\n';
+  m+='## Parkplatz\n\n'+(val('parkplatz')||'*leer*')+'\n\n';
+  m+='---\n\n*Blöcke 3 bis 5 des Feldkatalogs sind in diesem Termin nicht behandelt.*\n';
+  return m;
+}
+document.getElementById('copy').addEventListener('click',function(){
+  navigator.clipboard.writeText(markdown()).then(function(){
+    var b=document.getElementById('copy'); var t=b.textContent;
+    b.textContent='kopiert'; setTimeout(function(){b.textContent=t;},1400);
+  });
+});
+document.getElementById('dl').addEventListener('click',function(){
+  var name=(val('modulname')||'modulsteckbrief').toLowerCase()
+    .replace(/[äöüß]/g,function(c){return {'ä':'ae','ö':'oe','ü':'ue','ß':'ss'}[c];})
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  var blob=new Blob([markdown()],{type:'text/markdown;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=name+'.md';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+});
+document.getElementById('reset').addEventListener('click',function(){
+  if(!confirm('Alle Eingaben löschen?')) return;
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  location.reload();
+});
+
+document.addEventListener('input',function(e){ if(e.target.matches('[data-k]')) update(); });
+restore(); sync();
 </script>
 </body>
 </html>
